@@ -5,27 +5,18 @@ import java.time.LocalDateTime;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class ObjectInit {
+public abstract class ObjectInit {
 
-    /**
-     * Default constructor
-     */
+    protected int id;
+    protected LocalDateTime fechaCreacion;
+    protected LocalDateTime fechaModificacion;
+
     public ObjectInit() {
     }
 
-    /**
-     *
-     */
-    protected int id;
-
-    /**
-     *
-     */
-    protected LocalDateTime fechaCreacion;
-
-    /**
-     *
-     */
-    protected LocalDateTime fechaModificacion;
-
+    public ObjectInit(int id, LocalDateTime fechaCreacion, LocalDateTime fechaModificacion) {
+        this.id = id;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaModificacion = fechaModificacion;
+    }
 }

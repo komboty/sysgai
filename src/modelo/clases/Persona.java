@@ -1,34 +1,28 @@
 package modelo.clases;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class Persona extends ObjectInit {
+public abstract class Persona extends ObjectInit {
 
-    /**
-     * Default constructor
-     */
-    public Persona() {
-    }
-
-    /**
-     *
-     */
     protected String nombre;
-
-    /**
-     *
-     */
-    protected int telefono;
-
-    /**
-     *
-     */
+    protected String telefono;
     protected String mail;
-
-    /**
-     *
-     */
     protected String direccion;
 
+    public Persona(String mail) {
+        this.mail = mail;
+    }
+
+    public Persona(int id, LocalDateTime fechaCreacion, LocalDateTime fechaModificacion,
+            String nombre, String telefono, String mail, String direccion) {
+        
+        super(id, fechaCreacion, fechaModificacion);
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.direccion = direccion;
+    }
 }
