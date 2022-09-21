@@ -34,4 +34,9 @@ public class Usuario extends Persona {
     public String getTipo() {
         return tipo;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s\nTIPO: %s", super.toString(), tipo);
+    }
 }

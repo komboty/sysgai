@@ -45,8 +45,8 @@ public class LoginControlador implements Initializable {
 //        }
 
         // Si se encuentra el usuario se muestra el menu.
-//        Usuario usuario = new Usuario(TIPO_USUARIO_ADMINISTRADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-        Usuario usuario = new Usuario(TIPO_USUARIO_ARRENDADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
+        Usuario usuario = new Usuario(TIPO_USUARIO_ADMINISTRADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
+//        Usuario usuario = new Usuario(TIPO_USUARIO_ARRENDADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
 //        Usuario usuario = new Usuario(TIPO_USUARIO_ABOGADO, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
 //        Usuario usuario = new Usuario(TIPO_USUARIO_CONTADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
 //        Usuario usuario = new Usuario(TIPO_USUARIO_TECNICO, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");

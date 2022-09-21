@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.clases.Usuario;
 import static modelo.utils.Constantes.*;
 
@@ -75,6 +77,34 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
         // Si no se encontro el Usuario en la base de datos.
         return null;
+    }
+
+    @Override
+    public List<Usuario> getAllUsuario() {
+        String consulta = "SELECT * FROM %s"
+                + " JOIN %s ON %s.%s = %s.%s";
+        consulta = String.format(consulta, DB_N_T_USUARIO, DB_N_T_TIPO_USUARIO,
+                DB_N_T_USUARIO, T_USUARIO_C_ID_TIPO_USUARIO,
+                DB_N_T_TIPO_USUARIO, T_TIPO_USUARIO_C_ID);
+        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+
+        // Si no hay conexion a la base de datos.
+        if (statement == null) {
+            return null;
+        }
+
+        // Si hay conexion a la base de datos, se obtienen todos los Usuarios.
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery();            
+            while (resultSet.next()) {
+                usuarios.add(resultToUsuario(resultSet));
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+
+        return usuarios;
     }
 
 }

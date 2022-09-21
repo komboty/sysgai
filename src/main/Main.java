@@ -20,8 +20,8 @@ public class Main extends Application {
         this.stage = stage;
         Parent root = FXMLLoader.load(getClass().getResource(VISTA_URL_LOGIN));
         stage.setTitle(VISTA_TITULO_SISTEMA);
-        stage.setHeight(VISTA_VENTANA_ALTO);
-        stage.setWidth(VISTA_VENTANA_ANCHO);
+        stage.setHeight(VISTA_STAGE_ALTO);
+        stage.setWidth(VISTA_STAGE_ANCHO);
         stage.setScene(new Scene(root));
         stage.show();
     }

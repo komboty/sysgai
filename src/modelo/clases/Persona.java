@@ -25,4 +25,9 @@ public abstract class Persona extends ObjectInit {
         this.mail = mail;
         this.direccion = direccion;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("%s\nNOMBRE: %s\nTELEFONO: %s\nCORREO: %s\nDIRECCION: %s", super.toString(), nombre, telefono, mail, direccion);
+    }
 }

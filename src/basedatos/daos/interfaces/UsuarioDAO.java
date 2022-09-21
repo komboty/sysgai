@@ -1,6 +1,7 @@
 package basedatos.daos.interfaces;
 
 import basedatos.ConexionBD;
+import java.util.List;
 import modelo.clases.Usuario;
 
 /**
@@ -17,4 +18,6 @@ public interface UsuarioDAO {
      * @return Un Usuario, si es que existe en la base de datos.
      */
     public Usuario getUsuario(String mail, String contrasenia);
+    
+    public List<Usuario> getAllUsuario();
 }

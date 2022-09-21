@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pantallas.utils.DetalleInfoControlador">
+   <children>
+      <HBox fx:id="hbox">
+         <children>
+            <Label fx:id="labelInfo" text="Label">
+               <padding>
+                  <Insets right="6.0" />
+               </padding></Label>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
