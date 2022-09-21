@@ -13,19 +13,17 @@ import static modelo.utils.Constantes.*;
  */
 public class Main extends Application {
 
-    private static Stage primaryStage;
-    
-    public static Stage getStage() {
-        return primaryStage;
-    }
+    private static Stage stage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.primaryStage = primaryStage;
+    public void start(Stage stage) throws Exception {
+        this.stage = stage;
         Parent root = FXMLLoader.load(getClass().getResource(VISTA_URL_LOGIN));
-        primaryStage.setTitle(VISTA_TITULO_SISTEMA);
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        stage.setTitle(VISTA_TITULO_SISTEMA);
+        stage.setHeight(VISTA_VENTANA_ALTO);
+        stage.setWidth(VISTA_VENTANA_ANCHO);
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public static void main(String[] args) {
@@ -33,5 +31,9 @@ public class Main extends Application {
         ConexionBD conexionBD = ConexionBD.getInstancia();
         // Lanza la ventana de inicio.
         launch(args);
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }

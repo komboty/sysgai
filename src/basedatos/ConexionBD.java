@@ -52,7 +52,7 @@ public class ConexionBD {
         try {
             conexion = DriverManager.getConnection(url, usuario, contrasenia);
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
         return conexion;
     }
@@ -63,7 +63,7 @@ public class ConexionBD {
                 return conexion.prepareStatement(consulta);
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
 
         return null;

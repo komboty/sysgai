@@ -28,10 +28,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
      * @throws SQLException
      */
     private Usuario resultToUsuario(ResultSet resultSet) throws SQLException {
-        LocalDateTime fechaCreacion = null;
-        if (resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION) != null) {
-            fechaCreacion = resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION).toLocalDateTime();
-        }
+        LocalDateTime fechaCreacion = resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION) != null
+                ? resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION).toLocalDateTime() : null;
 
         return new Usuario(resultSet.getString(T_TIPO_USUARIO_C_TIPO),
                 resultSet.getString(T_USUARIO_C_CONTRASENIA),
@@ -43,6 +41,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 resultSet.getString(T_USUARIO_C_MAIL),
                 resultSet.getString(T_USUARIO_C_DIRECCION));
     }
+// HACER DAO TIPO USUARIO (NO HACER JOIN)
 
     @Override
     public Usuario getUsuario(String mail, String contrasenia) {
@@ -54,25 +53,28 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 DB_N_T_TIPO_USUARIO, T_TIPO_USUARIO_C_ID,
                 T_USUARIO_C_MAIL, T_USUARIO_C_CONTRASENIA);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
-        
+
         // Si no hay conexion a la base de datos.
         if (statement == null) {
             return null;
         }
-        
+
         // Si hay conexion a la base de datos, se busca el Usuario.
-        Usuario usuario = null;
         try {
             statement.setString(1, mail);
             statement.setString(2, contrasenia);
             ResultSet resultSet = statement.executeQuery();
+
+            // Si se encontro el Usuario en la base de datos.
             if (resultSet.next()) {
-                usuario = resultToUsuario(resultSet);
+                return resultToUsuario(resultSet);
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
-        return usuario;
+
+        // Si no se encontro el Usuario en la base de datos.
+        return null;
     }
 
 }
