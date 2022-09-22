@@ -1,4 +1,4 @@
-package pantallas.principal;
+package vistas.principal;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,14 +11,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import modelo.clases.Usuario;
 import static modelo.utils.Constantes.*;
-import pantallas.utils.BotonImagenControlador;
-import pantallas.utils.TablaControlador;
+import vistas.utils.BotonImagenControlador;
+import vistas.vertodos.TablaInfoControlador;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -37,7 +35,7 @@ public class PrincipalVistaControlador implements Initializable {
     private Usuario usuario;
     private Map<String, String> botonesMenu;
     private Map<String, String> botonesSubMenu;
-    private String delimitador = ",";
+    private final String delimitador = ",";
 
     public PrincipalVistaControlador(Usuario usuario) {
         this.usuario = usuario;
@@ -55,8 +53,9 @@ public class PrincipalVistaControlador implements Initializable {
             // Se obtienen los botones del menu segun el usuario logeado.
             getPermisosMenu();
             muestraBotonesMenu();
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (IOException ex) {
+            System.err.println("vistas.principal.PrincipalVistaControlador.initialize()");
+            System.err.println(ex);
         }
     }
 
@@ -223,20 +222,18 @@ public class PrincipalVistaControlador implements Initializable {
         String urlPanel = null;
         switch (nombreSubBoton) {
             case VISTA_ICON_LABEL_VER_TODOS:
-                urlPanel = VISTA_URL_TABLA;
+                urlPanel = VISTA_URL_TABLA_INFO;
                 break;
         }
 
         try {
-//            FXMLLoader fxmlLoaderPanel = new FXMLLoader(getClass().getResource(urlPanel));
-//            Pane vista = fxmlLoaderPanel.load();
-//            borderPaneSubMenu.setCenter(vista);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(urlPanel));
-            fxmlLoader.setControllerFactory(controllerClass -> new TablaControlador(nombreBoton));
+            fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton));
             Parent vista = fxmlLoader.load();
             borderPaneSubMenu.setCenter(vista);
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (IOException ex) {
+            System.err.println("vistas.principal.PrincipalVistaControlador.muestraPanel()");
+            System.err.println(ex);
         }
     }
 }

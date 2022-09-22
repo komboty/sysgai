@@ -1,4 +1,4 @@
-package basedatos.daos.implementacion;
+package basedatos.daos.implementaciones;
 
 import basedatos.ConexionBD;
 import basedatos.daos.interfaces.UsuarioDAO;
@@ -16,10 +16,9 @@ import static modelo.utils.Constantes.*;
  */
 public class UsuarioDAOImpl implements UsuarioDAO {
 
-    private ConexionBD conexion;
+    private static final ConexionBD conexion = ConexionBD.getInstancia();
 
     public UsuarioDAOImpl() {
-        conexion = ConexionBD.getInstancia();
     }
 
     /**
@@ -29,30 +28,28 @@ public class UsuarioDAOImpl implements UsuarioDAO {
      * @return Usuario.
      * @throws SQLException
      */
-    private Usuario resultToUsuario(ResultSet resultSet) throws SQLException {
-        LocalDateTime fechaCreacion = resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION) != null
+    public Usuario resultToUsuario(ResultSet resultSet) throws SQLException {
+        LocalDateTime fechaModificacion = resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION) != null
                 ? resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION).toLocalDateTime() : null;
 
         return new Usuario(resultSet.getString(T_TIPO_USUARIO_C_TIPO),
                 resultSet.getString(T_USUARIO_C_CONTRASENIA),
                 resultSet.getInt(T_USUARIO_C_ID),
                 resultSet.getTimestamp(T_USUARIO_C_FECHA_CREACION).toLocalDateTime(),
-                fechaCreacion,
+                fechaModificacion,
                 resultSet.getString(T_USUARIO_C_NOMBRE),
                 resultSet.getString(T_USUARIO_C_TELEFONO),
                 resultSet.getString(T_USUARIO_C_MAIL),
                 resultSet.getString(T_USUARIO_C_DIRECCION));
     }
-// HACER DAO TIPO USUARIO (NO HACER JOIN)
 
     @Override
-    public Usuario getUsuario(String mail, String contrasenia) {
+    public Usuario getPorMailYContrasenia(String mail, String contrasenia) {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s"
                 + " WHERE %s = ? AND %s = ?";
-        consulta = String.format(consulta, DB_N_T_USUARIO, DB_N_T_TIPO_USUARIO,
-                DB_N_T_USUARIO, T_USUARIO_C_ID_TIPO_USUARIO,
-                DB_N_T_TIPO_USUARIO, T_TIPO_USUARIO_C_ID,
+        consulta = String.format(consulta, DB_N_T_USUARIO,
+                DB_N_T_TIPO_USUARIO, DB_N_T_USUARIO, T_USUARIO_C_ID_TIPO_USUARIO, DB_N_T_TIPO_USUARIO, T_TIPO_USUARIO_C_ID,
                 T_USUARIO_C_MAIL, T_USUARIO_C_CONTRASENIA);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
@@ -71,8 +68,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             if (resultSet.next()) {
                 return resultToUsuario(resultSet);
             }
-        } catch (SQLException e) {
-            System.err.println(e);
+        } catch (SQLException ex) {
+            System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.getPorMailYContrasenia()");
+            System.err.println(ex);
         }
 
         // Si no se encontro el Usuario en la base de datos.
@@ -80,7 +78,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     @Override
-    public List<Usuario> getAllUsuario() {
+    public List<Usuario> getTodos() {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s";
         consulta = String.format(consulta, DB_N_T_USUARIO, DB_N_T_TIPO_USUARIO,
@@ -96,14 +94,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         // Si hay conexion a la base de datos, se obtienen todos los Usuarios.
         List<Usuario> usuarios = new ArrayList<>();
         try {
-            ResultSet resultSet = statement.executeQuery();            
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 usuarios.add(resultToUsuario(resultSet));
             }
-        } catch (SQLException e) {
-            System.err.println(e);
+        } catch (SQLException ex) {
+            System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.getTodos()");
+            System.err.println(ex);
         }
-
         return usuarios;
     }
 

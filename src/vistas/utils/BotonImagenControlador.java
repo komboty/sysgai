@@ -1,4 +1,4 @@
-package pantallas.utils;
+package vistas.utils;
 
 import java.net.URL;
 import java.util.ResourceBundle;

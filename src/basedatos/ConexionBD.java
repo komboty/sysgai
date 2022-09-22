@@ -36,7 +36,7 @@ public class ConexionBD {
      *
      * @return Instancia de la clase.
      */
-    public static ConexionBD getInstancia() {
+    public static synchronized ConexionBD getInstancia() {
         if (instancia == null) {
             instancia = new ConexionBD();
         }
@@ -50,20 +50,22 @@ public class ConexionBD {
      */
     private Connection conectarBD() {
         try {
-            conexion = DriverManager.getConnection(url, usuario, contrasenia);
-        } catch (SQLException e) {
-            System.err.println(e);
+        conexion = DriverManager.getConnection(url, usuario, contrasenia);
+        } catch (SQLException ex) {
+            System.err.println("basedatos.ConexionBD.conectarBD()");
+            System.err.println(ex);
         }
         return conexion;
     }
 
     public PreparedStatement getPreparedStatement(String consulta) {
         try {
-            if (!conexion.isClosed()) {
-                return conexion.prepareStatement(consulta);
-            }
-        } catch (SQLException e) {
-            System.err.println(e);
+        if (!conexion.isClosed()) {
+            return conexion.prepareStatement(consulta);
+        }
+        } catch (SQLException ex) {
+            System.err.println("basedatos.ConexionBD.getPreparedStatement()");
+            System.err.println(ex);
         }
 
         return null;

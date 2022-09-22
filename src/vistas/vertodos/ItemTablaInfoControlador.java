@@ -1,5 +1,6 @@
-package pantallas.utils;
+package vistas.vertodos;
 
+import vistas.utils.BotonImagenControlador;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +16,7 @@ import static modelo.utils.Constantes.*;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class DetalleInfoControlador implements Initializable {
+public class ItemTablaInfoControlador implements Initializable {
 
     @FXML
     private HBox hbox;
@@ -28,8 +29,9 @@ public class DetalleInfoControlador implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             addBotones();
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (IOException ex) {
+            System.err.println("vistas.utils.DetalleInfoControlador.initialize()");
+            System.err.println(ex);
         }
     }
 

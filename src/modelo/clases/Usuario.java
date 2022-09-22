@@ -1,7 +1,5 @@
 package modelo.clases;
 
-import basedatos.daos.implementacion.UsuarioDAOImpl;
-import basedatos.daos.interfaces.UsuarioDAO;
 import java.time.LocalDateTime;
 
 /**
@@ -9,14 +7,10 @@ import java.time.LocalDateTime;
  */
 public class Usuario extends Persona {
 
-    private static UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-    
     private String tipo;
     private String contrasenia;
 
-    public Usuario(String mail, String contrasenia) {
-        super(mail);
-        this.contrasenia = contrasenia;
+    public Usuario() {
     }
 
     public Usuario(String tipo, String contrasenia, int id, LocalDateTime fechaCreacion,
@@ -27,14 +21,10 @@ public class Usuario extends Persona {
         this.contrasenia = contrasenia;
     }
 
-    public Usuario identificar() {
-        return usuarioDAO.getUsuario(mail, contrasenia);
-    }
-
     public String getTipo() {
         return tipo;
     }
-    
+
     @Override
     public String toString() {
         return String.format("%s\nTIPO: %s", super.toString(), tipo);

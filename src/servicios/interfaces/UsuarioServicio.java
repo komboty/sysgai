@@ -1,21 +1,19 @@
-package basedatos.daos.interfaces;
+package servicios.interfaces;
 
-import java.sql.SQLException;
+import java.util.List;
 import modelo.clases.Usuario;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface UsuarioDAO extends GenericDAO<Usuario> {
+public interface UsuarioServicio extends GenericServicio<Usuario> {
 
     /**
-     * Identifica si hay un usuario con el mail y contraseña en la base de
-     * datos.
+     * Identifica si hay un usuario con el mail y contraseña en el sistema.
      *
      * @param mail Correo de usuario a identificar.
      * @param contrasenia Contraseña de usuario a identificar.
      * @return Un Usuario, si es que existe en la base de datos.
      */
-    public Usuario getPorMailYContrasenia(String mail, String contrasenia);
-
+    public Usuario identificar(String mail, String contrasenia);
 }

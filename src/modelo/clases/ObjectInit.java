@@ -20,12 +20,17 @@ public abstract class ObjectInit {
         this.fechaModificacion = fechaModificacion;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %d\nFECHA CREACIÓN: %s\nFECHA MODIFICACIÓN: %s", id, fechaCreacion, fechaModificacion);
+        return String.format("ID: %d\nFECHA CREACIÓN: %s\nFECHA MODIFICACIÓN: %s",
+                id, fechaCreacion, fechaModificacion);
     }
 }
