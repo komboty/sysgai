@@ -1,9 +1,8 @@
 package servicios.implementaciones;
 
-import basedatos.daos.implementaciones.ClienteDAOImpl;
 import basedatos.daos.interfaces.ClienteDAO;
 import java.util.List;
-import modelo.clases.Cliente;
+import modelo.entidades.Cliente;
 import servicios.interfaces.ClienteServicio;
 
 /**
@@ -11,9 +10,10 @@ import servicios.interfaces.ClienteServicio;
  */
 public class ClienteServicioImpl implements ClienteServicio {
 
-    private static ClienteDAO clienteDAO = new ClienteDAOImpl();
+    private ClienteDAO clienteDAO;
 
-    public ClienteServicioImpl() {
+    public ClienteServicioImpl(ClienteDAO clienteDAO) {
+        this.clienteDAO = clienteDAO;
     }
 
     @Override

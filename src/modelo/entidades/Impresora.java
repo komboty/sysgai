@@ -1,4 +1,4 @@
-package modelo.clases;
+package modelo.entidades;
 
 import modelo.constantes.TipoEstadoImpresora;
 import modelo.constantes.TipoImpresion;

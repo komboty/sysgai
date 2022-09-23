@@ -1,6 +1,6 @@
 package servicios.interfaces;
 
-import modelo.clases.Contrato;
+import modelo.entidades.Contrato;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas

@@ -1,6 +1,5 @@
 package basedatos.daos.implementaciones;
 
-import basedatos.ConexionBD;
 import basedatos.daos.interfaces.UsuarioDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,17 +7,19 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.clases.Usuario;
+import modelo.entidades.Usuario;
 import static modelo.utils.Constantes.*;
+import basedatos.ConexionBD;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
 public class UsuarioDAOImpl implements UsuarioDAO {
 
-    private static final ConexionBD conexion = ConexionBD.getInstancia();
+    private ConexionBD conexion;
 
-    public UsuarioDAOImpl() {
+    public UsuarioDAOImpl(ConexionBD conexion) {
+        this.conexion = conexion;
     }
 
     /**

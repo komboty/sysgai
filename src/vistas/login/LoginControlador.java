@@ -12,11 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.Dependencias;
 import main.Main;
-import modelo.clases.Usuario;
-import servicios.implementaciones.UsuarioServicioImpl;
-import servicios.interfaces.UsuarioServicio;
+import modelo.entidades.Usuario;
 import static modelo.utils.Constantes.*;
+import servicios.interfaces.UsuarioServicio;
 import vistas.principal.PrincipalVistaControlador;
 
 /**
@@ -37,7 +37,7 @@ public class LoginControlador implements Initializable {
 
     public void onIdentificar() throws IOException {
 //        // Se verifica si el usuario se encuntra registrado.
-//        UsuarioServicio usuarioServicio = new UsuarioServicioImpl();
+//        UsuarioServicio usuarioServicio = Dependencias.getUsuarioServicio();
 //        Usuario usuario = usuarioServicio.identificar(textMail.getText(), textContrasenia.getText());
 //        
 //        // Si no se encuentra el usuario se manda error.

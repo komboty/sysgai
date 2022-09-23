@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import modelo.clases.ObjectInit;
+import modelo.entidades.ObjectInit;
 import static modelo.utils.Constantes.*;
 
 /**

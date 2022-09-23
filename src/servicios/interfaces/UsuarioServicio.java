@@ -1,7 +1,6 @@
 package servicios.interfaces;
 
-import java.util.List;
-import modelo.clases.Usuario;
+import modelo.entidades.Usuario;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas

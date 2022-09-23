@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.clases.Almacen;
-import modelo.clases.Cliente;
+import modelo.entidades.Almacen;
+import modelo.entidades.Cliente;
 import static modelo.utils.Constantes.*;
 
 /**
@@ -17,9 +17,10 @@ import static modelo.utils.Constantes.*;
  */
 public class ClienteDAOImpl implements ClienteDAO {
 
-    private static final ConexionBD conexion = ConexionBD.getInstancia();
+    private ConexionBD conexion;
 
-    public ClienteDAOImpl() {
+    public ClienteDAOImpl(ConexionBD conexion) {
+        this.conexion = conexion;
     }
 
     /**

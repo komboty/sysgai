@@ -1,9 +1,8 @@
 package servicios.implementaciones;
 
-import basedatos.daos.implementaciones.ContratoDAOImpl;
 import basedatos.daos.interfaces.ContratoDAO;
 import java.util.List;
-import modelo.clases.Contrato;
+import modelo.entidades.Contrato;
 import servicios.interfaces.ContratoServicio;
 
 /**
@@ -11,9 +10,10 @@ import servicios.interfaces.ContratoServicio;
  */
 public class ContratoServicioImpl implements ContratoServicio {
 
-    private static ContratoDAO contratoDAO = new ContratoDAOImpl();
+    private ContratoDAO contratoDAO;
 
-    public ContratoServicioImpl() {
+    public ContratoServicioImpl(ContratoDAO contratoDAO) {
+        this.contratoDAO = contratoDAO;
     }
 
     @Override

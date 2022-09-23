@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.clases.Cliente;
-import modelo.clases.Contrato;
+import modelo.entidades.Cliente;
+import modelo.entidades.Contrato;
 import static modelo.utils.Constantes.*;
 
 /**
@@ -17,9 +17,10 @@ import static modelo.utils.Constantes.*;
  */
 public class ContratoDAOImpl implements ContratoDAO {
 
-    private static final ConexionBD conexion = ConexionBD.getInstancia();
+    private ConexionBD conexion;
 
-    public ContratoDAOImpl() {
+    public ContratoDAOImpl(ConexionBD conexion) {
+        this.conexion = conexion;
     }
 
     /**
@@ -34,7 +35,7 @@ public class ContratoDAOImpl implements ContratoDAO {
                 ? resultSet.getTimestamp(T_CONTRATO_C_FECHA_MODIFICACION).toLocalDateTime() : null;
 
         Cliente cliente = new Cliente();
-        cliente.setId(resultSet.getInt(T_CLIENTE_C_ID));
+        cliente.setId(resultSet.getInt(T_CONTRATO_C_ID_CLIENTE));
         cliente.setNombre(resultSet.getString(T_CLIENTE_C_NOMBRE));
         Contrato contrato = new Contrato(cliente, resultSet.getTimestamp(T_CONTRATO_C_INICIO_CONTRATO).toLocalDateTime(),
                 resultSet.getString(T_TIPO_CONTRATO_C_TIPO),

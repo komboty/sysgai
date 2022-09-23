@@ -1,9 +1,8 @@
 package servicios.implementaciones;
 
-import basedatos.daos.implementaciones.UsuarioDAOImpl;
 import basedatos.daos.interfaces.UsuarioDAO;
 import java.util.List;
-import modelo.clases.Usuario;
+import modelo.entidades.Usuario;
 import servicios.interfaces.UsuarioServicio;
 
 /**
@@ -11,9 +10,11 @@ import servicios.interfaces.UsuarioServicio;
  */
 public class UsuarioServicioImpl implements UsuarioServicio {
 
-    private static UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
+    private UsuarioDAO usuarioDAO;
 
-    public UsuarioServicioImpl() {}    
+    public UsuarioServicioImpl(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
 
     @Override
     public Usuario identificar(String mail, String contrasenia) {

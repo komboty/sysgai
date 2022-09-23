@@ -1,4 +1,4 @@
-package modelo.clases;
+package modelo.entidades;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas

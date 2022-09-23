@@ -1,6 +1,5 @@
 package main;
 
-import basedatos.ConexionBD;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,8 +26,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        // Conexion a base de datos.
-        ConexionBD conexionBD = ConexionBD.getInstancia();
+        // Se inicializan las dependencias.
+        Dependencias.Inicializa();
         // Lanza la ventana de inicio.
         launch(args);
     }

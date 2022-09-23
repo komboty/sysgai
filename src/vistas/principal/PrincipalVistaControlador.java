@@ -13,7 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import modelo.clases.Usuario;
+import modelo.entidades.Usuario;
 import static modelo.utils.Constantes.*;
 import vistas.utils.BotonImagenControlador;
 import vistas.vertodos.TablaInfoControlador;

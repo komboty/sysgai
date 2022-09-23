@@ -1,7 +1,7 @@
 package basedatos.daos.interfaces;
 
 import java.sql.SQLException;
-import modelo.clases.Usuario;
+import modelo.entidades.Usuario;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas

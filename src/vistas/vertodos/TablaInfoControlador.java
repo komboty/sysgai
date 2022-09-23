@@ -11,12 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import modelo.clases.ObjectInit;
-import servicios.implementaciones.ClienteServicioImpl;
-import servicios.implementaciones.UsuarioServicioImpl;
+import main.Dependencias;
+import modelo.entidades.ObjectInit;
 import servicios.interfaces.GenericServicio;
 import static modelo.utils.Constantes.*;
-import servicios.implementaciones.ContratoServicioImpl;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -47,20 +45,20 @@ public class TablaInfoControlador implements Initializable {
         }
     }
 
-    private List<ObjectInit> getDatos() {        
+    private List<ObjectInit> getDatos() {
         List<ObjectInit> listObjectInit = new ArrayList<>();
         GenericServicio genericServicio = null;
         switch (this.servicio) {
             case VISTA_ICON_LABEL_USUARIOS:
-                genericServicio = new UsuarioServicioImpl();
+                genericServicio = Dependencias.getUsuarioServicio();
                 break;
-                
+
             case VISTA_ICON_LABEL_CLIENTES:
-                genericServicio = new ClienteServicioImpl();
+                genericServicio = Dependencias.getClienteServicio();
                 break;
-                
+
             case VISTA_ICON_LABEL_CONTRATOS:
-                genericServicio = new ContratoServicioImpl();
+                genericServicio = Dependencias.getContratoServicio();
                 break;
         }
 
