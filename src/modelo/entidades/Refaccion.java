@@ -5,9 +5,6 @@ package modelo.entidades;
  */
 public class Refaccion extends Producto {
 
-    /**
-     * Default constructor
-     */
     public Refaccion() {
     }
 

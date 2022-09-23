@@ -1,24 +1,16 @@
 package modelo.entidades;
 
+import java.awt.Image;
+
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
 public class Evidencia extends ObjectInit {
 
-    /**
-     * Default constructor
-     */
+    private String comentario;
+    private Image evidencia;
+
     public Evidencia() {
     }
-
-    /**
-     *
-     */
-    private String comentario;
-
-    /**
-     *
-     */
-//    private image evidencia;
 
 }

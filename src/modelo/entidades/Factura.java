@@ -5,9 +5,6 @@ package modelo.entidades;
  */
 public class Factura extends ObjectInit {
 
-    /**
-     * Default constructor
-     */
     public Factura() {
     }
 

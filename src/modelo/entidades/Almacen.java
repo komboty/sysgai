@@ -5,9 +5,6 @@ package modelo.entidades;
  */
 public class Almacen extends ObjectInit {
 
-    /**
-     * Default constructor
-     */
     public Almacen() {
     }
 

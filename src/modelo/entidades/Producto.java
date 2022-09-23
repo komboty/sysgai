@@ -5,35 +5,13 @@ package modelo.entidades;
  */
 public class Producto extends ObjectInit {
 
-    /**
-     * Default constructor
-     */
+    protected String nombre;
+    protected String serie;
+    protected float costo;
+    protected float volumen;
+    protected float peso;
+
     public Producto() {
     }
-
-    /**
-     *
-     */
-    protected String nombre;
-
-    /**
-     *
-     */
-    protected String serie;
-
-    /**
-     *
-     */
-    protected float costo;
-
-    /**
-     *
-     */
-    protected float volumen;
-
-    /**
-     *
-     */
-    protected float peso;
 
 }
