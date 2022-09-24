@@ -49,17 +49,21 @@ public final class Constantes {
 
     // Mensajes de la vista.
     public static final String VISTA_ELIMINAR_REGISTRO_TITULO = "Eliminar registro";
-    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION = "Esta seguro de eliminar el registro?";
-    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_ELIMINADO = "El regitro con Id: %s se elimino correctamente";
-    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_ERROR = "Ocurrio un error al elimiar el registro";
+    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION = "Esta seguro de eliminar el registro con ID: %s?";
+    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_ELIMINADO = "El regitro con ID: %s se elimino correctamente.";
 
     public static final String VISTA_ERROR_NO_USUARIO = "No existe el Usuario";
+    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_ERROR = "Ocurrio un error al elimiar el registro con ID: %s.\nAsegurese de eliminar antes las referencias del registro.";
+
+    // Formato
+    public static final String VISTA_FECHA_FORMATO = "dd/MM/yyyy HH:mm";
 
     // Etiqueta y su URL de iconos, imagenes de ItemTablaInfo.
     public static final String VISTA_ICON_LABEL_ALMACENES = "Productos";
     public static final String VISTA_ICON_URL_ALMACENES = "/recursos/iconos/icono_productos.png";
     public static final String VISTA_ICON_LABEL_CLIENTES = "Clientes";
     public static final String VISTA_ICON_URL_CLIENTES = "/recursos/iconos/icono_clientes.png";
+    public static final String VISTA_IMAGE_URL_CLIENTES = "/recursos/imgItemsTablaInfo/imagen_cliente.png";
     public static final String VISTA_ICON_LABEL_CONTRATOS = "Contratos";
     public static final String VISTA_ICON_URL_CONTRATOS = "/recursos/iconos/icono_contratos.png";
     public static final String VISTA_ICON_LABEL_FACTURAS = "Facturas";
@@ -70,7 +74,7 @@ public final class Constantes {
     public static final String VISTA_ICON_URL_TICKETS = "/recursos/iconos/icono_tickets.png";
     public static final String VISTA_ICON_LABEL_USUARIOS = "Usuarios";
     public static final String VISTA_ICON_URL_USUARIOS = "/recursos/iconos/icono_usuarios.png";
-    public static final String VISTA_IMAGE_URL_USUARIOS = "/recursos/imgItemsTablaInfo/imagen_usuario.jpeg";
+    public static final String VISTA_IMAGE_URL_USUARIOS = "/recursos/imgItemsTablaInfo/imagen_usuario.png";
 
     public static final String VISTA_ICON_LABEL_CREAR = "Crear";
     public static final String VISTA_ICON_URL_CREAR = "/recursos/iconos/icono_crear.png";

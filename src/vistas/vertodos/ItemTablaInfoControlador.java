@@ -108,13 +108,13 @@ public class ItemTablaInfoControlador implements Initializable {
     private void llamarServicio(String accion) {
         switch (accion) {
             case VISTA_ICON_LABEL_EDITAR:
-                genericServicio.editarPorId(objectInit.getId());
+                System.out.println("EDITAR REGISTRO CON ID: " + objectInit.getId());
                 break;
 
-            case VISTA_ICON_LABEL_ELIMINAR:
+            case VISTA_ICON_LABEL_ELIMINAR:                
                 // Se lanza Alerta para asegurarse que se quiere eliminar.
-                boolean isEliminar = UtilsVista.lanzaAlertaCancelYAceptar(VISTA_ELIMINAR_REGISTRO_TITULO,
-                        VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION);
+                String mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION, objectInit.getId());
+                boolean isEliminar = UtilsVista.lanzaAlertaCancelYAceptar(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                 // Si no se dio en Aceptar, no se hace nada.
                 if (!isEliminar) {
                     return;
@@ -123,12 +123,13 @@ public class ItemTablaInfoControlador implements Initializable {
                 boolean isEliminado = genericServicio.eliminarPorId(objectInit.getId());
                 // Si ocurrio un error, se notifica al usuario.
                 if (!isEliminado) {
-                    UtilsVista.lanzaAlertaError(VISTA_ELIMINAR_REGISTRO_TITULO, VISTA_ELIMINAR_REGISTRO_MENSAJE_ERROR);
+                    mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_ERROR, objectInit.getId());
+                    UtilsVista.lanzaAlertaError(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                     return;
                 }
                 // Si se elimino correctamente, se notifica al usuario.
-                String mensajeEliminado = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_ELIMINADO, objectInit.getId());
-                UtilsVista.lanzaAlertaInformacion(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminado);
+                mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_ELIMINADO, objectInit.getId());
+                UtilsVista.lanzaAlertaInformacion(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                 actualizarTablaInfo.set(!actualizarTablaInfo.get());
                 break;
         }

@@ -11,6 +11,7 @@ import modelo.entidades.Usuario;
 import static modelo.utils.Constantes.*;
 import basedatos.ConexionBD;
 import modelo.entidades.Area;
+import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -31,14 +32,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
      * @throws SQLException
      */
     public Usuario resultToUsuario(ResultSet resultSet) throws SQLException {
-        LocalDateTime fechaModificacion = resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION) != null
-                ? resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION).toLocalDateTime() : null;
-
+        // FALTA TICKETS Y PEDIDOS.
         Usuario usuario = new Usuario();
-        usuario.setToStringTodos(true);
         usuario.setId(resultSet.getInt(T_USUARIO_C_ID));
-        usuario.setFechaCreacion(resultSet.getTimestamp(T_USUARIO_C_FECHA_CREACION).toLocalDateTime());
-        usuario.setFechaModificacion(fechaModificacion);
+        usuario.setFechaCreacion(Utils.resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_CREACION));
+        usuario.setFechaModificacion(Utils.resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_MODIFICACION));
         usuario.setNombre(resultSet.getString(T_USUARIO_C_NOMBRE));
         usuario.setTelefono(resultSet.getString(T_USUARIO_C_TELEFONO));
         usuario.setMail(resultSet.getString(T_USUARIO_C_MAIL));
@@ -46,7 +44,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         usuario.setContrasenia(resultSet.getString(T_USUARIO_C_CONTRASENIA));
 
         Area area = new Area();
-        area.setToStringTodos(false);
+        area.setToStringTodo(false);
         area.setId(resultSet.getInt(T_AREA_C_ID));
         area.setNombre(resultSet.getString(T_AREA_C_NOMBRE));
         usuario.setArea(area);
@@ -116,8 +114,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario editarPorId(Usuario usuario) {
-        System.out.println("EDITAR USUARIO CON ID: " + usuario.getId());
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new Usuario();
     }
 
     @Override
@@ -134,7 +131,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
         // Si hay conexion a la base de datos, se elimina el Usuario.
         try {
-            statement.setInt(1, id);            
+            statement.setInt(1, id);
             return statement.executeUpdate() == 1;
         } catch (SQLException ex) {
             System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.eliminarPorId()");

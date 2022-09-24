@@ -41,7 +41,13 @@ public class Cliente extends Persona {
     
     @Override
     public String toString() {
-        return String.format("%s\nNIVEL: %s\nALMACENES: %d\nCONTRATOS: %d",
+        String toString;
+        if (isToStringTodo()) {
+            toString = String.format("%s\nNIVEL: %s\nALMACENES: %s\nCONTRATOS: %s",
                 super.toString(), nivel, Utils.getSize(almacenes), Utils.getSize(contratos));
+        } else {
+            toString = String.format("%s", super.toString());
+        }
+        return toString;
     }
 }

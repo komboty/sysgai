@@ -1,7 +1,5 @@
 package modelo.entidades;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import modelo.utils.Utils;
 
@@ -53,9 +51,9 @@ public class Usuario extends Persona {
     @Override
     public String toString() {
         String toString;
-        if (isToStringTodos()) {
+        if (isToStringTodo()) {
             
-            toString = String.format("%s\n-----------------\nAREA:%s\n-----------------\nTickets Asignados: %d\n",
+            toString = String.format("%s\n-----------------\nAREA:%s\n-----------------\nTickets Asignados: %s\n",
                     super.toString(), area.toString(), Utils.getSize(tickets));
         } else {
             toString = String.format("%s", super.toString());

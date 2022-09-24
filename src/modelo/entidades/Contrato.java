@@ -24,8 +24,8 @@ public class Contrato extends ObjectInit {
     private int rentaMensual;
     private int bolsaBN;
     private int bolsaColor;
-    private int clickBN;
-    private int clickColor;
+    private double clickBN;
+    private double clickColor;
 
     public Contrato() {
     }
@@ -145,26 +145,32 @@ public class Contrato extends ObjectInit {
         this.bolsaColor = bolsaColor;
     }
 
-    public int getClickBN() {
+    public double getClickBN() {
         return clickBN;
     }
 
-    public void setClickBN(int clickBN) {
+    public void setClickBN(double clickBN) {
         this.clickBN = clickBN;
     }
 
-    public int getClickColor() {
+    public double getClickColor() {
         return clickColor;
     }
 
-    public void setClickColor(int clickColor) {
+    public void setClickColor(double clickColor) {
         this.clickColor = clickColor;
     }
 
     @Override
     public String toString() {
-        return String.format("%s\nCLIENTE: %s\nFACTURAS: %d\nPEDIDOS: %d\nINICIO: %s\nTIPO: %s\nMESES: %s\nDIA DE CORTE: %s\nFORMA DE PAGO: %s\nTIPO DE IMPRESORAS: %s\nTIPO DE TONERS: %s\nESTADO: %s\nRENTA MENSUAL: %s\nBOLSA B/N: %s\nBOLSA COLOR: %s\nCLICK BN: %s\nCLICK COLOR: %s",
-                super.toString(), cliente.getNombre(), Utils.getSize(facturas), Utils.getSize(pedidos), inicioContrato, tipoContrato, mesesContrato, diaCorte, formaPago, tipoImpresora, tipoToner, estado, rentaMensual, bolsaBN, bolsaColor, clickBN, clickColor);
+        String toString;
+        if (isToStringTodo()) {
+            toString = String.format("%s\nCLIENTE: %s\nINICIO: %s\nTIPO: %s\nESTADO: %s\nMESES: %s\nDIA DE CORTE: %s\nFORMA DE PAGO: %s\nTIPO DE IMPRESORAS: %s\nTIPO DE TONERS: %s\nRENTA MENSUAL: %s\nBOLSA B/N: %s\nBOLSA COLOR: %s\nCLICK BN: %.2f\nCLICK COLOR: %.2f\nFACTURAS: %s\nPEDIDOS: %s",
+                super.toString(), cliente.getNombre(), Utils.localDateTimeToString(inicioContrato), tipoContrato, estado, mesesContrato, diaCorte, formaPago, tipoImpresora, tipoToner, rentaMensual, bolsaBN, bolsaColor, clickBN, clickColor, Utils.getSize(facturas), Utils.getSize(pedidos));
+        } else {
+            toString = String.format("%s\nESTADO: %s", super.toString(), estado);
+        }
+        return toString;
     }
 
 }

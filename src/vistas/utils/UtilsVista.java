@@ -2,6 +2,7 @@ package vistas.utils;
 
 import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 
 /**
@@ -17,7 +18,7 @@ public class UtilsVista {
      * @return Verdadero si se oprimio el boton de Aceptar, de lo contrario falso.
      */
     public static boolean lanzaAlertaCancelYAceptar(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);
         Optional<ButtonType> result = alert.showAndWait();
@@ -31,7 +32,8 @@ public class UtilsVista {
      * @param mensaje Mensaje de la Alerta.
      */
     public static void lanzaAlertaError(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setHeaderText(null);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);
         alert.showAndWait();
@@ -44,7 +46,8 @@ public class UtilsVista {
      * @param mensaje Mensaje de la Alerta.
      */
     public static void lanzaAlertaInformacion(String titulo, String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
         alert.setTitle(titulo);
         alert.setContentText(mensaje);
         alert.showAndWait();

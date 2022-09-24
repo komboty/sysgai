@@ -2,7 +2,6 @@ package vistas.vertodos;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -61,10 +60,12 @@ public class TablaInfoControlador implements Initializable {
 
             case VISTA_ICON_LABEL_CLIENTES:
                 genericServicio = Dependencias.getClienteServicio();
+                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
                 break;
 
             case VISTA_ICON_LABEL_CONTRATOS:
                 genericServicio = Dependencias.getContratoServicio();
+                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package modelo.entidades;
 
 import java.time.LocalDateTime;
+import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -10,9 +11,11 @@ public abstract class ObjectInit {
     private int id;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaModificacion;
-    private boolean toStringTodos;
+    // Variable que define si se regresa toda la informacion en toString().
+    private boolean toStringTodo;
 
     public ObjectInit() {
+        toStringTodo = true;
     }
 
     public int getId() {
@@ -39,20 +42,20 @@ public abstract class ObjectInit {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public boolean isToStringTodos() {
-        return toStringTodos;
+    public boolean isToStringTodo() {
+        return toStringTodo;
     }
 
-    public void setToStringTodos(boolean toStringTodos) {
-        this.toStringTodos = toStringTodos;
+    public void setToStringTodo(boolean toStringTodos) {
+        this.toStringTodo = toStringTodos;
     }
 
     @Override
     public String toString() {
         String toString;
-        if (isToStringTodos()) {
-            toString = String.format("ID: %d\nFECHA CREACIÓN: %s\nFECHA MODIFICACIÓN: %s",
-                    id, fechaCreacion, fechaModificacion);
+        if (isToStringTodo()) {
+            toString = String.format("ID: %s\nFECHA CREACIÓN: %s\nFECHA MODIFICACIÓN: %s",
+                    id, Utils.localDateTimeToString(fechaCreacion), Utils.localDateTimeToString(fechaModificacion));
         } else {
             toString = "";
         }

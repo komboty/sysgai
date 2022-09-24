@@ -50,7 +50,7 @@ public abstract class Persona extends ObjectInit {
     @Override
     public String toString() {
         String toString;
-        if (isToStringTodos()) {
+        if (isToStringTodo()) {
             toString = String.format("%s\nNOMBRE: %s\nTELEFONO: %s\nCORREO: %s\n-----------------\nDIRECCION:\n%s\n-----------------",
                     super.toString(), nombre, telefono, mail, direccion.replaceAll(DELIMITADOR_DIRECCCION, "\n"));
         } else {

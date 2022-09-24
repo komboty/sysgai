@@ -12,7 +12,7 @@
          <children>
             <ImageView fx:id="imageItem" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
-                  <Insets right="6.0" />
+                  <Insets right="12.0" />
                </HBox.margin>
             </ImageView>
             <Label fx:id="labelInfo" text="Label">

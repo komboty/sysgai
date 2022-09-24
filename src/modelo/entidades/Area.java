@@ -42,8 +42,8 @@ public class Area extends ObjectInit {
     @Override
     public String toString() {
         String toString;
-        if (isToStringTodos()) {
-            toString = String.format("%s\nNOMBRE: %d\nEMPLEADOS: %d\nTICKETS: %d",
+        if (isToStringTodo()) {
+            toString = String.format("%s\nNOMBRE: %s\nEMPLEADOS: %s\nTICKETS: %s",
                     super.toString(), nombre, Utils.getSize(empleados), Utils.getSize(tickets));
         } else {
             toString = String.format("%s\nNOMBRE: %s", super.toString(), nombre);
