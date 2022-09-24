@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.login.LoginControlador">
+   <children>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefWidth="80.0" text="Correo">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="textMail" onKeyPressed="#onBorrarError" onMouseClicked="#onBorrarError" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefWidth="80.0" text="Contraseña">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <PasswordField fx:id="textContrasenia" onKeyPressed="#onBorrarError" />
+         </children>
+      </HBox>
+      <Label fx:id="labelError" textFill="RED">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <Button mnemonicParsing="false" onMouseClicked="#onIdentificar" text="Identificar" />
+   </children>
+</VBox>
