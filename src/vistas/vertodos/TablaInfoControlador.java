@@ -27,7 +27,6 @@ public class TablaInfoControlador implements Initializable {
 
     private String servicio;
     private GenericServicio genericServicio;
-    private String urlImageItem;
 
     public TablaInfoControlador(String servicio) {
         this.servicio = servicio;
@@ -36,11 +35,11 @@ public class TablaInfoControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         scrollPane.setMinSize(VISTA_SUB_VENTANA_ANCHO, VISTA_SUB_VENTANA_ALTO);
-        generaTablaIfo();
+        generaTablaInfo();
 
     }
 
-    private void generaTablaIfo() {
+    private void generaTablaInfo() {
         try {
             vbox.getChildren().clear();
             getGenericServicio();
@@ -55,17 +54,14 @@ public class TablaInfoControlador implements Initializable {
         switch (this.servicio) {
             case VISTA_ICON_LABEL_USUARIOS:
                 genericServicio = Dependencias.getUsuarioServicio();
-                urlImageItem = VISTA_IMAGE_URL_USUARIOS;
                 break;
 
             case VISTA_ICON_LABEL_CLIENTES:
                 genericServicio = Dependencias.getClienteServicio();
-                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
                 break;
 
             case VISTA_ICON_LABEL_CONTRATOS:
                 genericServicio = Dependencias.getContratoServicio();
-                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
                 break;
         }
     }
@@ -76,9 +72,9 @@ public class TablaInfoControlador implements Initializable {
             fxmlLoader.setLocation(getClass().getResource(VISTA_URL_ITEM_TABLA_INFO));
             Pane pane = fxmlLoader.load();
             ItemTablaInfoControlador detalleInfoControlador = fxmlLoader.getController();
-            detalleInfoControlador.setDetalleInfo(objectInit, urlImageItem, genericServicio);
+            detalleInfoControlador.setDetalleInfo(objectInit, genericServicio, servicio);
             detalleInfoControlador.actualizarTablaInfo().addListener((obs, wasDisabled, isNowDisabled) -> {
-                generaTablaIfo();
+                generaTablaInfo();
             });
             vbox.getChildren().add(pane);
         }

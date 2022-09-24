@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import modelo.entidades.Contrato;
 import modelo.entidades.ObjectInit;
 import static modelo.utils.Constantes.*;
 import servicios.interfaces.GenericServicio;
@@ -35,6 +36,8 @@ public class ItemTablaInfoControlador implements Initializable {
     private ObjectInit objectInit;
     // Servicio que realizara la accion que desea el usuario.
     private GenericServicio genericServicio;
+    // Nombre del servicio.
+    private String servicio;
     // Variable que al cambiar su estado actualiza la tabla (TablaInfoControlador).
     private final BooleanProperty actualizarTablaInfo = new SimpleBooleanProperty();
 
@@ -61,13 +64,51 @@ public class ItemTablaInfoControlador implements Initializable {
      * @param genericServicio Servico que realiza la accion que desea el
      * usuario.
      */
-    public void setDetalleInfo(ObjectInit objectInit, String urlImageItem, GenericServicio genericServicio) {
+    public void setDetalleInfo(ObjectInit objectInit, GenericServicio genericServicio, String servicio) {
         this.objectInit = objectInit;
         this.genericServicio = genericServicio;
+        this.servicio = servicio;
+        setImageItem();
+        this.labelInfo.setText(objectInit.toString());
+    }
+
+    private void setImageItem() {
+        String urlImageItem = null;
+        switch (this.servicio) {
+            case VISTA_ICON_LABEL_USUARIOS:
+                urlImageItem = VISTA_IMAGE_URL_USUARIOS;
+                break;
+
+            case VISTA_ICON_LABEL_CLIENTES:
+                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
+                break;
+
+            case VISTA_ICON_LABEL_CONTRATOS:
+                urlImageItem = getUrlImageContratos();
+                break;
+        }
 
         Image image = new Image(String.valueOf(getClass().getResource(urlImageItem)));
         imageItem.setImage(image);
-        this.labelInfo.setText(objectInit.toString());
+    }
+
+    public String getUrlImageContratos() {
+        String urlImageItem = null;
+        Contrato contrato = (Contrato) this.objectInit;
+        switch (contrato.getEstado()) {
+            case ESTADO_CONTRATO_VALIDADO:
+                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_VALIDADO;
+                break;
+
+            case ESTADO_CONTRATO_RECHAZADO:
+                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_RECHAZADO;
+                break;
+
+            default:
+                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_OTRO;
+                break;
+        }
+        return urlImageItem;
     }
 
     /**
@@ -111,7 +152,7 @@ public class ItemTablaInfoControlador implements Initializable {
                 System.out.println("EDITAR REGISTRO CON ID: " + objectInit.getId());
                 break;
 
-            case VISTA_ICON_LABEL_ELIMINAR:                
+            case VISTA_ICON_LABEL_ELIMINAR:
                 // Se lanza Alerta para asegurarse que se quiere eliminar.
                 String mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION, objectInit.getId());
                 boolean isEliminar = UtilsVista.lanzaAlertaCancelYAceptar(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);

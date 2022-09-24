@@ -54,9 +54,9 @@ public class LoginControlador implements Initializable {
         // Si se encuentra el usuario se muestra el menu.
         Usuario usuario = new Usuario();
         Area area = new Area();
-        area.setNombre(AREA_ADMINISTRACION);
+//        area.setNombre(AREA_ADMINISTRACION);
 //        area.setNombre(AREA_ARRENDAMIENTO);
-//        area.setNombre(AREA_ABOGADOS);
+        area.setNombre(AREA_ABOGADOS);
 //        area.setNombre(AREA_CONTADORES);
 //        area.setNombre(AREA_TECNICOS);
 //        area.setNombre(AREA_MESA_DE_SERVICIO);
