@@ -16,7 +16,7 @@ public final class Constantes {
     // Configuracion
     public static final String VISTA_TITULO_SISTEMA = "SYSGAI";
     public static final double VISTA_STAGE_ALTO = 600;
-    public static final double VISTA_STAGE_ANCHO = 800;
+    public static final double VISTA_STAGE_ANCHO = 1200;
     public static final double VISTA_VENTANA_ALTO_AJUSTE = 36;
     public static final double VISTA_VENTANA_ANCHO_AJUSTE = 10;
     public static final double VISTA_VENTANA_ALTO = VISTA_STAGE_ALTO - VISTA_VENTANA_ALTO_AJUSTE;
@@ -47,14 +47,23 @@ public final class Constantes {
     public static final String VISTA_URL_ITEM_TABLA_INFO = "/vistas/vertodos/itemTablaInfo.fxml";
     public static final String VISTA_URL_TABLA_INFO = "/vistas/vertodos/tablaInfo.fxml";
 
-    // Mensajes de error
-    public static final String VISTA_ERROR_NO_USUARIO = "No existe el Usuario";
+    // Mensajes de la vista.
+    public static final String VISTA_ELIMINAR_REGISTRO_TITULO = "Eliminar registro";
+    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION = "Esta seguro de eliminar el registro con ID: %s?";
+    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_ELIMINADO = "El regitro con ID: %s se elimino correctamente.";
 
-    // URL de iconos y su etiqueta.
+    public static final String VISTA_ERROR_NO_USUARIO = "No existe el Usuario";
+    public static final String VISTA_ELIMINAR_REGISTRO_MENSAJE_ERROR = "Ocurrio un error al elimiar el registro con ID: %s.\nAsegurese de eliminar antes las referencias del registro.";
+
+    // Formato
+    public static final String VISTA_FECHA_FORMATO = "dd/MM/yyyy HH:mm";
+
+    // Etiqueta y su URL de iconos, imagenes de ItemTablaInfo.
     public static final String VISTA_ICON_LABEL_ALMACENES = "Productos";
     public static final String VISTA_ICON_URL_ALMACENES = "/recursos/iconos/icono_productos.png";
     public static final String VISTA_ICON_LABEL_CLIENTES = "Clientes";
     public static final String VISTA_ICON_URL_CLIENTES = "/recursos/iconos/icono_clientes.png";
+    public static final String VISTA_IMAGE_URL_CLIENTES = "/recursos/imgItemsTablaInfo/imagen_cliente.png";
     public static final String VISTA_ICON_LABEL_CONTRATOS = "Contratos";
     public static final String VISTA_ICON_URL_CONTRATOS = "/recursos/iconos/icono_contratos.png";
     public static final String VISTA_ICON_LABEL_FACTURAS = "Facturas";
@@ -65,6 +74,7 @@ public final class Constantes {
     public static final String VISTA_ICON_URL_TICKETS = "/recursos/iconos/icono_tickets.png";
     public static final String VISTA_ICON_LABEL_USUARIOS = "Usuarios";
     public static final String VISTA_ICON_URL_USUARIOS = "/recursos/iconos/icono_usuarios.png";
+    public static final String VISTA_IMAGE_URL_USUARIOS = "/recursos/imgItemsTablaInfo/imagen_usuario.png";
 
     public static final String VISTA_ICON_LABEL_CREAR = "Crear";
     public static final String VISTA_ICON_URL_CREAR = "/recursos/iconos/icono_crear.png";
@@ -89,17 +99,17 @@ public final class Constantes {
 
     /**
      * ----------------------------------------------------------------------------------------------
-     * Tipos de Usuario
+     * Areas de la Empresa
      * ----------------------------------------------------------------------------------------------
      */
-    public static final String TIPO_USUARIO_ARRENDADOR = "Arrendador";
-    public static final String TIPO_USUARIO_ABOGADO = "Abogado";
-    public static final String TIPO_USUARIO_CONTADOR = "Contador";
-    public static final String TIPO_USUARIO_TECNICO = "Técnico";
-    public static final String TIPO_USUARIO_MESA = "Mesa de servicio";
-    public static final String TIPO_USUARIO_CHOFER = "Chofer";
-    public static final String TIPO_USUARIO_ALMACENISTA = "Almacenista";
-    public static final String TIPO_USUARIO_ADMINISTRADOR = "Administrador";
+    public static final String AREA_ARRENDAMIENTO = "Arrendamiento";
+    public static final String AREA_ABOGADOS = "Abogados";
+    public static final String AREA_CONTADORES = "Contadores";
+    public static final String AREA_TECNICOS = "Técnicos";
+    public static final String AREA_MESA_DE_SERVICIO = "Mesa de servicio";
+    public static final String AREA_ALMACEN = "Almacén";
+    public static final String AREA_DISTRIBUCION = "Distribución";
+    public static final String AREA_ADMINISTRACION = "Administración";
 
     /**
      * ----------------------------------------------------------------------------------------------
@@ -114,79 +124,91 @@ public final class Constantes {
     public static final String DB_USUARIO = "odoo";
     public static final String DB_CONTRASENIA = "odoo";
 
+    public static final String DELIMITADOR_DIRECCCION = ",";
+
     // Tablas 
     // (DB_N_T_) Nombre de tabla (T_) Tabla (C_) Columna
+    public static final String DB_N_T_AREA = "Area";
+    public static final String T_AREA_C_ID = "idArea";
+    public static final String T_AREA_C_FECHA_CREACION = "fechaCreacionArea";
+    public static final String T_AREA_C_FECHA_MODIFICACION = "fechaModificacionArea";
+    public static final String T_AREA_C_NOMBRE = "nombreArea";
+
     public static final String DB_N_T_USUARIO = "Usuario";
-    public static final String T_USUARIO_C_ID = "id";
-    public static final String T_USUARIO_C_ID_TIPO_USUARIO = "idTipoUsuario";
-    public static final String T_USUARIO_C_FECHA_CREACION = "fechaCreacion";
-    public static final String T_USUARIO_C_FECHA_MODIFICACION = "fechaModificacion";
-    public static final String T_USUARIO_C_NOMBRE = "nombre";
-    public static final String T_USUARIO_C_TELEFONO = "telefono";
-    public static final String T_USUARIO_C_MAIL = "mail";
-    public static final String T_USUARIO_C_DIRECCION = "direccion";
-    public static final String T_USUARIO_C_CONTRASENIA = "contrasenia";
+    public static final String T_USUARIO_C_ID = "idUsuario";
+    public static final String T_USUARIO_C_ID_AREA = "idArea";
+    public static final String T_USUARIO_C_FECHA_CREACION = "fechaCreacionUsuario";
+    public static final String T_USUARIO_C_FECHA_MODIFICACION = "fechaModificacionUsuario";
+    public static final String T_USUARIO_C_NOMBRE = "nombreUsuario";
+    public static final String T_USUARIO_C_TELEFONO = "telefonoUsuario";
+    public static final String T_USUARIO_C_MAIL = "mailUsuario";
+    public static final String T_USUARIO_C_DIRECCION = "direccionUsuario";
+    public static final String T_USUARIO_C_CONTRASENIA = "contraseniaUsuario";
 
     public static final String DB_N_T_CLIENTE = "Cliente";
-    public static final String T_CLIENTE_C_ID = "id";
+    public static final String T_CLIENTE_C_ID = "idCliente";
     public static final String T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE = "idTipoNivelCliente";
-    public static final String T_CLIENTE_C_FECHA_CREACION = "fechaCreacion";
-    public static final String T_CLIENTE_C_FECHA_MODIFICACION = "fechaModificacion";
-    public static final String T_CLIENTE_C_NOMBRE = "nombre";
-    public static final String T_CLIENTE_C_TELEFONO = "telefono";
-    public static final String T_CLIENTE_C_MAIL = "mail";
-    public static final String T_CLIENTE_C_DIRECCION = "direccion";
+    public static final String T_CLIENTE_C_FECHA_CREACION = "fechaCreacionCliente";
+    public static final String T_CLIENTE_C_FECHA_MODIFICACION = "fechaModificacionCliente";
+    public static final String T_CLIENTE_C_NOMBRE = "nombreCliente";
+    public static final String T_CLIENTE_C_TELEFONO = "telefonoCliente";
+    public static final String T_CLIENTE_C_MAIL = "mailCliente";
+    public static final String T_CLIENTE_C_DIRECCION = "direccionCliente";
 
     public static final String DB_N_T_CONTRATO = "Contrato";
-    public static final String T_CONTRATO_C_ID = "id";
+    public static final String T_CONTRATO_C_ID = "idContrato";
     public static final String T_CONTRATO_C_ID_CLIENTE = "idCliente";
     public static final String T_CONTRATO_C_ID_TIPO_CONTRATO = "idTipoContrato";
     public static final String T_CONTRATO_C_ID_TIPO_PAGO = "idTipoPago";
     public static final String T_CONTRATO_C_ID_TIPO_TONER = "idTipoToner";
-    public static final String T_CONTRATO_C_ID_TIPO_ESTADO_IMPRESORA = "idTipoEstadoImpresora";
+    public static final String T_CONTRATO_C_ID_TIPO_ESTADO_PRODUCTO = "idTipoEstadoProducto";
     public static final String T_CONTRATO_C_ID_TIPO_ESTADO_CONTRATO = "idTipoEstadoContrato";
-    public static final String T_CONTRATO_C_FECHA_CREACION = "fechaCreacion";
-    public static final String T_CONTRATO_C_FECHA_MODIFICACION = "fechaModificacion";
+    public static final String T_CONTRATO_C_FECHA_CREACION = "fechaCreacionContrato";
+    public static final String T_CONTRATO_C_FECHA_MODIFICACION = "fechaModificacionContrato";
     public static final String T_CONTRATO_C_INICIO_CONTRATO = "inicioContrato";
     public static final String T_CONTRATO_C_MESES_CONTRATO = "mesesContrato";
-    public static final String T_CONTRATO_C_DIA_CORTE = "diaCorte";
-    public static final String T_CONTRATO_C_RENTA_MENSUAL = "rentaMensual";
-    public static final String T_CONTRATO_C_BOLSA_BN = "bolsaBN";
-    public static final String T_CONTRATO_C_BOLSA_COLOR = "bolsaColor";
-    public static final String T_CONTRATO_C_CLICK_BN = "clickBN";
-    public static final String T_CONTRATO_C_CLICK_COLOR = "clickColor";
-    
-    public static final String DB_N_T_FATCURA = "Factura";
-    public static final String T_FATCURA_C_ID = "id";
-    public static final String T_FATCURA_C_FECHA_CREACION = "fechaCreacion";
-    public static final String T_FATCURA_C_FECHA_MODIFICACION = "fechaModificacion";
+    public static final String T_CONTRATO_C_DIA_CORTE = "diaCorteContrato";
+    public static final String T_CONTRATO_C_RENTA_MENSUAL = "rentaMensualContrato";
+    public static final String T_CONTRATO_C_BOLSA_BN = "bolsaBNContrato";
+    public static final String T_CONTRATO_C_BOLSA_COLOR = "bolsaColorContrato";
+    public static final String T_CONTRATO_C_CLICK_BN = "clickBNContrato";
+    public static final String T_CONTRATO_C_CLICK_COLOR = "clickColorContrato";
 
-    public static final String DB_N_T_TIPO_USUARIO = "TipoUsuario";
-    public static final String T_TIPO_USUARIO_C_ID = "id";
-    public static final String T_TIPO_USUARIO_C_TIPO = "tipo";
+    public static final String DB_N_T_FATCURA = "Factura";
+    public static final String T_FATCURA_C_ID = "idFactura";
+    public static final String T_FATCURA_C_ID_CONTRATO = "idContrato";
+    public static final String T_FATCURA_C_ID_TIPO_ESTADO_FACTURA = "idTipoEstadoFactura";
+    public static final String T_FATCURA_C_FECHA_CREACION = "fechaCreacionFactura";
+    public static final String T_FATCURA_C_FECHA_MODIFICACION = "fechaModificacionFactura";
+    public static final String T_FATCURA_C_IMPUESTO = "impuestoFactura";
+    public static final String T_FATCURA_C_COBRO = "cobroFactura";
 
     public static final String DB_N_T_TIPO_NIVEL_CLIENTE = "TipoNivelCliente";
-    public static final String T_TIPO_NIVEL_CLIENTE_C_ID = "id";
-    public static final String T_TIPO_NIVEL_CLIENTE_C_TIPO = "tipo";
+    public static final String T_TIPO_NIVEL_CLIENTE_C_ID = "idTipoNivelCliente";
+    public static final String T_TIPO_NIVEL_CLIENTE_C_TIPO = "tipoNivelCliente";
 
     public static final String DB_N_T_TIPO_CONTRATO = "TipoContrato";
-    public static final String T_TIPO_CONTRATO_C_ID = "id";
-    public static final String T_TIPO_CONTRATO_C_TIPO = "tipo";
+    public static final String T_TIPO_CONTRATO_C_ID = "idTipoContrato";
+    public static final String T_TIPO_CONTRATO_C_TIPO = "tipoContrato";
 
     public static final String DB_N_T_TIPO_PAGO = "TipoPago";
-    public static final String T_TIPO_PAGO_C_ID = "id";
-    public static final String T_TIPO_PAGO_C_TIPO = "tipo";
+    public static final String T_TIPO_PAGO_C_ID = "idTipoPago";
+    public static final String T_TIPO_PAGO_C_TIPO = "tipoPago";
 
     public static final String DB_N_T_TIPO_TONER = "TipoToner";
-    public static final String T_TIPO_TONER_C_ID = "id";
-    public static final String T_TIPO_TONER_C_TIPO = "tipo";
+    public static final String T_TIPO_TONER_C_ID = "idTipoToner";
+    public static final String T_TIPO_TONER_C_TIPO = "tipoToner";
 
-    public static final String DB_N_T_TIPO_ESTADO_IMPRESORA = "TipoEstadoImpresora";
-    public static final String T_TIPO_ESTADO_IMPRESORA_C_ID = "id";
-    public static final String T_TIPO_ESTADO_IMPRESORA_C_TIPO = "tipo";
-    
+    public static final String DB_N_T_TIPO_ESTADO_PRODUCTO = "TipoEstadoProducto";
+    public static final String T_TIPO_ESTADO_PRODUCTO_C_ID = "idTipoEstadoProducto";
+    public static final String T_TIPO_ESTADO_PRODUCTO_C_TIPO = "tipoEstadoProducto";
+
     public static final String DB_N_T_TIPO_ESTADO_CONTRATO = "TipoEstadoContrato";
-    public static final String T_TIPO_ESTADO_CONTRATO_C_ID = "id";
-    public static final String T_TIPO_ESTADO_CONTRATO_C_TIPO = "tipo";
+    public static final String T_TIPO_ESTADO_CONTRATO_C_ID = "idTipoEstadoContrato";
+    public static final String T_TIPO_ESTADO_CONTRATO_C_TIPO = "tipoEstadoContrato";
+
+    public static final String DB_N_T_TIPO_ESTADO_FACTURA = "TipoEstadoFactura";
+    public static final String T_TIPO_ESTADO_FACTURA_C_ID = "idTipoEstadoFactura";
+    public static final String T_TIPO_ESTADO_FACTURA_C_TIPO = "tipoEstadoFactura";
 
 }

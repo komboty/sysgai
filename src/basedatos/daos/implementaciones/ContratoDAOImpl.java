@@ -11,6 +11,7 @@ import java.util.List;
 import modelo.entidades.Cliente;
 import modelo.entidades.Contrato;
 import static modelo.utils.Constantes.*;
+import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -31,30 +32,30 @@ public class ContratoDAOImpl implements ContratoDAO {
      * @throws SQLException
      */
     public Contrato resultToContrato(ResultSet resultSet) throws SQLException {
-        LocalDateTime fechaModificacion = resultSet.getTimestamp(T_CONTRATO_C_FECHA_MODIFICACION) != null
-                ? resultSet.getTimestamp(T_CONTRATO_C_FECHA_MODIFICACION).toLocalDateTime() : null;
+        // FALTA FACTURAS Y PEDIDOS.
+        Contrato contrato = new Contrato();
+        contrato.setId(resultSet.getInt(T_CONTRATO_C_ID));
+        contrato.setFechaCreacion(Utils.resultSetToLocalDateTime(resultSet, T_CONTRATO_C_FECHA_CREACION));
+        contrato.setFechaModificacion(Utils.resultSetToLocalDateTime(resultSet, T_CONTRATO_C_FECHA_MODIFICACION));
+        contrato.setInicioContrato(Utils.resultSetToLocalDateTime(resultSet, T_CONTRATO_C_INICIO_CONTRATO));
+        contrato.setTipoContrato(resultSet.getString(T_TIPO_CONTRATO_C_TIPO));
+        contrato.setMesesContrato(resultSet.getInt(T_CONTRATO_C_MESES_CONTRATO));
+        contrato.setDiaCorte(resultSet.getInt(T_CONTRATO_C_DIA_CORTE));
+        contrato.setFormaPago(resultSet.getString(T_TIPO_PAGO_C_TIPO));
+        contrato.setTipoImpresora(resultSet.getString(T_TIPO_ESTADO_PRODUCTO_C_TIPO));
+        contrato.setTipoToner(resultSet.getString(T_TIPO_TONER_C_TIPO));
+        contrato.setEstado(resultSet.getString(T_TIPO_ESTADO_CONTRATO_C_TIPO));
+        contrato.setRentaMensual(resultSet.getInt(T_CONTRATO_C_RENTA_MENSUAL));
+        contrato.setBolsaBN(resultSet.getInt(T_CONTRATO_C_BOLSA_BN));
+        contrato.setBolsaColor(resultSet.getInt(T_CONTRATO_C_BOLSA_COLOR));
+        contrato.setClickBN(resultSet.getFloat(T_CONTRATO_C_CLICK_BN));
+        contrato.setClickColor(resultSet.getFloat(T_CONTRATO_C_CLICK_COLOR));
 
         Cliente cliente = new Cliente();
-        cliente.setId(resultSet.getInt(T_CONTRATO_C_ID_CLIENTE));
+        cliente.setToStringTodo(false);
+        cliente.setId(resultSet.getInt(T_CLIENTE_C_ID));
         cliente.setNombre(resultSet.getString(T_CLIENTE_C_NOMBRE));
-        Contrato contrato = new Contrato(cliente, resultSet.getTimestamp(T_CONTRATO_C_INICIO_CONTRATO).toLocalDateTime(),
-                resultSet.getString(T_TIPO_CONTRATO_C_TIPO),
-                resultSet.getInt(T_CONTRATO_C_MESES_CONTRATO),
-                resultSet.getInt(T_CONTRATO_C_DIA_CORTE),
-                resultSet.getString(T_TIPO_PAGO_C_TIPO),
-                resultSet.getString(T_TIPO_ESTADO_IMPRESORA_C_TIPO),
-                resultSet.getString(T_TIPO_TONER_C_TIPO),
-                resultSet.getString(T_TIPO_ESTADO_CONTRATO_C_TIPO),
-                resultSet.getInt(T_CONTRATO_C_RENTA_MENSUAL),
-                resultSet.getInt(T_CONTRATO_C_BOLSA_BN),
-                resultSet.getInt(T_CONTRATO_C_BOLSA_COLOR),
-                resultSet.getInt(T_CONTRATO_C_CLICK_BN),
-                resultSet.getInt(T_CONTRATO_C_CLICK_COLOR),
-                resultSet.getInt(T_CONTRATO_C_ID),
-                resultSet.getTimestamp(T_CONTRATO_C_FECHA_CREACION).toLocalDateTime(),
-                fechaModificacion);
-        System.out.println(String.format("ContratoDAOImpl IdEstadoContrato:%d", resultSet.getInt(T_TIPO_ESTADO_CONTRATO_C_ID)));
-//        GET FACTURAS
+        contrato.setCliente(cliente);
         return contrato;
     }
 
@@ -72,7 +73,7 @@ public class ContratoDAOImpl implements ContratoDAO {
                 DB_N_T_TIPO_CONTRATO, DB_N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_CONTRATO, DB_N_T_TIPO_CONTRATO, T_TIPO_CONTRATO_C_ID,
                 DB_N_T_TIPO_PAGO, DB_N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_PAGO, DB_N_T_TIPO_PAGO, T_TIPO_PAGO_C_ID,
                 DB_N_T_TIPO_TONER, DB_N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_TONER, DB_N_T_TIPO_TONER, T_TIPO_TONER_C_ID,
-                DB_N_T_TIPO_ESTADO_IMPRESORA, DB_N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_ESTADO_IMPRESORA, DB_N_T_TIPO_ESTADO_IMPRESORA, T_TIPO_ESTADO_IMPRESORA_C_ID,
+                DB_N_T_TIPO_ESTADO_PRODUCTO, DB_N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_ESTADO_PRODUCTO, DB_N_T_TIPO_ESTADO_PRODUCTO, T_TIPO_ESTADO_PRODUCTO_C_ID,
                 DB_N_T_TIPO_ESTADO_CONTRATO, DB_N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_ESTADO_CONTRATO, DB_N_T_TIPO_ESTADO_CONTRATO, T_TIPO_ESTADO_CONTRATO_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
@@ -94,6 +95,17 @@ public class ContratoDAOImpl implements ContratoDAO {
         }
 
         return clientes;
+    }
+
+    @Override
+    public Contrato editarPorId(Contrato contrato) {
+        return new Contrato();
+    }
+
+    @Override
+    public boolean eliminarPorId(int id) {
+        System.out.println("ELIMIAR CONTRATO CON ID: " + id);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

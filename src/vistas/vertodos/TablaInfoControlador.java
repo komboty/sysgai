@@ -2,7 +2,6 @@ package vistas.vertodos;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -27,6 +26,8 @@ public class TablaInfoControlador implements Initializable {
     private VBox vbox;
 
     private String servicio;
+    private GenericServicio genericServicio;
+    private String urlImageItem;
 
     public TablaInfoControlador(String servicio) {
         this.servicio = servicio;
@@ -35,43 +36,50 @@ public class TablaInfoControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         scrollPane.setMinSize(VISTA_SUB_VENTANA_ANCHO, VISTA_SUB_VENTANA_ALTO);
+        generaTablaIfo();
 
+    }
+
+    private void generaTablaIfo() {
         try {
-            List<ObjectInit> listObjectInit = getDatos();
-            muestraDatos(listObjectInit);
+            vbox.getChildren().clear();
+            getGenericServicio();
+            muestraDatos();
         } catch (IOException ex) {
-            System.err.println("vistas.utils.TablaControlador.initialize()");
+            System.err.println("vistas.utils.TablaControlador.generaTablaIfo()");
             System.err.println(ex);
         }
     }
 
-    private List<ObjectInit> getDatos() {
-        List<ObjectInit> listObjectInit = new ArrayList<>();
-        GenericServicio genericServicio = null;
+    private void getGenericServicio() {
         switch (this.servicio) {
             case VISTA_ICON_LABEL_USUARIOS:
                 genericServicio = Dependencias.getUsuarioServicio();
+                urlImageItem = VISTA_IMAGE_URL_USUARIOS;
                 break;
 
             case VISTA_ICON_LABEL_CLIENTES:
                 genericServicio = Dependencias.getClienteServicio();
+                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
                 break;
 
             case VISTA_ICON_LABEL_CONTRATOS:
                 genericServicio = Dependencias.getContratoServicio();
+                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
                 break;
         }
-
-        return (List<ObjectInit>) (List<? extends ObjectInit>) genericServicio.getTodos();
     }
 
-    private void muestraDatos(List<ObjectInit> listObjectInit) throws IOException {
-        for (ObjectInit objectInit : listObjectInit) {
+    private void muestraDatos() throws IOException {
+        for (ObjectInit objectInit : (List<ObjectInit>) genericServicio.getTodos()) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource(VISTA_URL_ITEM_TABLA_INFO));
             Pane pane = fxmlLoader.load();
             ItemTablaInfoControlador detalleInfoControlador = fxmlLoader.getController();
-            detalleInfoControlador.setObjectInit(objectInit);
+            detalleInfoControlador.setDetalleInfo(objectInit, urlImageItem, genericServicio);
+            detalleInfoControlador.actualizarTablaInfo().addListener((obs, wasDisabled, isNowDisabled) -> {
+                generaTablaIfo();
+            });
             vbox.getChildren().add(pane);
         }
     }

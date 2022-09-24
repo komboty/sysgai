@@ -14,4 +14,20 @@ public interface GenericDAO<T> {
      * @return Lista con todos los registros de T.
      */
     public List<T> getTodos();
+    
+    /**
+     * Edita un registro en la base de datos por su id.
+     *
+     * @param objectInit Objeto a editar.
+     * @return Regresa el registro con los nuevos cambios.
+     */
+    public T editarPorId(T id);
+
+    /**
+     * Elimina un registro en la base de datos por su id.
+     *
+     * @param id Id del registro a eliminar.
+     * @return Regresa verdadero si se eliminio correctamente.
+     */
+    public boolean eliminarPorId(int id);
 }

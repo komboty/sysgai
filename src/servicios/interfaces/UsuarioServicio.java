@@ -14,5 +14,5 @@ public interface UsuarioServicio extends GenericServicio<Usuario> {
      * @param contrasenia Contraseña de usuario a identificar.
      * @return Un Usuario, si es que existe en la base de datos.
      */
-    public Usuario identificar(String mail, String contrasenia);
+    public Usuario iniciarSesion(String mail, String contrasenia);
 }

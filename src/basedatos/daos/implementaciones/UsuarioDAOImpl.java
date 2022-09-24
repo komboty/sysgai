@@ -10,6 +10,8 @@ import java.util.List;
 import modelo.entidades.Usuario;
 import static modelo.utils.Constantes.*;
 import basedatos.ConexionBD;
+import modelo.entidades.Area;
+import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -23,25 +25,30 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     /**
-     * Convierte un ResultSet en Usuario.
+     * Convierte un ResultSet en un Usuario.
      *
      * @param resultSet ResultSet a convertir.
      * @return Usuario.
      * @throws SQLException
      */
     public Usuario resultToUsuario(ResultSet resultSet) throws SQLException {
-        LocalDateTime fechaModificacion = resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION) != null
-                ? resultSet.getTimestamp(T_USUARIO_C_FECHA_MODIFICACION).toLocalDateTime() : null;
+        // FALTA TICKETS Y PEDIDOS.
+        Usuario usuario = new Usuario();
+        usuario.setId(resultSet.getInt(T_USUARIO_C_ID));
+        usuario.setFechaCreacion(Utils.resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_CREACION));
+        usuario.setFechaModificacion(Utils.resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_MODIFICACION));
+        usuario.setNombre(resultSet.getString(T_USUARIO_C_NOMBRE));
+        usuario.setTelefono(resultSet.getString(T_USUARIO_C_TELEFONO));
+        usuario.setMail(resultSet.getString(T_USUARIO_C_MAIL));
+        usuario.setDireccion(resultSet.getString(T_USUARIO_C_DIRECCION));
+        usuario.setContrasenia(resultSet.getString(T_USUARIO_C_CONTRASENIA));
 
-        return new Usuario(resultSet.getString(T_TIPO_USUARIO_C_TIPO),
-                resultSet.getString(T_USUARIO_C_CONTRASENIA),
-                resultSet.getInt(T_USUARIO_C_ID),
-                resultSet.getTimestamp(T_USUARIO_C_FECHA_CREACION).toLocalDateTime(),
-                fechaModificacion,
-                resultSet.getString(T_USUARIO_C_NOMBRE),
-                resultSet.getString(T_USUARIO_C_TELEFONO),
-                resultSet.getString(T_USUARIO_C_MAIL),
-                resultSet.getString(T_USUARIO_C_DIRECCION));
+        Area area = new Area();
+        area.setToStringTodo(false);
+        area.setId(resultSet.getInt(T_AREA_C_ID));
+        area.setNombre(resultSet.getString(T_AREA_C_NOMBRE));
+        usuario.setArea(area);
+        return usuario;
     }
 
     @Override
@@ -50,7 +57,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 + " JOIN %s ON %s.%s = %s.%s"
                 + " WHERE %s = ? AND %s = ?";
         consulta = String.format(consulta, DB_N_T_USUARIO,
-                DB_N_T_TIPO_USUARIO, DB_N_T_USUARIO, T_USUARIO_C_ID_TIPO_USUARIO, DB_N_T_TIPO_USUARIO, T_TIPO_USUARIO_C_ID,
+                DB_N_T_AREA, DB_N_T_USUARIO, T_USUARIO_C_ID_AREA, DB_N_T_AREA, T_AREA_C_ID,
                 T_USUARIO_C_MAIL, T_USUARIO_C_CONTRASENIA);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
@@ -82,9 +89,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public List<Usuario> getTodos() {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s";
-        consulta = String.format(consulta, DB_N_T_USUARIO, DB_N_T_TIPO_USUARIO,
-                DB_N_T_USUARIO, T_USUARIO_C_ID_TIPO_USUARIO,
-                DB_N_T_TIPO_USUARIO, T_TIPO_USUARIO_C_ID);
+        consulta = String.format(consulta, DB_N_T_USUARIO,
+                DB_N_T_AREA, DB_N_T_USUARIO, T_USUARIO_C_ID_AREA, DB_N_T_AREA, T_AREA_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
@@ -104,6 +110,36 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             System.err.println(ex);
         }
         return usuarios;
+    }
+
+    @Override
+    public Usuario editarPorId(Usuario usuario) {
+        return new Usuario();
+    }
+
+    @Override
+    public boolean eliminarPorId(int id) {
+        String consulta = "DELETE FROM %s"
+                + " WHERE %s = ?";
+        consulta = String.format(consulta, DB_N_T_USUARIO, T_USUARIO_C_ID);
+        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+
+        // Si no hay conexion a la base de datos.
+        if (statement == null) {
+            return false;
+        }
+
+        // Si hay conexion a la base de datos, se elimina el Usuario.
+        try {
+            statement.setInt(1, id);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException ex) {
+            System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.eliminarPorId()");
+            System.err.println(ex);
+        }
+
+        // Si ocurrio un error en la base de datos.
+        return false;
     }
 
 }

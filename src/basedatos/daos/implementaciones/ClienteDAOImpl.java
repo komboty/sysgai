@@ -11,6 +11,7 @@ import java.util.List;
 import modelo.entidades.Almacen;
 import modelo.entidades.Cliente;
 import static modelo.utils.Constantes.*;
+import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -31,17 +32,17 @@ public class ClienteDAOImpl implements ClienteDAO {
      * @throws SQLException
      */
     public Cliente resultToCliente(ResultSet resultSet) throws SQLException {
-        LocalDateTime fechaModificacion = resultSet.getTimestamp(T_CLIENTE_C_FECHA_MODIFICACION) != null
-                ? resultSet.getTimestamp(T_CLIENTE_C_FECHA_MODIFICACION).toLocalDateTime() : null;
-// GET ALMACENES
-        return new Cliente(new Almacen(), resultSet.getString(T_TIPO_NIVEL_CLIENTE_C_TIPO),
-                resultSet.getInt(T_CLIENTE_C_ID),
-                resultSet.getTimestamp(T_CLIENTE_C_FECHA_CREACION).toLocalDateTime(),
-                fechaModificacion,
-                resultSet.getString(T_CLIENTE_C_NOMBRE),
-                resultSet.getString(T_CLIENTE_C_TELEFONO),
-                resultSet.getString(T_CLIENTE_C_MAIL),
-                resultSet.getString(T_CLIENTE_C_DIRECCION));
+        // FALTA GET ALMACENES Y CONTRATOS
+        Cliente cliente = new Cliente();
+        cliente.setId(resultSet.getInt(T_CLIENTE_C_ID));
+        cliente.setNivel(resultSet.getString(T_TIPO_NIVEL_CLIENTE_C_TIPO));
+        cliente.setFechaCreacion(Utils.resultSetToLocalDateTime(resultSet, T_CLIENTE_C_FECHA_CREACION));
+        cliente.setFechaModificacion(Utils.resultSetToLocalDateTime(resultSet, T_CLIENTE_C_FECHA_MODIFICACION));
+        cliente.setNombre(resultSet.getString(T_CLIENTE_C_NOMBRE));
+        cliente.setTelefono(resultSet.getString(T_CLIENTE_C_TELEFONO));
+        cliente.setMail(resultSet.getString(T_CLIENTE_C_MAIL));
+        cliente.setDireccion(resultSet.getString(T_CLIENTE_C_DIRECCION));
+        return cliente;
     }
 
     public Cliente getPorId(int id) {
@@ -50,7 +51,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                 + " WHERE %s = ?";
         consulta = String.format(consulta, DB_N_T_CLIENTE,
                 DB_N_T_TIPO_NIVEL_CLIENTE, DB_N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, DB_N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID,
-                DB_N_T_CLIENTE);
+                T_CLIENTE_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
@@ -99,6 +100,36 @@ public class ClienteDAOImpl implements ClienteDAO {
         }
 
         return clientes;
+    }
+
+    @Override
+    public Cliente editarPorId(Cliente cliente) {        
+        return new Cliente();
+    }
+
+    @Override
+    public boolean eliminarPorId(int id) {
+        String consulta = "DELETE FROM %s"
+                + " WHERE %s = ?";
+        consulta = String.format(consulta, DB_N_T_CLIENTE, T_CLIENTE_C_ID);
+        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+
+        // Si no hay conexion a la base de datos.
+        if (statement == null) {
+            return false;
+        }
+
+        // Si hay conexion a la base de datos, se elimina el Cliente.
+        try {
+            statement.setInt(1, id);
+            return statement.executeUpdate() == 1;
+        } catch (SQLException ex) {
+            System.err.println("basedatos.daos.implementaciones.ClienteDAOImpl.eliminarPorId()");
+            System.err.println(ex);
+        }
+
+        // Si ocurrio un error en la base de datos.
+        return false;
     }
 
 }

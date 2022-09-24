@@ -21,4 +21,14 @@ public class ClienteServicioImpl implements ClienteServicio {
         return clienteDAO.getTodos();
     }
 
+    @Override
+    public Cliente editarPorId(Cliente id) {
+        return clienteDAO.editarPorId(id);
+    }
+
+    @Override
+    public boolean eliminarPorId(int id) {
+        return clienteDAO.eliminarPorId(id);
+    }
+
 }

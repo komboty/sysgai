@@ -35,6 +35,6 @@
             <Insets />
          </VBox.margin>
       </Label>
-      <Button mnemonicParsing="false" onMouseClicked="#onIdentificar" text="Identificar" />
+      <Button mnemonicParsing="false" onMouseClicked="#onIniciarSesion" text="Iniciar Sesion" />
    </children>
 </VBox>

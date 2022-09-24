@@ -1,41 +1,61 @@
 package modelo.entidades;
 
-import java.time.LocalDateTime;
+import static modelo.utils.Constantes.DELIMITADOR_DIRECCCION;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
 public abstract class Persona extends ObjectInit {
 
-    protected String nombre;
-    protected String telefono;
-    protected String mail;
-    protected String direccion;
+    private String nombre;
+    private String telefono;
+    private String mail;
+    private String direccion;
 
     public Persona() {
-    }
-
-    public Persona(int id, LocalDateTime fechaCreacion, LocalDateTime fechaModificacion,
-            String nombre, String telefono, String mail, String direccion) {
-
-        super(id, fechaCreacion, fechaModificacion);
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.mail = mail;
-        this.direccion = direccion;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getNombre() {
         return nombre;
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
     @Override
     public String toString() {
-        return String.format("%s\nNOMBRE: %s\nTELEFONO: %s\nCORREO: %s\nDIRECCION: %s",
-                super.toString(), nombre, telefono, mail, direccion);
+        String toString;
+        if (isToStringTodo()) {
+            toString = String.format("%s\nNOMBRE: %s\nTELEFONO: %s\nCORREO: %s\n-----------------\nDIRECCION:\n%s\n-----------------",
+                    super.toString(), nombre, telefono, mail, direccion.replaceAll(DELIMITADOR_DIRECCCION, "\n"));
+        } else {
+            toString = String.format("%s\nNOMBRE: %s", super.toString(), nombre);
+        }
+        return toString;
     }
 }
