@@ -34,14 +34,15 @@ public class ClienteDAOImpl implements ClienteDAO {
         LocalDateTime fechaModificacion = resultSet.getTimestamp(T_CLIENTE_C_FECHA_MODIFICACION) != null
                 ? resultSet.getTimestamp(T_CLIENTE_C_FECHA_MODIFICACION).toLocalDateTime() : null;
 // GET ALMACENES
-        return new Cliente(new Almacen(), resultSet.getString(T_TIPO_NIVEL_CLIENTE_C_TIPO),
-                resultSet.getInt(T_CLIENTE_C_ID),
-                resultSet.getTimestamp(T_CLIENTE_C_FECHA_CREACION).toLocalDateTime(),
-                fechaModificacion,
-                resultSet.getString(T_CLIENTE_C_NOMBRE),
-                resultSet.getString(T_CLIENTE_C_TELEFONO),
-                resultSet.getString(T_CLIENTE_C_MAIL),
-                resultSet.getString(T_CLIENTE_C_DIRECCION));
+//        return new Cliente(new Almacen(), resultSet.getString(T_TIPO_NIVEL_CLIENTE_C_TIPO),
+//                resultSet.getInt(T_CLIENTE_C_ID),
+//                resultSet.getTimestamp(T_CLIENTE_C_FECHA_CREACION).toLocalDateTime(),
+//                fechaModificacion,
+//                resultSet.getString(T_CLIENTE_C_NOMBRE),
+//                resultSet.getString(T_CLIENTE_C_TELEFONO),
+//                resultSet.getString(T_CLIENTE_C_MAIL),
+//                resultSet.getString(T_CLIENTE_C_DIRECCION));
+        return new Cliente();
     }
 
     public Cliente getPorId(int id) {
@@ -99,6 +100,18 @@ public class ClienteDAOImpl implements ClienteDAO {
         }
 
         return clientes;
+    }
+
+    @Override
+    public Cliente editarPorId(Cliente cliente) {
+        System.out.println("EDITAR CLIENTE CON ID: " + cliente.getId());
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean eliminarPorId(int id) {
+        System.out.println("ELIMIAR CLIENTE CON ID: " + id);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

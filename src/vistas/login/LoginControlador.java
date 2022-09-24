@@ -2,7 +2,6 @@ package vistas.login;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import main.Dependencias;
 import main.Main;
+import modelo.entidades.Area;
 import modelo.entidades.Usuario;
 import static modelo.utils.Constantes.*;
 import servicios.interfaces.UsuarioServicio;
@@ -35,7 +35,12 @@ public class LoginControlador implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }
 
-    public void onIdentificar() throws IOException {
+    /**
+     * Verrfica si un usuario esta registrado en el sistame.
+     *
+     * @throws IOException
+     */
+    public void onIniciarSesion() throws IOException {
 //        // Se verifica si el usuario se encuntra registrado.
 //        UsuarioServicio usuarioServicio = Dependencias.getUsuarioServicio();
 //        Usuario usuario = usuarioServicio.identificar(textMail.getText(), textContrasenia.getText());
@@ -47,14 +52,17 @@ public class LoginControlador implements Initializable {
 //        }
 
         // Si se encuentra el usuario se muestra el menu.
-//        Usuario usuario = new Usuario(TIPO_USUARIO_ADMINISTRADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-//        Usuario usuario = new Usuario(TIPO_USUARIO_ARRENDADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-        Usuario usuario = new Usuario(TIPO_USUARIO_ABOGADO, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-//        Usuario usuario = new Usuario(TIPO_USUARIO_CONTADOR, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-//        Usuario usuario = new Usuario(TIPO_USUARIO_TECNICO, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-//        Usuario usuario = new Usuario(TIPO_USUARIO_MESA, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-//        Usuario usuario = new Usuario(TIPO_USUARIO_CHOFER, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
-//        Usuario usuario = new Usuario(TIPO_USUARIO_ALMACENISTA, "", 1, LocalDateTime.MIN, LocalDateTime.MIN, "Admin", "", "", "");
+        Usuario usuario = new Usuario();
+        Area area = new Area();
+        area.setNombre(AREA_ADMINISTRACION);
+//        area.setNombre(AREA_ARRENDAMIENTO);
+//        area.setNombre(AREA_ABOGADOS);
+//        area.setNombre(AREA_CONTADORES);
+//        area.setNombre(AREA_TECNICOS);
+//        area.setNombre(AREA_MESA_DE_SERVICIO);
+//        area.setNombre(AREA_DISTRIBUCION);
+//        area.setNombre(AREA_ALMACEN);
+        usuario.setArea(area);
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(VISTA_URL_PRINCIPAL));
         fxmlLoader.setControllerFactory(controllerClass -> new PrincipalVistaControlador(usuario));
@@ -62,6 +70,9 @@ public class LoginControlador implements Initializable {
         Main.getStage().setScene(new Scene(root));
     }
 
+    /**
+     * Borra el mensaje de error que se muestra al usuario.
+     */
     public void onBorrarError() {
         labelError.setText("");
     }

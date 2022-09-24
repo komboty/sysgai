@@ -17,7 +17,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario identificar(String mail, String contrasenia) {
+    public Usuario iniciarSesion(String mail, String contrasenia) {
         return usuarioDAO.getPorMailYContrasenia(mail, contrasenia);
     }
 
@@ -26,4 +26,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioDAO.getTodos();
     }
 
+    @Override
+    public Usuario editarPorId(Usuario usuario) {
+        return usuarioDAO.editarPorId(usuario);
+    }
+
+    @Override
+    public boolean eliminarPorId(int id) {
+        return usuarioDAO.eliminarPorId(id);
+    }
 }

@@ -32,10 +32,10 @@ public class PrincipalVistaControlador implements Initializable {
     @FXML
     private BorderPane borderPaneSubMenu;
 
+    // Usuario logeado.
     private Usuario usuario;
     private Map<String, String> botonesMenu;
     private Map<String, String> botonesSubMenu;
-    private final String delimitador = ",";
 
     public PrincipalVistaControlador(Usuario usuario) {
         this.usuario = usuario;
@@ -49,8 +49,8 @@ public class PrincipalVistaControlador implements Initializable {
         vboxSubMenu.setMinSize(VISTA_MENU_ANCHO, VISTA_VENTANA_ALTO);
         vboxMenu.setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_FONDO));
 
+        // Se obtienen los botones del menu segun el usuario logeado.
         try {
-            // Se obtienen los botones del menu segun el usuario logeado.
             getPermisosMenu();
             muestraBotonesMenu();
         } catch (IOException ex) {
@@ -60,8 +60,8 @@ public class PrincipalVistaControlador implements Initializable {
     }
 
     /**
-     * Obtiene los botones (BotonImagenControlador) del menu segun el tipo del
-     * Usuario.
+     * Obtiene los botones (BotonImagenControlador) del Menu y los permisos
+     * segun el Usuario logeado.
      */
     private void getPermisosMenu() {
         botonesMenu = new HashMap<>();
@@ -69,50 +69,51 @@ public class PrincipalVistaControlador implements Initializable {
         botonesMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_URL_TICKETS);
         botonesSubMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_LABEL_VER_TODOS);
 
-        switch (usuario.getTipo()) {
-            case TIPO_USUARIO_ADMINISTRADOR:
+        switch (usuario.getArea().getNombre()) {
+            case AREA_ADMINISTRACION:
                 botonesMenu.put(VISTA_ICON_LABEL_USUARIOS, VISTA_ICON_URL_USUARIOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_USUARIOS, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS);
+                botonesSubMenu.put(VISTA_ICON_LABEL_USUARIOS, String.valueOf(VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS));
                 break;
 
-            case TIPO_USUARIO_ARRENDADOR:
+            case AREA_ARRENDAMIENTO:
                 botonesMenu.put(VISTA_ICON_LABEL_CLIENTES, VISTA_ICON_URL_CLIENTES);
-                botonesSubMenu.put(VISTA_ICON_LABEL_CLIENTES, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS);
+                botonesSubMenu.put(VISTA_ICON_LABEL_CLIENTES, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
                 botonesMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_URL_CONTRATOS);
                 botonesSubMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_LABEL_CREAR);
                 botonesMenu.put(VISTA_ICON_LABEL_PEDIDOS, VISTA_ICON_URL_PEDIDOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_PEDIDOS, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS + "," + VISTA_ICON_LABEL_VALIDAR);
+                botonesSubMenu.put(VISTA_ICON_LABEL_PEDIDOS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VALIDAR);
                 break;
 
-            case TIPO_USUARIO_ABOGADO:
+            case AREA_ABOGADOS:
                 botonesMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_URL_CONTRATOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS + "," + VISTA_ICON_LABEL_VALIDAR);
+                botonesSubMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VALIDAR);
                 break;
 
-            case TIPO_USUARIO_CONTADOR:
+            case AREA_CONTADORES:
                 botonesMenu.put(VISTA_ICON_LABEL_FACTURAS, VISTA_ICON_URL_FACTURAS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_FACTURAS, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS + "," + VISTA_ICON_LABEL_VALIDAR);
+                botonesSubMenu.put(VISTA_ICON_LABEL_FACTURAS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VALIDAR);
                 break;
 
-            case TIPO_USUARIO_TECNICO:
+            case AREA_TECNICOS:
                 break;
 
-            case TIPO_USUARIO_MESA:
-                botonesSubMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS);
+            case AREA_MESA_DE_SERVICIO:
+                botonesSubMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
                 break;
 
-            case TIPO_USUARIO_CHOFER:
+            case AREA_DISTRIBUCION:
                 break;
 
-            case TIPO_USUARIO_ALMACENISTA:
+            case AREA_ALMACEN:
                 botonesMenu.put(VISTA_ICON_LABEL_ALMACENES, VISTA_ICON_URL_ALMACENES);
-                botonesSubMenu.put(VISTA_ICON_LABEL_ALMACENES, VISTA_ICON_LABEL_CREAR + "," + VISTA_ICON_LABEL_VER_TODOS);
+                botonesSubMenu.put(VISTA_ICON_LABEL_ALMACENES, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
                 break;
         }
     }
 
     /**
-     * Muestra en la vista los botones (BotonImagenControlador).
+     * Muestra en la vista los botones (BotonImagenControlador) del Menu
+     * principal.
      */
     private void muestraBotonesMenu() throws IOException {
         int sizeBotonesMenu = botonesMenu.size();
@@ -166,12 +167,12 @@ public class PrincipalVistaControlador implements Initializable {
     }
 
     /**
-     * Muestra en la vista los botones (BotonImagenControlador).
+     * Muestra en la vista los botones (BotonImagenControlador) del SubMenu.
      */
     private void muestraBotonesSubMenu(String nombreBoton) throws IOException {
         vboxSubMenu.getChildren().clear();
         Map<String, String> urlBotonesSubMenu = getBotonesSubMenu();
-        String[] nbotonesSubMenu = botonesSubMenu.get(nombreBoton).split(delimitador);
+        String[] nbotonesSubMenu = botonesSubMenu.get(nombreBoton).split(DELIMITADOR_DIRECCCION);
         boolean[] isSeleccionado = new boolean[nbotonesSubMenu.length];
         Node[] nodos = new Node[nbotonesSubMenu.length];
 
@@ -216,16 +217,17 @@ public class PrincipalVistaControlador implements Initializable {
     }
 
     /**
-     * Muestra pantalla segun el boton (BotonImagenControlador) seleccionado.
+     * Muestra en pantalla la informacion desaea con base al boton (BotonImagenControlador) seleccionado.
      */
     private void muestraPanel(String nombreBoton, String nombreSubBoton) {
+        // Se obtiene la ruta de la vista a mostrar.
         String urlPanel = null;
         switch (nombreSubBoton) {
             case VISTA_ICON_LABEL_VER_TODOS:
                 urlPanel = VISTA_URL_TABLA_INFO;
                 break;
         }
-
+        // Se muestra la pantalla deseada al usuario.
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(urlPanel));
             fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton));
