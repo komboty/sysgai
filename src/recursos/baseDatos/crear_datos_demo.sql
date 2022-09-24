@@ -18,7 +18,7 @@ INSERT INTO Cliente (idCliente, idTipoNivelCliente, fechaCreacionCliente, fechaM
 INSERT INTO Contrato (idContrato, idCliente, idTipoContrato, idTipoPago, idTipoToner, idTipoEstadoProducto, idTipoEstadoContrato, fechaCreacionContrato, fechaModificacionContrato, inicioContrato, mesesContrato, diaCorteContrato, rentaMensualContrato, bolsaBNContrato, bolsaColorContrato, clickBNContrato, clickColorContrato) VALUES
     (DEFAULT, 1, 1, 1, 1, 1, 4, CURRENT_TIMESTAMP, NULL, CURRENT_TIMESTAMP, 6, 28, 8000.0, 0, 0, 0.0, 0.0),
     (DEFAULT, 2, 2, 2, 2, 2, 1, CURRENT_TIMESTAMP, NULL, '2023-01-01 00:00:00', 8, 22, 2000.0, 3000, 1000, 0.16, 1.2),
-    (DEFAULT, 3, 3, 3, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '2022-12-01 00:00:00', 12, 15, 0.0, 0, 0, 0.2, 1.6);
+    (DEFAULT, 3, 3, 3, 1, 1, 3, CURRENT_TIMESTAMP, NULL, '2022-12-01 00:00:00', 12, 15, 0.0, 0, 0, 0.2, 1.6);
 
 INSERT INTO Pedido (idPedido, idUsuario, idContrato, idTipoEstadoPedido, fechaCreacionPedido, fechaModificacionPedido) VALUES
     (DEFAULT, 2, 1, 10, CURRENT_TIMESTAMP, NULL);

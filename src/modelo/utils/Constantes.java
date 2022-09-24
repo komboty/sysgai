@@ -10,7 +10,7 @@ public final class Constantes {
 
     /**
      * ----------------------------------------------------------------------------------------------
-     * Vistas
+     * VISTAS
      * ----------------------------------------------------------------------------------------------
      */
     // Configuracion
@@ -36,16 +36,16 @@ public final class Constantes {
     // URL de FXML de vistas
     public static final String VISTA_URL_LOGIN = "/vistas/login/loginVista.fxml";
     public static final String VISTA_URL_PRINCIPAL = "/vistas/principal/principalVista.fxml";
-//    public static final String VISTA_URL_ALMACENES = "/vistas/principal/almacenesVista.fxml";
-//    public static final String VISTA_URL_CLIENTES = "/vistas/principal/clientesVista.fxml";
-//    public static final String VISTA_URL_CONTRATOS = "/vistas/principal/contratosVista.fxml";
-//    public static final String VISTA_URL_FACTURAS = "/vistas/principal/facturasVista.fxml";
-//    public static final String VISTA_URL_PEDIDOS = "/vistas/principal/pedidosVista.fxml";
-//    public static final String VISTA_URL_TICKETS = "/vistas/principal/ticketsVista.fxml";
-//    public static final String VISTA_URL_USUARIOS = "/vistas/usuarios/usuariosVista.fxml";
     public static final String VISTA_URL_BOTON_IMAGEN = "/vistas/utils/botonImagen.fxml";
     public static final String VISTA_URL_ITEM_TABLA_INFO = "/vistas/vertodos/itemTablaInfo.fxml";
     public static final String VISTA_URL_TABLA_INFO = "/vistas/vertodos/tablaInfo.fxml";
+    public static final String VISTA_URL_ALMACENES_CREAR = "/vistas/.fxml";
+    public static final String VISTA_URL_CLIENTES_CREAR = "/vistas/.fxml";
+    public static final String VISTA_URL_CONTRATOS_CREAR = "/vistas/.fxml";
+    public static final String VISTA_URL_FACTURAS_CREAR = "/vistas/.fxml";
+    public static final String VISTA_URL_PEDIDOS_CREAR = "/vistas/.fxml";
+    public static final String VISTA_URL_TICKETS_CREAR = "/vistas/.fxml";
+    public static final String VISTA_URL_USUARIOS_CREAR = "/vistas/.fxml";
 
     // Mensajes de la vista.
     public static final String VISTA_ELIMINAR_REGISTRO_TITULO = "Eliminar registro";
@@ -66,6 +66,9 @@ public final class Constantes {
     public static final String VISTA_IMAGE_URL_CLIENTES = "/recursos/imgItemsTablaInfo/imagen_cliente.png";
     public static final String VISTA_ICON_LABEL_CONTRATOS = "Contratos";
     public static final String VISTA_ICON_URL_CONTRATOS = "/recursos/iconos/icono_contratos.png";
+    public static final String VISTA_IMAGE_URL_CONTRATOS_ESTADO_VALIDADO = "/recursos/imgItemsTablaInfo/imagen_contrato_validado.png";
+    public static final String VISTA_IMAGE_URL_CONTRATOS_ESTADO_RECHAZADO = "/recursos/imgItemsTablaInfo/imagen_contrato_rechazado.png";
+    public static final String VISTA_IMAGE_URL_CONTRATOS_ESTADO_OTRO = "/recursos/imgItemsTablaInfo/imagen_contrato_otro.png";
     public static final String VISTA_ICON_LABEL_FACTURAS = "Facturas";
     public static final String VISTA_ICON_URL_FACTURAS = "/recursos/iconos/icono_facturas.png";
     public static final String VISTA_ICON_LABEL_PEDIDOS = "Pedidos";
@@ -99,9 +102,10 @@ public final class Constantes {
 
     /**
      * ----------------------------------------------------------------------------------------------
-     * Areas de la Empresa
+     * MODELO
      * ----------------------------------------------------------------------------------------------
      */
+    // Areas de la Empresa
     public static final String AREA_ARRENDAMIENTO = "Arrendamiento";
     public static final String AREA_ABOGADOS = "Abogados";
     public static final String AREA_CONTADORES = "Contadores";
@@ -111,9 +115,13 @@ public final class Constantes {
     public static final String AREA_DISTRIBUCION = "Distribución";
     public static final String AREA_ADMINISTRACION = "Administración";
 
+    // Estados de un Contrato
+    public static final String ESTADO_CONTRATO_VALIDADO = "Validado";
+    public static final String ESTADO_CONTRATO_RECHAZADO = "Rechazado";
+
     /**
      * ----------------------------------------------------------------------------------------------
-     * Base de datos
+     * BASE DE DATOS
      * ----------------------------------------------------------------------------------------------
      */
     // Configuracion

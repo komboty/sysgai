@@ -43,7 +43,7 @@ public class PrincipalVistaControlador implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Se fija el tamanio de los elementos.
+        // Se fija el tamanio de los elementos.        
         borderPaneMenu.setMinSize(VISTA_VENTANA_ANCHO, VISTA_VENTANA_ALTO);
         vboxMenu.setMinSize(VISTA_MENU_ANCHO, VISTA_VENTANA_ALTO);
         vboxSubMenu.setMinSize(VISTA_MENU_ANCHO, VISTA_VENTANA_ALTO);
@@ -217,24 +217,74 @@ public class PrincipalVistaControlador implements Initializable {
     }
 
     /**
-     * Muestra en pantalla la informacion desaea con base al boton (BotonImagenControlador) seleccionado.
+     * Muestra en pantalla la informacion desaea con base al boton
+     * (BotonImagenControlador) seleccionado.
      */
     private void muestraPanel(String nombreBoton, String nombreSubBoton) {
         // Se obtiene la ruta de la vista a mostrar.
-        String urlPanel = null;
         switch (nombreSubBoton) {
+            case VISTA_ICON_LABEL_CREAR:
+                muestraPaneCrear(nombreBoton);
+                break;
+
             case VISTA_ICON_LABEL_VER_TODOS:
-                urlPanel = VISTA_URL_TABLA_INFO;
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(VISTA_URL_TABLA_INFO));
+                fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton));
+                Parent vista = fxmlLoader.load();
+                borderPaneSubMenu.setCenter(vista);
+            } catch (IOException ex) {
+                System.err.println("vistas.principal.PrincipalVistaControlador.muestraPanel()");
+                System.err.println(ex);
+            }
+            break;
+        }
+    }
+
+    /**
+     * Muestra en pantalla la informacion desaea con base al boton
+     * (BotonImagenControlador) seleccionado.
+     */
+    private void muestraPaneCrear(String nombreBoton) {
+        String urlPaneCrear = null;
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        // Se obtiene la ruta de la vista a mostrar.
+        switch (nombreBoton) {
+            case VISTA_ICON_LABEL_USUARIOS:
+                urlPaneCrear = VISTA_URL_USUARIOS_CREAR;
+                break;
+
+            case VISTA_ICON_LABEL_ALMACENES:
+                urlPaneCrear = VISTA_URL_ALMACENES_CREAR;
+                break;
+
+            case VISTA_ICON_LABEL_CLIENTES:
+                urlPaneCrear = VISTA_URL_CLIENTES_CREAR;
+                break;
+
+            case VISTA_ICON_LABEL_CONTRATOS:
+                urlPaneCrear = VISTA_URL_CONTRATOS_CREAR;
+                break;
+
+            case VISTA_ICON_LABEL_FACTURAS:
+                urlPaneCrear = VISTA_URL_FACTURAS_CREAR;
+                break;
+
+            case VISTA_ICON_LABEL_PEDIDOS:
+                urlPaneCrear = VISTA_URL_PEDIDOS_CREAR;
+                break;
+
+            case VISTA_ICON_LABEL_TICKETS:
+                urlPaneCrear = VISTA_URL_TICKETS_CREAR;
                 break;
         }
-        // Se muestra la pantalla deseada al usuario.
+
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(urlPanel));
-            fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton));
-            Parent vista = fxmlLoader.load();
-            borderPaneSubMenu.setCenter(vista);
+            fxmlLoader.setLocation(getClass().getResource(urlPaneCrear));
+            Parent pane = fxmlLoader.load();
+            borderPaneSubMenu.setCenter(pane);
         } catch (IOException ex) {
-            System.err.println("vistas.principal.PrincipalVistaControlador.muestraPanel()");
+            System.err.println("vistas.principal.PrincipalVistaControlador.muestraPaneCrear()");
             System.err.println(ex);
         }
     }

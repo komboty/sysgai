@@ -5,7 +5,6 @@ import basedatos.daos.interfaces.ContratoDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Cliente;
