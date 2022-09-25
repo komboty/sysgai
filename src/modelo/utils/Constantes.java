@@ -93,7 +93,7 @@ public final class Constantes {
     public static final String VISTA_ICON_URL_VER_TODOS = "/recursos/iconos/icono_ver_todos.png";
 
     public static Map<String, String> getBotonesSubMenu() {
-        Map<String, String> botonesSubMenu = new HashMap<String, String>();
+        Map<String, String> botonesSubMenu = new HashMap<>();
         botonesSubMenu.put(VISTA_ICON_LABEL_CREAR, VISTA_ICON_URL_CREAR);
         botonesSubMenu.put(VISTA_ICON_LABEL_VALIDAR, VISTA_ICON_URL_VALIDAR);
         botonesSubMenu.put(VISTA_ICON_LABEL_VER_TODOS, VISTA_ICON_URL_VER_TODOS);
@@ -116,6 +116,7 @@ public final class Constantes {
     public static final String AREA_ADMINISTRACION = "Administración";
 
     // Estados de un Contrato
+    public static final String ESTADO_CONTRATO_EN_VALIDACION = "En validación";
     public static final String ESTADO_CONTRATO_VALIDADO = "Validado";
     public static final String ESTADO_CONTRATO_RECHAZADO = "Rechazado";
 

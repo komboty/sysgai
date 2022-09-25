@@ -18,7 +18,7 @@ INSERT INTO Cliente (idCliente, idTipoNivelCliente, fechaCreacionCliente, fechaM
 INSERT INTO Contrato (idContrato, idCliente, idTipoContrato, idTipoPago, idTipoToner, idTipoEstadoProducto, idTipoEstadoContrato, fechaCreacionContrato, fechaModificacionContrato, inicioContrato, mesesContrato, diaCorteContrato, rentaMensualContrato, bolsaBNContrato, bolsaColorContrato, clickBNContrato, clickColorContrato) VALUES
     (DEFAULT, 1, 1, 1, 1, 1, 4, CURRENT_TIMESTAMP, NULL, CURRENT_TIMESTAMP, 6, 28, 8000.0, 0, 0, 0.0, 0.0),
     (DEFAULT, 2, 2, 2, 2, 2, 1, CURRENT_TIMESTAMP, NULL, '2023-01-01 00:00:00', 8, 22, 2000.0, 3000, 1000, 0.16, 1.2),
-    (DEFAULT, 3, 3, 3, 1, 1, 3, CURRENT_TIMESTAMP, NULL, '2022-12-01 00:00:00', 12, 15, 0.0, 0, 0, 0.2, 1.6);
+    (DEFAULT, 3, 3, 3, 1, 1, 2, CURRENT_TIMESTAMP, NULL, '2022-12-01 00:00:00', 12, 15, 0.0, 0, 0, 0.2, 1.6);
 
 INSERT INTO Pedido (idPedido, idUsuario, idContrato, idTipoEstadoPedido, fechaCreacionPedido, fechaModificacionPedido) VALUES
     (DEFAULT, 2, 1, 10, CURRENT_TIMESTAMP, NULL);
@@ -38,25 +38,25 @@ INSERT INTO Almacen (idAlmacen, idCliente, fechaCreacionAlmacen, fechaModificaci
     (DEFAULT, NULL, CURRENT_TIMESTAMP, NULL, 'CALLE: calle0,NUM.EXT.: 0,NUM.INT.: Null,LOCALIDAD: colonia0,MUNICIPIO: alcaldia0,C.P.: 00000,ESTADO: estado0'),
     (DEFAULT, 1, CURRENT_TIMESTAMP, NULL, 'CALLE: calle9,NUM.EXT.: 9,NUM.INT.: Null,LOCALIDAD: colonia9,MUNICIPIO: alcaldia9,C.P.: 99999,ESTADO: estado9');
 
-INSERT INTO DetalleProducto (idDetalleProducto, idProducto, idAlmacen, idTipoEstadoProducto, fechaCreacionDetalleProducto, fechaModificacionDetalleProducto, serieDetalleProducto, contadorDetalleProducto) VALUES
-    (DEFAULT, 1, 2, 1, CURRENT_TIMESTAMP, NULL, '00001', 0),
-    (DEFAULT, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '00002', 0),
-    (DEFAULT, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '00003', 0),
-    (DEFAULT, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '00004', 0),
-    (DEFAULT, 2, 1, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL),
-    (DEFAULT, 2, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL),
-    (DEFAULT, 3, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL),
-    (DEFAULT, 3, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL),
-    (DEFAULT, 3, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL),
-    (DEFAULT, 4, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL),
-    (DEFAULT, 4, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL),
-    (DEFAULT, 4, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL),
-    (DEFAULT, 5, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL),
-    (DEFAULT, 5, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL),
-    (DEFAULT, 5, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL),    
-    (DEFAULT, 6, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL),
-    (DEFAULT, 6, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL),
-    (DEFAULT, 6, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL);
+INSERT INTO DetalleProducto (idDetalleProducto, idProducto, idAlmacen, idTipoEstadoProducto, fechaCreacionDetalleProducto, fechaModificacionDetalleProducto, serieDetalleProducto, contadorClienteDetalleProducto, contadorProductoDetalleProducto) VALUES
+    (DEFAULT, 1, 2, 1, CURRENT_TIMESTAMP, NULL, '00001', 0, 0),
+    (DEFAULT, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '00002', 0, 0),
+    (DEFAULT, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '00003', 0, 0),
+    (DEFAULT, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '00004', 0, 0),
+    (DEFAULT, 2, 1, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL, NULL),
+    (DEFAULT, 2, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL, NULL),
+    (DEFAULT, 3, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL, NULL),
+    (DEFAULT, 3, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL, NULL),
+    (DEFAULT, 3, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL, NULL),
+    (DEFAULT, 4, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL, NULL),
+    (DEFAULT, 4, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL, NULL),
+    (DEFAULT, 4, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL, NULL),
+    (DEFAULT, 5, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL, NULL),
+    (DEFAULT, 5, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL, NULL),
+    (DEFAULT, 5, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL, NULL),    
+    (DEFAULT, 6, 2, NULL, CURRENT_TIMESTAMP, NULL, '00001', NULL, NULL),
+    (DEFAULT, 6, 1, NULL, CURRENT_TIMESTAMP, NULL, '00002', NULL, NULL),
+    (DEFAULT, 6, 1, NULL, CURRENT_TIMESTAMP, NULL, '00003', NULL, NULL);
 
 INSERT INTO Factura (idFactura, idContrato, idTipoEstadoFactura, fechaCreacionFactura, fechaModificacionFactura, impuestoFactura, cobroFactura) VALUES
     (DEFAULT, 1, 3, CURRENT_TIMESTAMP, NULL, 16, 8000.0);

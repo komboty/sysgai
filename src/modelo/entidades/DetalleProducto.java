@@ -3,7 +3,7 @@ package modelo.entidades;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-class DetalleProducto {
+public class DetalleProducto extends ObjectInit {
 
     private int contadorCliente;
     private int contadorProducto;

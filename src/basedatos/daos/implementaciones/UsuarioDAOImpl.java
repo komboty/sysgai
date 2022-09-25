@@ -4,7 +4,6 @@ import basedatos.daos.interfaces.UsuarioDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Usuario;
@@ -113,8 +112,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     @Override
-    public Usuario editarPorId(Usuario usuario) {
-        return new Usuario();
+    public Usuario actualizarPorId(Usuario usuario) {
+        return null;
     }
 
     @Override

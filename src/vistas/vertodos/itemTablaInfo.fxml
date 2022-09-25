@@ -5,10 +5,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.vertodos.ItemTablaInfoControlador">
    <children>
-      <HBox fx:id="hbox" style="-fx-background-color: white; -fx-background-radius: 10;">
+      <HBox style="-fx-background-color: white; -fx-background-radius: 10;">
          <children>
             <ImageView fx:id="imageItem" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
@@ -20,6 +21,11 @@
                   <Insets right="6.0" />
                </padding>
             </Label>
+            <VBox fx:id="vbox" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
+               <HBox.margin>
+                  <Insets left="14.0" />
+               </HBox.margin>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />

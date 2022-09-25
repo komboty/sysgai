@@ -12,8 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import modelo.entidades.Contrato;
 import modelo.entidades.ObjectInit;
 import static modelo.utils.Constantes.*;
@@ -26,7 +26,7 @@ import vistas.utils.UtilsVista;
 public class ItemTablaInfoControlador implements Initializable {
 
     @FXML
-    private HBox hbox;
+    private VBox vbox;
     @FXML
     private Label labelInfo;
     @FXML
@@ -41,40 +41,59 @@ public class ItemTablaInfoControlador implements Initializable {
     // Variable que al cambiar su estado actualiza la tabla (TablaInfoControlador).
     private final BooleanProperty actualizarTablaInfo = new SimpleBooleanProperty();
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+
+    /**
+     * Regresa variable que al cambiar su estado actualiza la tabla
+     * (TablaInfoControlador).
+     *
+     * @return BooleanProperty.
+     */
     public BooleanProperty actualizarTablaInfo() {
         return actualizarTablaInfo;
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        try {
-            addBotones();
-        } catch (IOException ex) {
-            System.err.println("vistas.utils.DetalleInfoControlador.initialize()");
-            System.err.println(ex);
-        }
-    }
-
     /**
-     * Inician valores fundamentales para su funcionamiento.
+     * Inician valores fundamentales para el funcionamiento del
+     * ItemTablaInfoControlador.
      *
      * @param objectInit ObjectInit con la informacion a mostrar.
-     * @param urlImageItem Url de la imgen que se mostrara junto a la
-     * informacion del ObjectInit.
      * @param genericServicio Servico que realiza la accion que desea el
      * usuario.
+     * @param servicio Nombre del servicio.
      */
     public void setDetalleInfo(ObjectInit objectInit, GenericServicio genericServicio, String servicio) {
         this.objectInit = objectInit;
         this.genericServicio = genericServicio;
         this.servicio = servicio;
-        setImageItem();
         this.labelInfo.setText(objectInit.toString());
+        setImageItem();
+        addBotones();
     }
 
+    /**
+     * Agrega los botones de editar y eliminar a la vistas.
+     */
+    private void addBotones() {
+        try {
+            Pane paneEditar = crearBoton(VISTA_ICON_URL_EDITAR, VISTA_ICON_LABEL_EDITAR);
+            Pane paneEliminar = crearBoton(VISTA_ICON_URL_ELIMINAR, VISTA_ICON_LABEL_ELIMINAR);
+            vbox.getChildren().addAll(paneEditar, paneEliminar);
+        } catch (IOException ex) {
+            System.err.println("vistas.vertodos.ItemTablaInfoControlador.addBotones()");
+            System.err.println(ex);
+        }
+    }
+
+    
+    /**
+     * Muestra una imagen en la pantalla segun el servicio.
+     */
     private void setImageItem() {
         String urlImageItem = null;
-        switch (this.servicio) {
+        switch (servicio) {
             case VISTA_ICON_LABEL_USUARIOS:
                 urlImageItem = VISTA_IMAGE_URL_USUARIOS;
                 break;
@@ -92,7 +111,13 @@ public class ItemTablaInfoControlador implements Initializable {
         imageItem.setImage(image);
     }
 
-    public String getUrlImageContratos() {
+    /**
+     * Si el servicio es de Contratos, se se pone un imagen segun el estado del
+     * Contrato.
+     *
+     * @return Url de la imagen a mostrar en pantalla.
+     */
+    private String getUrlImageContratos() {
         String urlImageItem = null;
         Contrato contrato = (Contrato) this.objectInit;
         switch (contrato.getEstado()) {
@@ -104,23 +129,31 @@ public class ItemTablaInfoControlador implements Initializable {
                 urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_RECHAZADO;
                 break;
 
+            case ESTADO_CONTRATO_EN_VALIDACION:
+                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_OTRO;
+                addBotonValidar();
+                break;
+
             default:
                 urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_OTRO;
                 break;
         }
         return urlImageItem;
     }
-
+    
     /**
-     * Agrega los botones de editra y eliminar a la vistas.
-     *
-     * @throws IOException
+     * Agrega el boton de validar a la vistas.
      */
-    private void addBotones() throws IOException {
-        Pane paneEditar = crearBoton(VISTA_ICON_URL_EDITAR, VISTA_ICON_LABEL_EDITAR);
-        Pane paneEliminar = crearBoton(VISTA_ICON_URL_ELIMINAR, VISTA_ICON_LABEL_ELIMINAR);
-        hbox.getChildren().addAll(paneEditar, paneEliminar);
+    private void addBotonValidar() {
+        try {
+            Pane paneValidar = crearBoton(VISTA_ICON_URL_VALIDAR, VISTA_ICON_LABEL_VALIDAR);
+            vbox.getChildren().add(paneValidar);
+        } catch (IOException ex) {
+            System.err.println("vistas.vertodos.ItemTablaInfoControlador.addBotonValidar()");
+            System.err.println(ex);
+        }
     }
+
 
     /**
      * Crea un boton (BotonImagenControlador) con una icono y un texto dado.
@@ -146,10 +179,19 @@ public class ItemTablaInfoControlador implements Initializable {
         return pane;
     }
 
+    /**
+     * Dada una accion (Un boton oprimido) se llama un Servicio u otra vista.
+     *
+     * @param accion
+     */
     private void llamarServicio(String accion) {
         switch (accion) {
             case VISTA_ICON_LABEL_EDITAR:
                 System.out.println("EDITAR REGISTRO CON ID: " + objectInit.getId());
+                break;
+                
+             case VISTA_ICON_LABEL_VALIDAR:
+                System.out.println("VALIDAR REGISTRO CON ID: " + objectInit.getId());
                 break;
 
             case VISTA_ICON_LABEL_ELIMINAR:

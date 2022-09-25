@@ -1,7 +1,6 @@
 package modelo.entidades;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import modelo.utils.Utils;
 

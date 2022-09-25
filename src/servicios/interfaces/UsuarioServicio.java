@@ -15,4 +15,7 @@ public interface UsuarioServicio extends GenericServicio<Usuario> {
      * @return Un Usuario, si es que existe en la base de datos.
      */
     public Usuario iniciarSesion(String mail, String contrasenia);
+
+    public Usuario crearUsuario(int idArea, String nombre, String telefono, String mail, 
+            String direccion, String contrasenia);
 }

@@ -2,7 +2,6 @@
 
 INSERT INTO TipoTicket (idTipoTicket, tipoTicket) VALUES
     (DEFAULT, 'Contrato'),
-    (DEFAULT, 'Instalación'),
     (DEFAULT, 'Falla'),
     (DEFAULT, 'Toner');
 

@@ -16,12 +16,12 @@ public interface GenericDAO<T> {
     public List<T> getTodos();
     
     /**
-     * Edita un registro en la base de datos por su id.
+     * Actualiza un registro en la base de datos por su id.
      *
-     * @param objectInit Objeto a editar.
-     * @return Regresa el registro con los nuevos cambios.
+     * @param objectInit Objeto a actulizar, debe contener Id.
+     * @return Regresa el registro de la base de datos con los nuevos cambios.
      */
-    public T editarPorId(T id);
+    public T actualizarPorId(T objectInit);
 
     /**
      * Elimina un registro en la base de datos por su id.

@@ -97,14 +97,14 @@ public class ContratoDAOImpl implements ContratoDAO {
     }
 
     @Override
-    public Contrato editarPorId(Contrato contrato) {
-        return new Contrato();
+    public Contrato actualizarPorId(Contrato contrato) {
+        return null;
     }
 
     @Override
     public boolean eliminarPorId(int id) {
         System.out.println("ELIMIAR CONTRATO CON ID: " + id);
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return false;
     }
 
 }

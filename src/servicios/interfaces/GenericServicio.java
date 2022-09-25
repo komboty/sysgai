@@ -15,17 +15,9 @@ public interface GenericServicio<T> {
     public List<T> getTodos();
 
     /**
-     * Edita un registro del sistema por su id.
+     * Elimina un T del sistema por su id.
      *
-     * @param objectInit Objeto a editar.
-     * @return Regresa el registro con los nuevos cambios.
-     */
-    public T editarPorId(T objectInit);
-
-    /**
-     * Elimina un registro del sistema por su id.
-     *
-     * @param id Id del registro a eliminar.
+     * @param id Id del T a eliminar.
      * @return Regresa verdadero si se eliminio correctamente.
      */
     public boolean eliminarPorId(int id);

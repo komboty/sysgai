@@ -27,12 +27,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario editarPorId(Usuario usuario) {
-        return usuarioDAO.editarPorId(usuario);
+    public boolean eliminarPorId(int id) {
+        return usuarioDAO.eliminarPorId(id);
     }
 
     @Override
-    public boolean eliminarPorId(int id) {
-        return usuarioDAO.eliminarPorId(id);
+    public Usuario crearUsuario(int idArea, String nombre, String telefono, String mail, String direccion, String contrasenia) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

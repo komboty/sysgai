@@ -103,7 +103,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public Cliente editarPorId(Cliente cliente) {        
+    public Cliente actualizarPorId(Cliente cliente) {        
         return new Cliente();
     }
 

@@ -22,13 +22,13 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public Cliente editarPorId(Cliente id) {
-        return clienteDAO.editarPorId(id);
+    public boolean eliminarPorId(int id) {
+        return clienteDAO.eliminarPorId(id);
     }
 
     @Override
-    public boolean eliminarPorId(int id) {
-        return clienteDAO.eliminarPorId(id);
+    public Cliente crearCliente(int idTipoNivelCliente, String nombre, String telefono, String mail, String direccion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
