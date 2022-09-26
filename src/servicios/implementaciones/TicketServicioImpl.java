@@ -6,14 +6,13 @@ import java.util.List;
 import modelo.entidades.Ticket;
 import static modelo.utils.ConstantesModelo.*;
 import modelo.utils.UtilsModelo;
-import servicios.dtos.FiltroDTO;
 import servicios.dtos.ObjectToStringDTO;
 import servicios.interfaces.TicketServicio;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class TicketServicioImpl implements TicketServicio {
+public class TicketServicioImpl implements TicketServicio<ObjectToStringDTO, ObjectToStringDTO> {
 
     private TicketDAO ticketDAO;
 
@@ -22,10 +21,10 @@ public class TicketServicioImpl implements TicketServicio {
     }
 
     @Override
-    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO) {
+    public List<ObjectToStringDTO> getTodos(String filtro, String valor) {
         List<Ticket> tickets;
-        if (filtroDTO.getNombre() != null && filtroDTO.getNombre().equals(FILTRO_ASIGNADOS)) {
-            tickets = ticketDAO.getAsignados(Integer.parseInt(filtroDTO.getValor()));
+        if (filtro.equals(FILTRO_ASIGNADOS)) {
+            tickets = ticketDAO.getAsignados(Integer.parseInt(valor));
         } else {
             tickets = ticketDAO.getTodos();
         }
@@ -42,12 +41,13 @@ public class TicketServicioImpl implements TicketServicio {
     }
 
     @Override
-    public Ticket crearTicketFalla(int idTipoPrioridad, int idUsuario, int idPedido) {
+    public ObjectToStringDTO crearTicketFalla(int idTipoPrioridad, int idUsuario, int idPedido) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Ticket crearTicketToner(int idTipoPrioridad, int idUsuario, int idPedido) {
+    public ObjectToStringDTO crearTicketToner(int idTipoPrioridad, int idUsuario, int idPedido) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 }

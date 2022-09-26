@@ -9,7 +9,7 @@ import static basedatos.utils.ConstantesBD.*;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class ConexionBDImpl implements ConexionBD {
+public class ConexionBDImpl implements ConexionBD<Connection, PreparedStatement> {
 
     private final String url;
     private final String usuario;

@@ -14,7 +14,7 @@ import static basedatos.utils.ConstantesBD.*;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class ClienteDAOImpl implements ClienteDAO {
+public class ClienteDAOImpl implements ClienteDAO<Cliente> {
 
     private ConexionBD conexion;
 
@@ -29,7 +29,7 @@ public class ClienteDAOImpl implements ClienteDAO {
         consulta = String.format(consulta, N_T_CLIENTE,
                 N_T_TIPO_NIVEL_CLIENTE, N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID,
                 T_CLIENTE_C_ID);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {
@@ -59,7 +59,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                 + " JOIN %s ON %s.%s = %s.%s";
         consulta = String.format(consulta, N_T_CLIENTE,
                 N_T_TIPO_NIVEL_CLIENTE, N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {
@@ -93,7 +93,7 @@ public class ClienteDAOImpl implements ClienteDAO {
         String consulta = "DELETE FROM %s"
                 + " WHERE %s = ?";
         consulta = String.format(consulta, N_T_CLIENTE, T_CLIENTE_C_ID);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {

@@ -1,12 +1,11 @@
 package basedatos.daos.interfaces;
 
 import java.util.List;
-import modelo.entidades.Ticket;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface TicketDAO extends GenericDAO<Ticket> {
+public interface TicketDAO<T> extends GenericDAO<T> {
     
-    public List<Ticket> getAsignados(int idUsuario);
+    public List<T> getAsignados(int idUsuario);
 }

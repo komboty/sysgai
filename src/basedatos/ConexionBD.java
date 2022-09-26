@@ -1,25 +1,23 @@
 package basedatos;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface ConexionBD {
+public interface ConexionBD<T, K> {
 
     /**
      * Conecta a la base de datos.
      *
      * @return Conexion a la base de datos.
      */
-    public Connection conectarBD();
+    public T conectarBD();
 
     /**
-     * Dada una consulata de regresa el resultado.
+     * Dada una consulata de regresa un objeto para hacer una consulta
+     * parametrizada.
      *
      * @param consulta Consulta a ejecutar en la base de datos.
-     * @return Resultado de la consulta.
+     * @return Objeto para hacer una consulta parametrizada.
      */
-    public PreparedStatement getPreparedStatement(String consulta);
+    public K getPreparedStatement(String consulta);
 }

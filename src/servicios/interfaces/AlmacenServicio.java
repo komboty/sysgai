@@ -1,11 +1,9 @@
 package servicios.interfaces;
 
-import modelo.entidades.Almacen;
-
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface AlmacenServicio extends GenericServicio<Almacen> {
+public interface AlmacenServicio<T, K> extends GenericServicio<T> {
 
-    public Almacen crearAlmacen(int idCliente, String direccion);
+    public K crearAlmacen(int idCliente, String direccion);
 }

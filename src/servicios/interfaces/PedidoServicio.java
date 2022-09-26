@@ -2,13 +2,12 @@ package servicios.interfaces;
 
 import basedatos.daos.interfaces.GenericDAO;
 import java.util.List;
-import modelo.entidades.Pedido;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface PedidoServicio extends GenericDAO<Pedido> {
-    
-    public Pedido crearPedido(int idArrendador, int idContrato, List<Integer> idsDetalleProducto);
-    
+public interface PedidoServicio<T, K> extends GenericDAO<T> {
+
+    public K crearPedido(int idArrendador, int idContrato, List<Integer> idsDetalleProducto);
+
 }

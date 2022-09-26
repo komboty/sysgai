@@ -14,7 +14,7 @@ import modelo.entidades.Ticket;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class TicketDAOImpl implements TicketDAO {
+public class TicketDAOImpl implements TicketDAO<Ticket> {
 
     private ConexionBD conexion;
 
@@ -40,7 +40,7 @@ public class TicketDAOImpl implements TicketDAO {
                 N_T_USUARIO, N_T_TICKET, T_TICKET_C_ID_USUARIO, N_T_USUARIO, T_USUARIO_C_ID,
                 N_T_PEDIDO, N_T_TICKET, T_TICKET_C_ID_PEDIDO, N_T_PEDIDO, T_PEDIDO_C_ID,
                 N_T_TICKET, T_TICKET_C_ID_USUARIO);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {
@@ -85,7 +85,7 @@ public class TicketDAOImpl implements TicketDAO {
                 N_T_AREA, N_T_TICKET, T_TICKET_C_ID_AREA, N_T_AREA, T_AREA_C_ID,
                 N_T_USUARIO, N_T_TICKET, T_TICKET_C_ID_USUARIO, N_T_USUARIO, T_USUARIO_C_ID,
                 N_T_PEDIDO, N_T_TICKET, T_TICKET_C_ID_PEDIDO, N_T_PEDIDO, T_PEDIDO_C_ID);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {

@@ -14,7 +14,7 @@ import basedatos.utils.UtilsBD;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class UsuarioDAOImpl implements UsuarioDAO {
+public class UsuarioDAOImpl implements UsuarioDAO<Usuario> {
 
     private ConexionBD conexion;
 
@@ -30,7 +30,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         consulta = String.format(consulta, N_T_USUARIO,
                 N_T_AREA, N_T_USUARIO, T_USUARIO_C_ID_AREA, N_T_AREA, T_AREA_C_ID,
                 T_USUARIO_C_MAIL, T_USUARIO_C_CONTRASENIA);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {
@@ -64,7 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 + " JOIN %s ON %s.%s = %s.%s";
         consulta = String.format(consulta, N_T_USUARIO,
                 N_T_AREA, N_T_USUARIO, T_USUARIO_C_ID_AREA, N_T_AREA, T_AREA_C_ID);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {
@@ -97,7 +97,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         String consulta = "DELETE FROM %s"
                 + " WHERE %s = ?";
         consulta = String.format(consulta, N_T_USUARIO, T_USUARIO_C_ID);
-        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {

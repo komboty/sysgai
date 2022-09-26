@@ -1,12 +1,10 @@
 package servicios.interfaces;
 
-import modelo.entidades.Usuario;
-import servicios.dtos.UsuarioLogueadoDTO;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface UsuarioServicio extends GenericServicio<Usuario> {
+public interface UsuarioServicio<T, K, V> extends GenericServicio<T> {
 
     /**
      * Identifica si hay un usuario con el mail y contraseña en el sistema.
@@ -15,8 +13,8 @@ public interface UsuarioServicio extends GenericServicio<Usuario> {
      * @param contrasenia Contraseña de usuario a identificar.
      * @return Un Usuario, si es que existe en la base de datos.
      */
-    public UsuarioLogueadoDTO iniciarSesion(String mail, String contrasenia);
+    public V iniciarSesion(String mail, String contrasenia);
 
-    public Usuario crearUsuario(int idArea, String nombre, String telefono, String mail, 
+    public K crearUsuario(int idArea, String nombre, String telefono, String mail,
             String direccion, String contrasenia);
 }
