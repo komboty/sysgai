@@ -14,9 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import modelo.entidades.Contrato;
-import modelo.entidades.ObjectInit;
-import static modelo.utils.Constantes.*;
+import static vistas.utils.ConstantesVista.*;
+import static modelo.utils.ConstantesModelo.*;
+import servicios.dtos.ObjectToStringDTO;
+import servicios.dtos.UsuarioLogueadoDTO;
 import servicios.interfaces.GenericServicio;
 import vistas.utils.UtilsVista;
 
@@ -33,13 +34,14 @@ public class ItemTablaInfoControlador implements Initializable {
     private ImageView imageItem;
 
     // Objeto a mostrar informacion.
-    private ObjectInit objectInit;
+    private ObjectToStringDTO objectToStringDTO;
     // Servicio que realizara la accion que desea el usuario.
     private GenericServicio genericServicio;
     // Nombre del servicio.
     private String servicio;
     // Variable que al cambiar su estado actualiza la tabla (TablaInfoControlador).
     private final BooleanProperty actualizarTablaInfo = new SimpleBooleanProperty();
+    private UsuarioLogueadoDTO UsuarioLogueadoDTO;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -59,17 +61,25 @@ public class ItemTablaInfoControlador implements Initializable {
      * Inician valores fundamentales para el funcionamiento del
      * ItemTablaInfoControlador.
      *
-     * @param objectInit ObjectInit con la informacion a mostrar.
+     * @param objectToStringDTO ObjectInit con la informacion a mostrar.
      * @param genericServicio Servico que realiza la accion que desea el
      * usuario.
      * @param servicio Nombre del servicio.
      */
-    public void setDetalleInfo(ObjectInit objectInit, GenericServicio genericServicio, String servicio) {
-        this.objectInit = objectInit;
+    public void setDetalleInfo(ObjectToStringDTO objectToStringDTO, GenericServicio genericServicio, 
+            String servicio, UsuarioLogueadoDTO usuarioLogueadoDTO) {
+        
+        this.objectToStringDTO = objectToStringDTO;
         this.genericServicio = genericServicio;
         this.servicio = servicio;
-        this.labelInfo.setText(objectInit.toString());
+        this.UsuarioLogueadoDTO = usuarioLogueadoDTO;
+        this.labelInfo.setText(objectToStringDTO.getDatos());
         setImageItem();
+        
+        if (servicio.equals(ICON_LABEL_TICKETS) && !usuarioLogueadoDTO.getNombreArea().equals(AREA_MESA_DE_SERVICIO)) {
+            return;
+        }
+            
         addBotones();
     }
 
@@ -78,8 +88,8 @@ public class ItemTablaInfoControlador implements Initializable {
      */
     private void addBotones() {
         try {
-            Pane paneEditar = crearBoton(VISTA_ICON_URL_EDITAR, VISTA_ICON_LABEL_EDITAR);
-            Pane paneEliminar = crearBoton(VISTA_ICON_URL_ELIMINAR, VISTA_ICON_LABEL_ELIMINAR);
+            Pane paneEditar = crearBoton(ICON_URL_EDITAR, ICON_LABEL_EDITAR);
+            Pane paneEliminar = crearBoton(ICON_URL_ELIMINAR, ICON_LABEL_ELIMINAR);
             vbox.getChildren().addAll(paneEditar, paneEliminar);
         } catch (IOException ex) {
             System.err.println("vistas.vertodos.ItemTablaInfoControlador.addBotones()");
@@ -92,19 +102,22 @@ public class ItemTablaInfoControlador implements Initializable {
      * Muestra una imagen en la pantalla segun el servicio.
      */
     private void setImageItem() {
-        String urlImageItem = null;
+        String urlImageItem = "";
         switch (servicio) {
-            case VISTA_ICON_LABEL_USUARIOS:
-                urlImageItem = VISTA_IMAGE_URL_USUARIOS;
+            case ICON_LABEL_USUARIOS:
+                urlImageItem = IMAGE_URL_USUARIOS;
                 break;
 
-            case VISTA_ICON_LABEL_CLIENTES:
-                urlImageItem = VISTA_IMAGE_URL_CLIENTES;
+            case ICON_LABEL_CLIENTES:
+                urlImageItem = IMAGE_URL_CLIENTES;
                 break;
 
-            case VISTA_ICON_LABEL_CONTRATOS:
+            case ICON_LABEL_CONTRATOS:
                 urlImageItem = getUrlImageContratos();
                 break;
+                
+            case ICON_LABEL_TICKETS:
+                urlImageItem = IMAGE_URL_TICKETS;
         }
 
         Image image = new Image(String.valueOf(getClass().getResource(urlImageItem)));
@@ -119,23 +132,22 @@ public class ItemTablaInfoControlador implements Initializable {
      */
     private String getUrlImageContratos() {
         String urlImageItem = null;
-        Contrato contrato = (Contrato) this.objectInit;
-        switch (contrato.getEstado()) {
+        switch (objectToStringDTO.getEstado()) {
             case ESTADO_CONTRATO_VALIDADO:
-                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_VALIDADO;
+                urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_VALIDADO;
                 break;
 
             case ESTADO_CONTRATO_RECHAZADO:
-                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_RECHAZADO;
+                urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_RECHAZADO;
                 break;
 
             case ESTADO_CONTRATO_EN_VALIDACION:
-                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_OTRO;
+                urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_OTRO;
                 addBotonValidar();
                 break;
 
             default:
-                urlImageItem = VISTA_IMAGE_URL_CONTRATOS_ESTADO_OTRO;
+                urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_OTRO;
                 break;
         }
         return urlImageItem;
@@ -146,7 +158,7 @@ public class ItemTablaInfoControlador implements Initializable {
      */
     private void addBotonValidar() {
         try {
-            Pane paneValidar = crearBoton(VISTA_ICON_URL_VALIDAR, VISTA_ICON_LABEL_VALIDAR);
+            Pane paneValidar = crearBoton(ICON_URL_VALIDAR, ICON_LABEL_VALIDAR);
             vbox.getChildren().add(paneValidar);
         } catch (IOException ex) {
             System.err.println("vistas.vertodos.ItemTablaInfoControlador.addBotonValidar()");
@@ -165,13 +177,13 @@ public class ItemTablaInfoControlador implements Initializable {
      */
     private Pane crearBoton(String urlImagenBoton, String textoBoton) throws IOException {
         FXMLLoader fXMLLoader = new FXMLLoader();
-        fXMLLoader.setLocation(getClass().getResource(VISTA_URL_BOTON_IMAGEN));
+        fXMLLoader.setLocation(getClass().getResource(URL_BOTON_IMAGEN));
         Pane pane = fXMLLoader.load();
         BotonImagenControlador botonEditar = fXMLLoader.getController();
         botonEditar.setInfo(urlImagenBoton, textoBoton.toUpperCase());
         pane.setOnMousePressed(event -> llamarServicio(textoBoton));
         pane.setOnMouseEntered(event -> {
-            pane.setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_MOUSE_ENTRA));
+            pane.setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_MOUSE_ENTRA));
         });
         pane.setOnMouseExited(event -> {
             pane.setStyle("-fx-background-color: transparent;");
@@ -186,33 +198,33 @@ public class ItemTablaInfoControlador implements Initializable {
      */
     private void llamarServicio(String accion) {
         switch (accion) {
-            case VISTA_ICON_LABEL_EDITAR:
-                System.out.println("EDITAR REGISTRO CON ID: " + objectInit.getId());
+            case ICON_LABEL_EDITAR:
+                System.out.println("EDITAR REGISTRO CON ID: " + objectToStringDTO.getId());
                 break;
                 
-             case VISTA_ICON_LABEL_VALIDAR:
-                System.out.println("VALIDAR REGISTRO CON ID: " + objectInit.getId());
+             case ICON_LABEL_VALIDAR:
+                System.out.println("VALIDAR REGISTRO CON ID: " + objectToStringDTO.getId());
                 break;
 
-            case VISTA_ICON_LABEL_ELIMINAR:
+            case ICON_LABEL_ELIMINAR:
                 // Se lanza Alerta para asegurarse que se quiere eliminar.
-                String mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION, objectInit.getId());
-                boolean isEliminar = UtilsVista.lanzaAlertaCancelYAceptar(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
+                String mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION, objectToStringDTO.getId());
+                boolean isEliminar = UtilsVista.lanzaAlertaCancelYAceptar(ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                 // Si no se dio en Aceptar, no se hace nada.
                 if (!isEliminar) {
                     return;
                 }
                 // Si se dio en Aceptar, se elimina.
-                boolean isEliminado = genericServicio.eliminarPorId(objectInit.getId());
+                boolean isEliminado = genericServicio.eliminarPorId(objectToStringDTO.getId());
                 // Si ocurrio un error, se notifica al usuario.
                 if (!isEliminado) {
-                    mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_ERROR, objectInit.getId());
-                    UtilsVista.lanzaAlertaError(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
+                    mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_ERROR, objectToStringDTO.getId());
+                    UtilsVista.lanzaAlertaError(ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                     return;
                 }
                 // Si se elimino correctamente, se notifica al usuario.
-                mensajeEliminar = String.format(VISTA_ELIMINAR_REGISTRO_MENSAJE_ELIMINADO, objectInit.getId());
-                UtilsVista.lanzaAlertaInformacion(VISTA_ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
+                mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_ELIMINADO, objectToStringDTO.getId());
+                UtilsVista.lanzaAlertaInformacion(ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                 actualizarTablaInfo.set(!actualizarTablaInfo.get());
                 break;
         }

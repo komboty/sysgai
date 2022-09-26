@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import static modelo.utils.Constantes.*;
+import static basedatos.utils.ConstantesBD.*;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -17,9 +17,9 @@ public class ConexionBDImpl implements ConexionBD {
     private final Connection conexion;
 
     public ConexionBDImpl() {
-        url = DB_URL;
-        usuario = DB_USUARIO;
-        contrasenia = DB_CONTRASENIA;
+        url = URL;
+        usuario = USUARIO;
+        contrasenia = CONTRASENIA;
         conexion = conectarBD();
     }
 

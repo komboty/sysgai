@@ -1,7 +1,6 @@
 package modelo.entidades;
 
 import java.util.List;
-import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -37,17 +36,5 @@ public class Cliente extends Persona {
     
     public void setContratos(List<Contrato> contratos) {
         this.contratos = contratos;
-    }
-    
-    @Override
-    public String toString() {
-        String toString;
-        if (isToStringTodo()) {
-            toString = String.format("%s\nNIVEL: %s\nALMACENES: %s\nCONTRATOS: %s",
-                super.toString(), nivel, Utils.getSize(almacenes), Utils.getSize(contratos));
-        } else {
-            toString = String.format("%s", super.toString());
-        }
-        return toString;
     }
 }

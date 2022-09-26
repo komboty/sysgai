@@ -11,9 +11,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.Dependencias;
-import modelo.entidades.ObjectInit;
+import static modelo.utils.ConstantesModelo.*;
+import servicios.dtos.FiltroDTO;
+import servicios.dtos.ObjectToStringDTO;
+import servicios.dtos.UsuarioLogueadoDTO;
 import servicios.interfaces.GenericServicio;
-import static modelo.utils.Constantes.*;
+import static vistas.utils.ConstantesVista.*;
+import vistas.utils.UtilsVista;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -26,15 +30,19 @@ public class TablaInfoControlador implements Initializable {
     private VBox vbox;
 
     private String servicio;
+    private String subServicio;
     private GenericServicio genericServicio;
+    private UsuarioLogueadoDTO usuarioLogueadoDTO;
 
-    public TablaInfoControlador(String servicio) {
+    public TablaInfoControlador(String servicio, String subServicio, UsuarioLogueadoDTO usuarioLogueadoDTO) {
         this.servicio = servicio;
+        this.subServicio = subServicio;
+        this.usuarioLogueadoDTO = usuarioLogueadoDTO;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        scrollPane.setMinSize(VISTA_SUB_VENTANA_ANCHO, VISTA_SUB_VENTANA_ALTO);
+        scrollPane.setMinSize(SUB_VENTANA_ANCHO, SUB_VENTANA_ALTO);
         generaTablaInfo();
 
     }
@@ -52,27 +60,44 @@ public class TablaInfoControlador implements Initializable {
 
     private void getGenericServicio() {
         switch (this.servicio) {
-            case VISTA_ICON_LABEL_USUARIOS:
+            case ICON_LABEL_USUARIOS:
                 genericServicio = Dependencias.getUsuarioServicio();
                 break;
 
-            case VISTA_ICON_LABEL_CLIENTES:
+            case ICON_LABEL_CLIENTES:
                 genericServicio = Dependencias.getClienteServicio();
                 break;
 
-            case VISTA_ICON_LABEL_CONTRATOS:
+            case ICON_LABEL_CONTRATOS:
                 genericServicio = Dependencias.getContratoServicio();
+                break;
+
+            case ICON_LABEL_TICKETS:
+                genericServicio = Dependencias.getTicketServicio();
                 break;
         }
     }
 
     private void muestraDatos() throws IOException {
-        for (ObjectInit objectInit : (List<ObjectInit>) genericServicio.getTodos()) {
+        FiltroDTO filtroDTO = new FiltroDTO();
+        if (subServicio.equals(ICON_LABEL_ASIGNADOS)) {
+            filtroDTO.setNombre(FILTRO_ASIGNADOS);
+            filtroDTO.setValor(String.valueOf(usuarioLogueadoDTO.getIdUsuario()));
+        }
+        
+        List<ObjectToStringDTO> objectDTOs = genericServicio.getTodos(filtroDTO);
+        
+        if (objectDTOs.isEmpty()) {            
+            UtilsVista.lanzaAlertaInformacion(NO_HAY_REGISTROS, NO_HAY_REGISTROS);
+            return;
+        }
+
+        for (ObjectToStringDTO objectToStringDTO : objectDTOs) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(VISTA_URL_ITEM_TABLA_INFO));
+            fxmlLoader.setLocation(getClass().getResource(URL_ITEM_TABLA_INFO));
             Pane pane = fxmlLoader.load();
             ItemTablaInfoControlador detalleInfoControlador = fxmlLoader.getController();
-            detalleInfoControlador.setDetalleInfo(objectInit, genericServicio, servicio);
+            detalleInfoControlador.setDetalleInfo(objectToStringDTO, genericServicio, servicio, usuarioLogueadoDTO);
             detalleInfoControlador.actualizarTablaInfo().addListener((obs, wasDisabled, isNowDisabled) -> {
                 generaTablaInfo();
             });

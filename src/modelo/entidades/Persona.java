@@ -1,7 +1,5 @@
 package modelo.entidades;
 
-import static modelo.utils.Constantes.DELIMITADOR_DIRECCCION;
-
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
@@ -45,17 +43,5 @@ public abstract class Persona extends ObjectInit {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    @Override
-    public String toString() {
-        String toString;
-        if (isToStringTodo()) {
-            toString = String.format("%s\nNOMBRE: %s\nTELEFONO: %s\nCORREO: %s\n-----------------\nDIRECCION:\n%s\n-----------------",
-                    super.toString(), nombre, telefono, mail, direccion.replaceAll(DELIMITADOR_DIRECCCION, "\n"));
-        } else {
-            toString = String.format("%s\nNOMBRE: %s", super.toString(), nombre);
-        }
-        return toString;
     }
 }

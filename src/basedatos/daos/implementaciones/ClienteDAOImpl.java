@@ -2,16 +2,14 @@ package basedatos.daos.implementaciones;
 
 import basedatos.ConexionBD;
 import basedatos.daos.interfaces.ClienteDAO;
+import basedatos.utils.UtilsBD;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.entidades.Almacen;
 import modelo.entidades.Cliente;
-import static modelo.utils.Constantes.*;
-import modelo.utils.Utils;
+import static basedatos.utils.ConstantesBD.*;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -24,33 +22,12 @@ public class ClienteDAOImpl implements ClienteDAO {
         this.conexion = conexion;
     }
 
-    /**
-     * Convierte un ResultSet en Cliente.
-     *
-     * @param resultSet ResultSet a convertir.
-     * @return Cliente.
-     * @throws SQLException
-     */
-    public Cliente resultToCliente(ResultSet resultSet) throws SQLException {
-        // FALTA GET ALMACENES Y CONTRATOS
-        Cliente cliente = new Cliente();
-        cliente.setId(resultSet.getInt(T_CLIENTE_C_ID));
-        cliente.setNivel(resultSet.getString(T_TIPO_NIVEL_CLIENTE_C_TIPO));
-        cliente.setFechaCreacion(Utils.resultSetToLocalDateTime(resultSet, T_CLIENTE_C_FECHA_CREACION));
-        cliente.setFechaModificacion(Utils.resultSetToLocalDateTime(resultSet, T_CLIENTE_C_FECHA_MODIFICACION));
-        cliente.setNombre(resultSet.getString(T_CLIENTE_C_NOMBRE));
-        cliente.setTelefono(resultSet.getString(T_CLIENTE_C_TELEFONO));
-        cliente.setMail(resultSet.getString(T_CLIENTE_C_MAIL));
-        cliente.setDireccion(resultSet.getString(T_CLIENTE_C_DIRECCION));
-        return cliente;
-    }
-
     public Cliente getPorId(int id) {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s"
                 + " WHERE %s = ?";
-        consulta = String.format(consulta, DB_N_T_CLIENTE,
-                DB_N_T_TIPO_NIVEL_CLIENTE, DB_N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, DB_N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID,
+        consulta = String.format(consulta, N_T_CLIENTE,
+                N_T_TIPO_NIVEL_CLIENTE, N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID,
                 T_CLIENTE_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
@@ -64,7 +41,9 @@ public class ClienteDAOImpl implements ClienteDAO {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return resultToCliente(resultSet);
+                Cliente cliente = UtilsBD.resultSetToCliente(resultSet);
+                cliente.setNivel(UtilsBD.resultSetToTipoNivelClienteDTO(resultSet).getTipo());
+                return cliente;
             }
         } catch (SQLException ex) {
             System.err.println("basedatos.daos.implementaciones.ClienteDAOImpl.getPorId()");
@@ -78,8 +57,8 @@ public class ClienteDAOImpl implements ClienteDAO {
     public List<Cliente> getTodos() {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s";
-        consulta = String.format(consulta, DB_N_T_CLIENTE,
-                DB_N_T_TIPO_NIVEL_CLIENTE, DB_N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, DB_N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID);
+        consulta = String.format(consulta, N_T_CLIENTE,
+                N_T_TIPO_NIVEL_CLIENTE, N_T_CLIENTE, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, N_T_TIPO_NIVEL_CLIENTE, T_TIPO_NIVEL_CLIENTE_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
@@ -92,7 +71,9 @@ public class ClienteDAOImpl implements ClienteDAO {
         try {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                clientes.add(resultToCliente(resultSet));
+                Cliente cliente = UtilsBD.resultSetToCliente(resultSet);
+                cliente.setNivel(UtilsBD.resultSetToTipoNivelClienteDTO(resultSet).getTipo());
+                clientes.add(cliente);
             }
         } catch (SQLException ex) {
             System.err.println("basedatos.daos.implementaciones.ClienteDAOImpl.getTodos()");
@@ -103,15 +84,15 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public Cliente actualizarPorId(Cliente cliente) {        
-        return new Cliente();
+    public Cliente actualizarPorId(Cliente cliente) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean eliminarPorId(int id) {
         String consulta = "DELETE FROM %s"
                 + " WHERE %s = ?";
-        consulta = String.format(consulta, DB_N_T_CLIENTE, T_CLIENTE_C_ID);
+        consulta = String.format(consulta, N_T_CLIENTE, T_CLIENTE_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.

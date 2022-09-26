@@ -7,10 +7,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Usuario;
-import static modelo.utils.Constantes.*;
+import static basedatos.utils.ConstantesBD.*;
 import basedatos.ConexionBD;
-import modelo.entidades.Area;
-import modelo.utils.Utils;
+import basedatos.utils.UtilsBD;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -23,40 +22,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         this.conexion = conexion;
     }
 
-    /**
-     * Convierte un ResultSet en un Usuario.
-     *
-     * @param resultSet ResultSet a convertir.
-     * @return Usuario.
-     * @throws SQLException
-     */
-    public Usuario resultToUsuario(ResultSet resultSet) throws SQLException {
-        // FALTA TICKETS Y PEDIDOS.
-        Usuario usuario = new Usuario();
-        usuario.setId(resultSet.getInt(T_USUARIO_C_ID));
-        usuario.setFechaCreacion(Utils.resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_CREACION));
-        usuario.setFechaModificacion(Utils.resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_MODIFICACION));
-        usuario.setNombre(resultSet.getString(T_USUARIO_C_NOMBRE));
-        usuario.setTelefono(resultSet.getString(T_USUARIO_C_TELEFONO));
-        usuario.setMail(resultSet.getString(T_USUARIO_C_MAIL));
-        usuario.setDireccion(resultSet.getString(T_USUARIO_C_DIRECCION));
-        usuario.setContrasenia(resultSet.getString(T_USUARIO_C_CONTRASENIA));
-
-        Area area = new Area();
-        area.setToStringTodo(false);
-        area.setId(resultSet.getInt(T_AREA_C_ID));
-        area.setNombre(resultSet.getString(T_AREA_C_NOMBRE));
-        usuario.setArea(area);
-        return usuario;
-    }
-
     @Override
     public Usuario getPorMailYContrasenia(String mail, String contrasenia) {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s"
                 + " WHERE %s = ? AND %s = ?";
-        consulta = String.format(consulta, DB_N_T_USUARIO,
-                DB_N_T_AREA, DB_N_T_USUARIO, T_USUARIO_C_ID_AREA, DB_N_T_AREA, T_AREA_C_ID,
+        consulta = String.format(consulta, N_T_USUARIO,
+                N_T_AREA, N_T_USUARIO, T_USUARIO_C_ID_AREA, N_T_AREA, T_AREA_C_ID,
                 T_USUARIO_C_MAIL, T_USUARIO_C_CONTRASENIA);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
@@ -73,7 +45,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
             // Si se encontro el Usuario en la base de datos.
             if (resultSet.next()) {
-                return resultToUsuario(resultSet);
+                Usuario usuario = UtilsBD.resultSetToUsuario(resultSet);
+                usuario.setArea(UtilsBD.resultSetToArea(resultSet));
+                return usuario;
             }
         } catch (SQLException ex) {
             System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.getPorMailYContrasenia()");
@@ -88,8 +62,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public List<Usuario> getTodos() {
         String consulta = "SELECT * FROM %s"
                 + " JOIN %s ON %s.%s = %s.%s";
-        consulta = String.format(consulta, DB_N_T_USUARIO,
-                DB_N_T_AREA, DB_N_T_USUARIO, T_USUARIO_C_ID_AREA, DB_N_T_AREA, T_AREA_C_ID);
+        consulta = String.format(consulta, N_T_USUARIO,
+                N_T_AREA, N_T_USUARIO, T_USUARIO_C_ID_AREA, N_T_AREA, T_AREA_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
@@ -102,7 +76,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         try {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                usuarios.add(resultToUsuario(resultSet));
+                Usuario usuario = UtilsBD.resultSetToUsuario(resultSet);
+                usuario.setArea(UtilsBD.resultSetToArea(resultSet));
+                usuarios.add(usuario);
             }
         } catch (SQLException ex) {
             System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.getTodos()");
@@ -113,14 +89,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public Usuario actualizarPorId(Usuario usuario) {
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean eliminarPorId(int id) {
         String consulta = "DELETE FROM %s"
                 + " WHERE %s = ?";
-        consulta = String.format(consulta, DB_N_T_USUARIO, T_USUARIO_C_ID);
+        consulta = String.format(consulta, N_T_USUARIO, T_USUARIO_C_ID);
         PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.

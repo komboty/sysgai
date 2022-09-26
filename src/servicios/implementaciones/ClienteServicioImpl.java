@@ -1,8 +1,12 @@
 package servicios.implementaciones;
 
 import basedatos.daos.interfaces.ClienteDAO;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Cliente;
+import modelo.utils.UtilsModelo;
+import servicios.dtos.FiltroDTO;
+import servicios.dtos.ObjectToStringDTO;
 import servicios.interfaces.ClienteServicio;
 
 /**
@@ -17,8 +21,13 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public List<Cliente> getTodos() {
-        return clienteDAO.getTodos();
+    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO) {
+        List<Cliente> clientes = clienteDAO.getTodos();
+        List<ObjectToStringDTO> objectToStringDTO = new ArrayList<>();
+        for (Cliente cliente : clientes) {
+            objectToStringDTO.add(UtilsModelo.clienteToObjectToStringDTO(cliente));
+        }
+        return objectToStringDTO;
     }
 
     @Override

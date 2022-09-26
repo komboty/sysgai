@@ -2,7 +2,7 @@ package modelo.entidades;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import modelo.utils.Utils;
+import modelo.utils.UtilsModelo;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -158,18 +158,6 @@ public class Contrato extends ObjectInit {
 
     public void setClickColor(double clickColor) {
         this.clickColor = clickColor;
-    }
-
-    @Override
-    public String toString() {
-        String toString;
-        if (isToStringTodo()) {
-            toString = String.format("%s\nCLIENTE: %s\nINICIO: %s\nTIPO: %s\nESTADO: %s\nMESES: %s\nDIA DE CORTE: %s\nFORMA DE PAGO: %s\nTIPO DE IMPRESORAS: %s\nTIPO DE TONERS: %s\nRENTA MENSUAL: %s\nBOLSA B/N: %s\nBOLSA COLOR: %s\nCLICK BN: %.2f\nCLICK COLOR: %.2f\nFACTURAS: %s\nPEDIDOS: %s",
-                super.toString(), cliente.getNombre(), Utils.localDateTimeToString(inicioContrato), tipoContrato, estado, mesesContrato, diaCorte, formaPago, tipoImpresora, tipoToner, rentaMensual, bolsaBN, bolsaColor, clickBN, clickColor, Utils.getSize(facturas), Utils.getSize(pedidos));
-        } else {
-            toString = String.format("%s\nESTADO: %s", super.toString(), estado);
-        }
-        return toString;
     }
 
 }

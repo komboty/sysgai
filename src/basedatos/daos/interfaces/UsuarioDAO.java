@@ -1,6 +1,5 @@
 package basedatos.daos.interfaces;
 
-import java.sql.SQLException;
 import modelo.entidades.Usuario;
 
 /**

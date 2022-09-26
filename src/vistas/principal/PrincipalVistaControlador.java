@@ -13,8 +13,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import modelo.entidades.Usuario;
-import static modelo.utils.Constantes.*;
+import static vistas.utils.ConstantesVista.*;
+import static modelo.utils.ConstantesModelo.*;
+import servicios.dtos.UsuarioLogueadoDTO;
 import vistas.utils.BotonImagenControlador;
 import vistas.vertodos.TablaInfoControlador;
 
@@ -33,21 +34,21 @@ public class PrincipalVistaControlador implements Initializable {
     private BorderPane borderPaneSubMenu;
 
     // Usuario logeado.
-    private Usuario usuario;
+    private UsuarioLogueadoDTO usuarioLogueadoDTO;
     private Map<String, String> botonesMenu;
     private Map<String, String> botonesSubMenu;
 
-    public PrincipalVistaControlador(Usuario usuario) {
-        this.usuario = usuario;
+    public PrincipalVistaControlador(UsuarioLogueadoDTO usuarioLogueadoDTO) {
+        this.usuarioLogueadoDTO = usuarioLogueadoDTO;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Se fija el tamanio de los elementos.        
-        borderPaneMenu.setMinSize(VISTA_VENTANA_ANCHO, VISTA_VENTANA_ALTO);
-        vboxMenu.setMinSize(VISTA_MENU_ANCHO, VISTA_VENTANA_ALTO);
-        vboxSubMenu.setMinSize(VISTA_MENU_ANCHO, VISTA_VENTANA_ALTO);
-        vboxMenu.setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_FONDO));
+        borderPaneMenu.setMinSize(VENTANA_ANCHO, VENTANA_ALTO);
+        vboxMenu.setMinSize(MENU_ANCHO, VENTANA_ALTO);
+        vboxSubMenu.setMinSize(MENU_ANCHO, VENTANA_ALTO);
+        vboxMenu.setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_FONDO));
 
         // Se obtienen los botones del menu segun el usuario logeado.
         try {
@@ -66,47 +67,47 @@ public class PrincipalVistaControlador implements Initializable {
     private void getPermisosMenu() {
         botonesMenu = new HashMap<>();
         botonesSubMenu = new HashMap<>();
-        botonesMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_URL_TICKETS);
-        botonesSubMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_LABEL_VER_TODOS);
+        botonesMenu.put(ICON_LABEL_TICKETS, ICON_URL_TICKETS);
+        botonesSubMenu.put(ICON_LABEL_TICKETS, ICON_LABEL_ASIGNADOS);
 
-        switch (usuario.getArea().getNombre()) {
+        switch (usuarioLogueadoDTO.getNombreArea()) {
             case AREA_ADMINISTRACION:
-                botonesMenu.put(VISTA_ICON_LABEL_USUARIOS, VISTA_ICON_URL_USUARIOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_USUARIOS, String.valueOf(VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS));
+                botonesMenu.put(ICON_LABEL_USUARIOS, ICON_URL_USUARIOS);
+                botonesSubMenu.put(ICON_LABEL_USUARIOS, String.valueOf(ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS));
                 break;
 
             case AREA_ARRENDAMIENTO:
-                botonesMenu.put(VISTA_ICON_LABEL_CLIENTES, VISTA_ICON_URL_CLIENTES);
-                botonesSubMenu.put(VISTA_ICON_LABEL_CLIENTES, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
-                botonesMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_URL_CONTRATOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_LABEL_CREAR);
-                botonesMenu.put(VISTA_ICON_LABEL_PEDIDOS, VISTA_ICON_URL_PEDIDOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_PEDIDOS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
+                botonesMenu.put(ICON_LABEL_CLIENTES, ICON_URL_CLIENTES);
+                botonesSubMenu.put(ICON_LABEL_CLIENTES, ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS);
+                botonesMenu.put(ICON_LABEL_CONTRATOS, ICON_URL_CONTRATOS);
+                botonesSubMenu.put(ICON_LABEL_CONTRATOS, ICON_LABEL_CREAR);
+                botonesMenu.put(ICON_LABEL_PEDIDOS, ICON_URL_PEDIDOS);
+                botonesSubMenu.put(ICON_LABEL_PEDIDOS, ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS);
                 break;
 
             case AREA_ABOGADOS:
-                botonesMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_URL_CONTRATOS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_CONTRATOS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
+                botonesMenu.put(ICON_LABEL_CONTRATOS, ICON_URL_CONTRATOS);
+                botonesSubMenu.put(ICON_LABEL_CONTRATOS, ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS);
                 break;
 
             case AREA_CONTADORES:
-                botonesMenu.put(VISTA_ICON_LABEL_FACTURAS, VISTA_ICON_URL_FACTURAS);
-                botonesSubMenu.put(VISTA_ICON_LABEL_FACTURAS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
+                botonesMenu.put(ICON_LABEL_FACTURAS, ICON_URL_FACTURAS);
+                botonesSubMenu.put(ICON_LABEL_FACTURAS, ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS);
                 break;
 
             case AREA_TECNICOS:
                 break;
 
             case AREA_MESA_DE_SERVICIO:
-                botonesSubMenu.put(VISTA_ICON_LABEL_TICKETS, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
+                botonesSubMenu.put(ICON_LABEL_TICKETS, ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_ASIGNADOS + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS);
                 break;
 
             case AREA_DISTRIBUCION:
                 break;
 
             case AREA_ALMACEN:
-                botonesMenu.put(VISTA_ICON_LABEL_ALMACENES, VISTA_ICON_URL_ALMACENES);
-                botonesSubMenu.put(VISTA_ICON_LABEL_ALMACENES, VISTA_ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + VISTA_ICON_LABEL_VER_TODOS);
+                botonesMenu.put(ICON_LABEL_ALMACENES, ICON_URL_ALMACENES);
+                botonesSubMenu.put(ICON_LABEL_ALMACENES, ICON_LABEL_CREAR + DELIMITADOR_DIRECCCION + ICON_LABEL_VER_TODOS);
                 break;
         }
     }
@@ -125,7 +126,7 @@ public class PrincipalVistaControlador implements Initializable {
             final int iNodo = i;
             // Se carga la vista de cada boton (BotonImagenControlador).
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(VISTA_URL_BOTON_IMAGEN));
+            fxmlLoader.setLocation(getClass().getResource(URL_BOTON_IMAGEN));
             nodos[iNodo] = fxmlLoader.load();
             BotonImagenControlador botonImagenControlador = fxmlLoader.getController();
             botonImagenControlador.setInfo(botonMenu.getValue(), botonMenu.getKey());
@@ -133,12 +134,12 @@ public class PrincipalVistaControlador implements Initializable {
             // Se pone animacion a cada boton (BotonImagenControlador).
             nodos[iNodo].setOnMouseEntered(event -> {
                 if (!isSeleccionado[iNodo]) {
-                    nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_MOUSE_ENTRA));
+                    nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_MOUSE_ENTRA));
                 }
             });
 
             nodos[iNodo].setOnMouseExited(event -> {
-                String color = !isSeleccionado[iNodo] ? VISTA_MENU_COLOR_FONDO : VISTA_MENU_COLOR_MOUSE_CLICK;
+                String color = !isSeleccionado[iNodo] ? MENU_COLOR_FONDO : MENU_COLOR_MOUSE_CLICK;
                 nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", color));
             });
 
@@ -146,14 +147,14 @@ public class PrincipalVistaControlador implements Initializable {
                 // Se restaura el color de todos los botones (BotonImagenControlador).
                 Arrays.fill(isSeleccionado, false);
                 for (Node nodo : nodos) {
-                    nodo.setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_FONDO));
+                    nodo.setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_FONDO));
                 }
                 // Se selecciona el boton (BotonImagenControlador) que se dio click.
                 isSeleccionado[iNodo] = true;
-                nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_MOUSE_CLICK));
+                nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_MOUSE_CLICK));
                 try {
                     // Se pone el subMenus segun el boton presionado.
-                    vboxSubMenu.setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_FONDO));
+                    vboxSubMenu.setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_FONDO));
                     muestraBotonesSubMenu(botonMenu.getKey());
                 } catch (IOException ex) {
                     System.err.println();
@@ -180,7 +181,7 @@ public class PrincipalVistaControlador implements Initializable {
             final int iNodo = i;
             // Se carga la vista de cada boton (BotonImagenControlador).
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource(VISTA_URL_BOTON_IMAGEN));
+            fxmlLoader.setLocation(getClass().getResource(URL_BOTON_IMAGEN));
             nodos[iNodo] = fxmlLoader.load();
             BotonImagenControlador botonImagenControlador = fxmlLoader.getController();
             String urlIcono = urlBotonesSubMenu.get(nbotonesSubMenu[iNodo]);
@@ -189,12 +190,12 @@ public class PrincipalVistaControlador implements Initializable {
             // Se pone animacion a cada boton (BotonImagenControlador).
             nodos[iNodo].setOnMouseEntered(event -> {
                 if (!isSeleccionado[iNodo]) {
-                    nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_MOUSE_ENTRA));
+                    nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_MOUSE_ENTRA));
                 }
             });
 
             nodos[iNodo].setOnMouseExited(event -> {
-                String color = !isSeleccionado[iNodo] ? VISTA_MENU_COLOR_FONDO : VISTA_MENU_COLOR_MOUSE_CLICK;
+                String color = !isSeleccionado[iNodo] ? MENU_COLOR_FONDO : MENU_COLOR_MOUSE_CLICK;
                 nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", color));
             });
 
@@ -202,11 +203,11 @@ public class PrincipalVistaControlador implements Initializable {
                 // Se restaura el color de todos los botones (BotonImagenControlador).
                 Arrays.fill(isSeleccionado, false);
                 for (Node nodo : nodos) {
-                    nodo.setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_FONDO));
+                    nodo.setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_FONDO));
                 }
                 // Se selecciona el boton (BotonImagenControlador) que se dio click.
                 isSeleccionado[iNodo] = true;
-                nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", VISTA_MENU_COLOR_MOUSE_CLICK));
+                nodos[iNodo].setStyle(String.format("-fx-background-color: %s;", MENU_COLOR_MOUSE_CLICK));
                 // Se muestra la pantalla segun el boton (BotonImagenControlador) seleccionado.                
                 muestraPanel(nombreBoton, nbotonesSubMenu[iNodo]);
             });
@@ -223,14 +224,16 @@ public class PrincipalVistaControlador implements Initializable {
     private void muestraPanel(String nombreBoton, String nombreSubBoton) {
         // Se obtiene la ruta de la vista a mostrar.
         switch (nombreSubBoton) {
-            case VISTA_ICON_LABEL_CREAR:
+            case ICON_LABEL_CREAR:
                 muestraPaneCrear(nombreBoton);
                 break;
 
-            case VISTA_ICON_LABEL_VER_TODOS:
+            case ICON_LABEL_ASIGNADOS:
+            case ICON_LABEL_VER_TODOS:
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(VISTA_URL_TABLA_INFO));
-                fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(URL_TABLA_INFO));
+                fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton,
+                        nombreSubBoton, usuarioLogueadoDTO));
                 Parent vista = fxmlLoader.load();
                 borderPaneSubMenu.setCenter(vista);
             } catch (IOException ex) {
@@ -250,32 +253,32 @@ public class PrincipalVistaControlador implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         // Se obtiene la ruta de la vista a mostrar.
         switch (nombreBoton) {
-            case VISTA_ICON_LABEL_USUARIOS:
-                urlPaneCrear = VISTA_URL_USUARIOS_CREAR;
+            case ICON_LABEL_USUARIOS:
+                urlPaneCrear = URL_USUARIOS_CREAR;
                 break;
 
-            case VISTA_ICON_LABEL_ALMACENES:
-                urlPaneCrear = VISTA_URL_ALMACENES_CREAR;
+            case ICON_LABEL_ALMACENES:
+                urlPaneCrear = URL_ALMACENES_CREAR;
                 break;
 
-            case VISTA_ICON_LABEL_CLIENTES:
-                urlPaneCrear = VISTA_URL_CLIENTES_CREAR;
+            case ICON_LABEL_CLIENTES:
+                urlPaneCrear = URL_CLIENTES_CREAR;
                 break;
 
-            case VISTA_ICON_LABEL_CONTRATOS:
-                urlPaneCrear = VISTA_URL_CONTRATOS_CREAR;
+            case ICON_LABEL_CONTRATOS:
+                urlPaneCrear = URL_CONTRATOS_CREAR;
                 break;
 
-            case VISTA_ICON_LABEL_FACTURAS:
-                urlPaneCrear = VISTA_URL_FACTURAS_CREAR;
+            case ICON_LABEL_FACTURAS:
+                urlPaneCrear = URL_FACTURAS_CREAR;
                 break;
 
-            case VISTA_ICON_LABEL_PEDIDOS:
-                urlPaneCrear = VISTA_URL_PEDIDOS_CREAR;
+            case ICON_LABEL_PEDIDOS:
+                urlPaneCrear = URL_PEDIDOS_CREAR;
                 break;
 
-            case VISTA_ICON_LABEL_TICKETS:
-                urlPaneCrear = VISTA_URL_TICKETS_CREAR;
+            case ICON_LABEL_TICKETS:
+                urlPaneCrear = URL_TICKETS_CREAR;
                 break;
         }
 
