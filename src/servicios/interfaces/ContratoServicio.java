@@ -1,28 +1,29 @@
 package servicios.interfaces;
 
 import java.time.LocalDateTime;
+import modelo.entidades.Contrato;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface ContratoServicio<T, K> extends GenericServicio<T> {
+public interface ContratoServicio extends GenericServicio<Contrato> {
 
 //    public Contrato crearContrato(int idCliente, int idTipoContrato, int idTipoPago, int idTipoToner,
 //            int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato,
 //            int diaCorte, int rentaMensual, int bolsaBN, int bolsaColor, double clickBN, double clickColor);
-    public K crearContratoRentaMensual(int idCliente, int idTipoPago, int idTipoToner,
+    public Contrato crearContratoRentaMensual(int idCliente, int idTipoPago, int idTipoToner,
             int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato,
             int diaCorte, int rentaMensual);
 
-    public K crearContratoRentaPorBolsa(int idCliente, int idTipoPago, int idTipoToner,
+    public Contrato crearContratoRentaPorBolsa(int idCliente, int idTipoPago, int idTipoToner,
             int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato,
             int diaCorte, int rentaMensual, int bolsaBN, int bolsaColor, double clickBN, double clickColor);
 
-    public K crearContratoCostoPorPaginas(int idCliente, int idTipoPago, int idTipoToner,
+    public Contrato crearContratoCostoPorPaginas(int idCliente, int idTipoPago, int idTipoToner,
             int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato,
             int diaCorte, double clickBN, double clickColor);
 
-    public K crearContratoSoporteYMantenimiento(int idCliente, int idTipoPago, int idTipoToner,
+    public Contrato crearContratoSoporteYMantenimiento(int idCliente, int idTipoPago, int idTipoToner,
             int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato,
             int diaCorte, int rentaMensual);
 }

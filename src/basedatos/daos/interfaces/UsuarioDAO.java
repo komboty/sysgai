@@ -1,9 +1,11 @@
 package basedatos.daos.interfaces;
 
+import modelo.entidades.Usuario;
+
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface UsuarioDAO<T> extends GenericDAO<T> {
+public interface UsuarioDAO extends GenericDAO<Usuario> {
 
     /**
      * Identifica si hay un usuario con el mail y contraseña en la base de
@@ -13,6 +15,6 @@ public interface UsuarioDAO<T> extends GenericDAO<T> {
      * @param contrasenia
      * @return Un Usuario, si es que existe en la base de datos.
      */
-    public T getPorMailYContrasenia(String mail, String contrasenia);
+    public Usuario getPorMailYContrasenia(String mail, String contrasenia);
 
 }

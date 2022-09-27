@@ -14,7 +14,7 @@ import static basedatos.utils.ConstantesBD.*;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class ContratoDAOImpl implements ContratoDAO<Contrato> {
+public class ContratoDAOImpl implements ContratoDAO {
 
     private ConexionBD conexion;
 
@@ -38,7 +38,7 @@ public class ContratoDAOImpl implements ContratoDAO<Contrato> {
                 N_T_TIPO_TONER, N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_TONER, N_T_TIPO_TONER, T_TIPO_TONER_C_ID,
                 N_T_TIPO_ESTADO_PRODUCTO, N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_ESTADO_PRODUCTO, N_T_TIPO_ESTADO_PRODUCTO, T_TIPO_ESTADO_PRODUCTO_C_ID,
                 N_T_TIPO_ESTADO_CONTRATO, N_T_CONTRATO, T_CONTRATO_C_ID_TIPO_ESTADO_CONTRATO, N_T_TIPO_ESTADO_CONTRATO, T_TIPO_ESTADO_CONTRATO_C_ID);
-        PreparedStatement statement = (PreparedStatement) conexion.getPreparedStatement(consulta);
+        PreparedStatement statement = conexion.getPreparedStatement(consulta);
 
         // Si no hay conexion a la base de datos.
         if (statement == null) {

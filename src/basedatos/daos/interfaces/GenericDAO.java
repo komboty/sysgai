@@ -18,10 +18,10 @@ public interface GenericDAO<T> {
     /**
      * Actualiza un registro en la base de datos por su id.
      *
-     * @param object Objeto a actulizar, debe contener Id.
+     * @param objectInit Objeto a actulizar, debe contener Id.
      * @return Regresa el registro de la base de datos con los nuevos cambios.
      */
-    public T actualizarPorId(T object);
+    public T actualizarPorId(T objectInit);
 
     /**
      * Elimina un registro en la base de datos por su id.

@@ -65,7 +65,6 @@ public class ItemTablaInfoControlador implements Initializable {
      * @param genericServicio Servico que realiza la accion que desea el
      * usuario.
      * @param servicio Nombre del servicio.
-     * @param usuarioLogueadoDTO
      */
     public void setDetalleInfo(ObjectToStringDTO objectToStringDTO, GenericServicio genericServicio, 
             String servicio, UsuarioLogueadoDTO usuarioLogueadoDTO) {

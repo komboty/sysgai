@@ -53,12 +53,12 @@ public class LoginControlador implements Initializable {
 
         // Si se encuentra el usuario se muestra el menu.
         UsuarioLogueadoDTO usuarioLogueadoDTO = new UsuarioLogueadoDTO();
-        usuarioLogueadoDTO.setNombreArea(AREA_ADMINISTRACION);
+//        usuarioLogueadoDTO.setNombreArea(AREA_ADMINISTRACION);
 //        usuarioLogueadoDTO.setNombreArea(AREA_ARRENDAMIENTO);
 //        usuarioLogueadoDTO.setNombreArea(AREA_ABOGADOS);
 //        usuarioLogueadoDTO.setNombreArea(AREA_CONTADORES);
 //        usuarioLogueadoDTO.setNombreArea(AREA_TECNICOS);
-//        usuarioLogueadoDTO.setNombreArea(AREA_MESA_DE_SERVICIO);
+        usuarioLogueadoDTO.setNombreArea(AREA_MESA_DE_SERVICIO);
 //        usuarioLogueadoDTO.setNombreArea(AREA_DISTRIBUCION);
 //        usuarioLogueadoDTO.setNombreArea(AREA_ALMACEN);
         usuarioLogueadoDTO.setIdUsuario(6);

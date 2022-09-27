@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import main.Dependencias;
 import static modelo.utils.ConstantesModelo.*;
+import servicios.dtos.FiltroDTO;
 import servicios.dtos.ObjectToStringDTO;
 import servicios.dtos.UsuarioLogueadoDTO;
 import servicios.interfaces.GenericServicio;
@@ -78,16 +79,19 @@ public class TablaInfoControlador implements Initializable {
     }
 
     private void muestraDatos() throws IOException {
-        boolean isServicioAsignados = subServicio.equals(ICON_LABEL_ASIGNADOS);
-        String filtro = isServicioAsignados ? FILTRO_ASIGNADOS : "";
-        String valor = isServicioAsignados ? String.valueOf(usuarioLogueadoDTO.getIdUsuario()) : "";        
-        List<ObjectToStringDTO> objectDTOs = genericServicio.getTodos(filtro, valor);
-        // Si no hay registros, se termina la funcion.
+        FiltroDTO filtroDTO = new FiltroDTO();
+        if (subServicio.equals(ICON_LABEL_ASIGNADOS)) {
+            filtroDTO.setNombre(FILTRO_ASIGNADOS);
+            filtroDTO.setValor(String.valueOf(usuarioLogueadoDTO.getIdUsuario()));
+        }
+        
+        List<ObjectToStringDTO> objectDTOs = genericServicio.getTodos(filtroDTO);
+        
         if (objectDTOs.isEmpty()) {            
             UtilsVista.lanzaAlertaInformacion(NO_HAY_REGISTROS, NO_HAY_REGISTROS);
             return;
         }
-        // Si hay registros, se muestran los datos.
+
         for (ObjectToStringDTO objectToStringDTO : objectDTOs) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource(URL_ITEM_TABLA_INFO));

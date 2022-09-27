@@ -6,13 +6,14 @@ import java.util.List;
 import modelo.entidades.Ticket;
 import static modelo.utils.ConstantesModelo.*;
 import modelo.utils.UtilsModelo;
+import servicios.dtos.FiltroDTO;
 import servicios.dtos.ObjectToStringDTO;
 import servicios.interfaces.TicketServicio;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class TicketServicioImpl implements TicketServicio<ObjectToStringDTO, ObjectToStringDTO> {
+public class TicketServicioImpl implements TicketServicio {
 
     private TicketDAO ticketDAO;
 
@@ -21,10 +22,10 @@ public class TicketServicioImpl implements TicketServicio<ObjectToStringDTO, Obj
     }
 
     @Override
-    public List<ObjectToStringDTO> getTodos(String filtro, String valor) {
+    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO) {
         List<Ticket> tickets;
-        if (filtro.equals(FILTRO_ASIGNADOS)) {
-            tickets = ticketDAO.getAsignados(Integer.parseInt(valor));
+        if (filtroDTO.getNombre() != null && filtroDTO.getNombre().equals(FILTRO_ASIGNADOS)) {
+            tickets = ticketDAO.getAsignados(Integer.parseInt(filtroDTO.getValor()));
         } else {
             tickets = ticketDAO.getTodos();
         }
@@ -41,13 +42,12 @@ public class TicketServicioImpl implements TicketServicio<ObjectToStringDTO, Obj
     }
 
     @Override
-    public ObjectToStringDTO crearTicketFalla(int idTipoPrioridad, int idUsuario, int idPedido) {
+    public Ticket crearTicketFalla(int idTipoPrioridad, int idUsuario, int idPedido) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ObjectToStringDTO crearTicketToner(int idTipoPrioridad, int idUsuario, int idPedido) {
+    public Ticket crearTicketToner(int idTipoPrioridad, int idUsuario, int idPedido) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 }
