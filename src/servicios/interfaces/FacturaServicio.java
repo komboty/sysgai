@@ -1,12 +1,12 @@
 package servicios.interfaces;
 
 import basedatos.daos.interfaces.GenericDAO;
-import modelo.entidades.Factura;
+import servicios.dtos.FacturaDTO;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface FacturaServicio extends GenericDAO<Factura>{
+public interface FacturaServicio extends GenericDAO<FacturaDTO>{
     
-    public Factura crearFactura(int idContrato, int impuesto);
+    public FacturaDTO crearFactura(int idContrato, int impuesto);
 }

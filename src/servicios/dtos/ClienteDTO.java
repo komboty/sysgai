@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public class UsuarioDTO {
+public class ClienteDTO {
 
     private int id;
     private String fechaCreacion;
@@ -14,11 +14,11 @@ public class UsuarioDTO {
     private String telefono;
     private String mail;
     private String direccion;
-    private String nombreArea;
-    private List<Integer> idsTickets;
-    private List<Integer> idsPedidos;
+    private String nivel;
+    private List<Integer> idsAlmacenes;
+    private List<Integer> idsContratos;
 
-    public UsuarioDTO() {
+    public ClienteDTO() {
     }
 
     public int getId() {
@@ -77,28 +77,28 @@ public class UsuarioDTO {
         this.direccion = direccion;
     }
 
-    public String getNombreArea() {
-        return nombreArea;
+    public String getNivel() {
+        return nivel;
     }
 
-    public void setNombreArea(String nombreArea) {
-        this.nombreArea = nombreArea;
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
     }
 
-    public List<Integer> getIdsTickets() {
-        return idsTickets;
+    public List<Integer> getIdsAlmacenes() {
+        return idsAlmacenes;
     }
 
-    public void setIdsTickets(List<Integer> idTickets) {
-        this.idsTickets = idTickets;
+    public void setIdsAlmacenes(List<Integer> idsAlmacenes) {
+        this.idsAlmacenes = idsAlmacenes;
     }
 
-    public List<Integer> getIdsPedidos() {
-        return idsPedidos;
+    public List<Integer> getIdsContratos() {
+        return idsContratos;
     }
 
-    public void setIdsPedidos(List<Integer> idPedidos) {
-        this.idsPedidos = idPedidos;
+    public void setIdsContratos(List<Integer> idsContratos) {
+        this.idsContratos = idsContratos;
     }
 
 }

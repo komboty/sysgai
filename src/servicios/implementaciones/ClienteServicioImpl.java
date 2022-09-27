@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Cliente;
 import modelo.utils.UtilsModelo;
-import servicios.dtos.FiltroDTO;
-import servicios.dtos.ObjectToStringDTO;
+import servicios.dtos.ClienteDTO;
 import servicios.interfaces.ClienteServicio;
 
 /**
@@ -21,11 +20,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO) {
+    public List<ClienteDTO> getTodos(String filtro, String valor) {
         List<Cliente> clientes = clienteDAO.getTodos();
-        List<ObjectToStringDTO> objectToStringDTO = new ArrayList<>();
+        List<ClienteDTO> objectToStringDTO = new ArrayList<>();
         for (Cliente cliente : clientes) {
-            objectToStringDTO.add(UtilsModelo.clienteToObjectToStringDTO(cliente));
+            objectToStringDTO.add(UtilsModelo.clienteToClienteDTO(cliente));
         }
         return objectToStringDTO;
     }
@@ -36,7 +35,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public Cliente crearCliente(int idTipoNivelCliente, String nombre, String telefono, String mail, String direccion) {
+    public ClienteDTO crearCliente(int idTipoNivelCliente, String nombre, String telefono, String mail, String direccion) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

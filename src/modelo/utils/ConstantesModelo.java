@@ -19,67 +19,11 @@ public final class ConstantesModelo {
     public static final String ESTADO_CONTRATO_EN_VALIDACION = "En validación";
     public static final String ESTADO_CONTRATO_VALIDADO = "Validado";
     public static final String ESTADO_CONTRATO_RECHAZADO = "Rechazado";
-    
+
     // Filtros
     public static final String FILTRO_ASIGNADOS = "Asignados";
 
     // Formato
     public static final String FORMATO_VISTA_FECHA = "dd/MM/yyyy HH:mm";
-    
-    public static final String FORMATO_USUARIO_TO_STRING = ""
-            + "ID: %s\n"
-            + "FECHA CREACIÓN: %s\n"
-            + "FECHA MODIFICACIÓN: %s\n"
-            + "NOMBRE: %s\n"
-            + "TELEFONO: %s\n"
-            + "CORREO: %s\n"
-            + "AREA: %s\n"
-            + "-----------------\n"
-            + "DIRECCION:\n"
-            + "%s\n"
-            + "-----------------";
-    
-    public static final String FORMATO_CONTRATO_TO_STRING = ""
-            + "ID: %s\n"
-            + "FECHA CREACIÓN: %s\n"
-            + "FECHA MODIFICACIÓN: %s\n"
-            + "CLIENTE: %s\n"
-            + "INICIO: %s\n"
-            + "TIPO: %s\n"
-            + "ESTADO: %s\n"
-            + "MESES: %s\n"
-            + "DIA DE CORTE: %s\n"
-            + "FORMA DE PAGO: %s\n"
-            + "TIPO DE IMPRESORAS: %s\n"
-            + "TIPO DE TONERS: %s\n"
-            + "RENTA MENSUAL: %s\n"
-            + "BOLSA B/N: %s\n"
-            + "BOLSA COLOR: %s\n"
-            + "CLICK BN: %.2f\n"
-            + "CLICK COLOR: %.2f";
-    
-    public static final String FORMATO_CLIENTE_TO_STRING = ""
-            + "ID: %s\n"
-            + "FECHA CREACIÓN: %s\n"
-            + "FECHA MODIFICACIÓN: %s\n"
-            + "NOMBRE: %s\n"
-            + "TELEFONO: %s\n"
-            + "CORREO: %s\n"
-            + "NIVEL: %s\n"
-            + "-----------------\n"
-            + "DIRECCION:\n"
-            + "%s\n"
-            + "-----------------";
-    
-    public static final String FORMATO_TICKET_TO_STRING = ""
-            + "ID: %s\n"
-            + "FECHA CREACIÓN: %s\n"
-            + "FECHA MODIFICACIÓN: %s\n"
-            + "PRIORIDAD: %s\n"
-            + "ESTADO: %s\n"
-            + "TIPO: %s\n"
-            + "AREA ASIGNADA: %s\n"
-            + "USUARIO ASIGNADO: %s\n"
-            + "PEDIDO CON ID: %s\n"
-            + "DESCRIPCIÓN: %s";
+
 }

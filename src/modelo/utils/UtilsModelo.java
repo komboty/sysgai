@@ -8,8 +8,11 @@ import modelo.entidades.Contrato;
 import modelo.entidades.Ticket;
 import modelo.entidades.Usuario;
 import static modelo.utils.ConstantesModelo.*;
+import servicios.dtos.ClienteDTO;
+import servicios.dtos.ContratoDTO;
+import servicios.dtos.TicketDTO;
 import static vistas.utils.ConstantesVista.*;
-import servicios.dtos.ObjectToStringDTO;
+import servicios.dtos.UsuarioDTO;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -41,92 +44,67 @@ public class UtilsModelo {
         return localDateTime.format(formato);
     }
 
-    //    public static UsuarioDTO usuarioToUsuarioDTO(Usuario usuario) {
-//        UsuarioDTO usuarioDTO = new UsuarioDTO();
-//        usuarioDTO.setId(usuario.getId());
-//        usuarioDTO.setFechaCreacion(localDateTimeToString(usuario.getFechaCreacion()));
-//        usuarioDTO.setFechaModificacion(localDateTimeToString(usuario.getFechaModificacion()));
-//        usuarioDTO.setNombre(usuario.getNombre());
-//        usuarioDTO.setTelefono(usuario.getTelefono());
-//        usuarioDTO.setMail(usuario.getMail());
-//        usuarioDTO.setDireccion(usuario.getDireccion());
-//        usuarioDTO.setNombreArea(usuario.getArea().getNombre());
-//        return usuarioDTO;
-//    }
-    
-    public static ObjectToStringDTO usuarioToObjectToStringDTO(Usuario usuario) {
-        ObjectToStringDTO objectToStringDTO = new ObjectToStringDTO();
-        objectToStringDTO.setId(usuario.getId());
-        objectToStringDTO.setDatos(String.format(FORMATO_USUARIO_TO_STRING,
-                usuario.getId(),
-                localDateTimeToString(usuario.getFechaCreacion()),
-                localDateTimeToString(usuario.getFechaModificacion()),
-                usuario.getNombre(),
-                usuario.getTelefono(),
-                usuario.getMail(),
-                usuario.getArea().getNombre(),
-                usuario.getDireccion().replaceAll(DELIMITADOR_DIRECCCION, "\n")
-        ));
-        return objectToStringDTO;
+    public static UsuarioDTO usuarioToUsuarioDTO(Usuario usuario) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(usuario.getId());
+        usuarioDTO.setFechaCreacion(localDateTimeToString(usuario.getFechaCreacion()));
+        usuarioDTO.setFechaModificacion(localDateTimeToString(usuario.getFechaModificacion()));
+        usuarioDTO.setNombre(usuario.getNombre());
+        usuarioDTO.setTelefono(usuario.getTelefono());
+        usuarioDTO.setMail(usuario.getMail());
+        usuarioDTO.setNombreArea(usuario.getArea().getNombre());
+        usuarioDTO.setDireccion(usuario.getDireccion().replaceAll(DELIMITADOR_DIRECCCION, "\n"));
+        return usuarioDTO;
     }
 
-    public static ObjectToStringDTO contratoToObjectToStringDTO(Contrato contrato) {
-        ObjectToStringDTO objectToStringDTO = new ObjectToStringDTO();
-        objectToStringDTO.setId(contrato.getId());
-        objectToStringDTO.setEstado(contrato.getEstado());
-        objectToStringDTO.setDatos(String.format(FORMATO_CONTRATO_TO_STRING,
-                contrato.getId(),
-                localDateTimeToString(contrato.getFechaCreacion()),
-                localDateTimeToString(contrato.getFechaModificacion()),
-                contrato.getCliente().getNombre(),
-                localDateTimeToString(contrato.getInicioContrato()),
-                contrato.getTipoContrato(),
-                contrato.getEstado(),
-                contrato.getMesesContrato(),
-                contrato.getDiaCorte(),
-                contrato.getFormaPago(),
-                contrato.getTipoImpresora(),
-                contrato.getTipoToner(),
-                contrato.getRentaMensual(),
-                contrato.getBolsaBN(),
-                contrato.getBolsaColor(),
-                contrato.getClickBN(),
-                contrato.getClickColor()
-        ));
-        return objectToStringDTO;
-    }
-    
-    public static ObjectToStringDTO clienteToObjectToStringDTO(Cliente cliente) {
-        ObjectToStringDTO objectToStringDTO = new ObjectToStringDTO();
-        objectToStringDTO.setId(cliente.getId());
-        objectToStringDTO.setDatos(String.format(FORMATO_CLIENTE_TO_STRING,
-                cliente.getId(),
-                localDateTimeToString(cliente.getFechaCreacion()),
-                localDateTimeToString(cliente.getFechaModificacion()),
-                cliente.getNombre(),
-                cliente.getTelefono(),
-                cliente.getMail(),
-                cliente.getNivel(),
-                cliente.getDireccion().replaceAll(DELIMITADOR_DIRECCCION, "\n")
-        ));
-        return objectToStringDTO;
+    public static TicketDTO ticketToTicketDTO(Ticket ticket) {
+        TicketDTO ticketDTO = new TicketDTO();
+        ticketDTO.setId(ticket.getId());
+        ticketDTO.setFechaCreacion(localDateTimeToString(ticket.getFechaCreacion()));
+        ticketDTO.setFechaModificacion(localDateTimeToString(ticket.getFechaModificacion()));
+        ticketDTO.setPrioridad(ticket.getPrioridad());
+        ticketDTO.setEstado(ticket.getEstado());
+        ticketDTO.setTipo(ticket.getTipo());
+        ticketDTO.setNombreAreaAsignada(ticket.getAreaAsignada().getNombre());
+        ticketDTO.setMailUsuarioAsignado(ticket.getUsuarioAsignado() != null ? ticket.getUsuarioAsignado().getMail() : null);
+        ticketDTO.setIdPedido(ticket.getPedido() != null ? ticket.getPedido().getId() : null);
+        ticketDTO.setDescripcion(ticket.getDescripcion());
+        return ticketDTO;
     }
 
-    public static ObjectToStringDTO ticketToObjectToStringDTO(Ticket ticket) {
-        ObjectToStringDTO objectToStringDTO = new ObjectToStringDTO();
-        objectToStringDTO.setId(ticket.getId());
-        objectToStringDTO.setDatos(String.format(FORMATO_TICKET_TO_STRING,
-                ticket.getId(),
-                localDateTimeToString(ticket.getFechaCreacion()),
-                localDateTimeToString(ticket.getFechaModificacion()),
-                ticket.getPrioridad(),
-                ticket.getEstado(),
-                ticket.getTipo(),
-                ticket.getAreaAsignada().getNombre(),
-                ticket.getUsuarioAsignado() != null ? ticket.getUsuarioAsignado().getMail() : null,
-                ticket.getPedido() != null ? ticket.getPedido().getId() : null,
-                ticket.getDescripcion()
-        ));
-        return objectToStringDTO;
+    public static ContratoDTO contratoToContratoDTO(Contrato contrato) {
+        ContratoDTO contratoDTO = new ContratoDTO();
+        contratoDTO.setId(contrato.getId());
+        contratoDTO.setFechaCreacion(localDateTimeToString(contrato.getFechaCreacion()));
+        contratoDTO.setFechaModificacion(localDateTimeToString(contrato.getFechaModificacion()));
+        contratoDTO.setNombreCliente(contrato.getCliente().getNombre());
+        contratoDTO.setInicioContrato(localDateTimeToString(contrato.getInicioContrato()));
+        contratoDTO.setTipoContrato(contrato.getTipoContrato());
+        contratoDTO.setEstado(contrato.getEstado());
+        contratoDTO.setMesesContrato(contrato.getMesesContrato());
+        contratoDTO.setDiaCorte(contrato.getDiaCorte());
+        contratoDTO.setFormaPago(contrato.getFormaPago());
+        contratoDTO.setTipoImpresora(contrato.getTipoImpresora());
+        contratoDTO.setTipoToner(contrato.getTipoToner());
+        contratoDTO.setRentaMensual(contrato.getRentaMensual());
+        contratoDTO.setBolsaBN(contrato.getBolsaBN());
+        contratoDTO.setBolsaColor(contrato.getBolsaColor());
+        contratoDTO.setClickBN(contrato.getClickBN());
+        contratoDTO.setClickColor(contrato.getClickColor());
+        return contratoDTO;
     }
+
+    public static ClienteDTO clienteToClienteDTO(Cliente cliente) {
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setId(cliente.getId());
+        clienteDTO.setFechaCreacion(localDateTimeToString(cliente.getFechaCreacion()));
+        clienteDTO.setFechaModificacion(localDateTimeToString(cliente.getFechaModificacion()));
+        clienteDTO.setNombre(cliente.getNombre());
+        clienteDTO.setTelefono(cliente.getTelefono());
+        clienteDTO.setMail(cliente.getMail());
+        clienteDTO.setNivel(cliente.getNivel());
+        clienteDTO.setDireccion(cliente.getDireccion().replaceAll(DELIMITADOR_DIRECCCION, "\n"));
+        return clienteDTO;
+    }
+
 }

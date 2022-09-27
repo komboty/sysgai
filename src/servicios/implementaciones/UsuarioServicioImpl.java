@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Usuario;
 import modelo.utils.UtilsModelo;
-import servicios.dtos.FiltroDTO;
 import servicios.dtos.UsuarioDTO;
 import servicios.dtos.UsuarioLogueadoDTO;
-import servicios.dtos.ObjectToStringDTO;
 import servicios.interfaces.UsuarioServicio;
 
 /**
@@ -37,13 +35,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO) {
+    public List<UsuarioDTO> getTodos(String filtro, String valor) {
         List<Usuario> usuarios = usuarioDAO.getTodos();
-        List<ObjectToStringDTO> objectToStringDTO = new ArrayList<>();
+        List<UsuarioDTO> usuarioDTO = new ArrayList<>();
         for (Usuario usuario : usuarios) {
-            objectToStringDTO.add(UtilsModelo.usuarioToObjectToStringDTO(usuario));
+            usuarioDTO.add(UtilsModelo.usuarioToUsuarioDTO(usuario));
         }
-        return objectToStringDTO;
+        return usuarioDTO;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario crearUsuario(int idArea, String nombre, String telefono, String mail, String direccion, String contrasenia) {
+    public UsuarioDTO crearUsuario(int idArea, String nombre, String telefono, String mail, String direccion, String contrasenia) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

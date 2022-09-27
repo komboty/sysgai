@@ -16,7 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import static vistas.utils.ConstantesVista.*;
 import static modelo.utils.ConstantesModelo.*;
-import servicios.dtos.ObjectToStringDTO;
+import servicios.dtos.ClienteDTO;
+import servicios.dtos.ContratoDTO;
+import servicios.dtos.TicketDTO;
+import servicios.dtos.UsuarioDTO;
 import servicios.dtos.UsuarioLogueadoDTO;
 import servicios.interfaces.GenericServicio;
 import vistas.utils.UtilsVista;
@@ -34,14 +37,15 @@ public class ItemTablaInfoControlador implements Initializable {
     private ImageView imageItem;
 
     // Objeto a mostrar informacion.
-    private ObjectToStringDTO objectToStringDTO;
+    private Object objectDTO;
     // Servicio que realizara la accion que desea el usuario.
     private GenericServicio genericServicio;
     // Nombre del servicio.
     private String servicio;
     // Variable que al cambiar su estado actualiza la tabla (TablaInfoControlador).
     private final BooleanProperty actualizarTablaInfo = new SimpleBooleanProperty();
-    private UsuarioLogueadoDTO UsuarioLogueadoDTO;
+    private int id;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -61,25 +65,24 @@ public class ItemTablaInfoControlador implements Initializable {
      * Inician valores fundamentales para el funcionamiento del
      * ItemTablaInfoControlador.
      *
-     * @param objectToStringDTO ObjectInit con la informacion a mostrar.
+     * @param objectDTO ObjectDTO con la informacion a mostrar.
      * @param genericServicio Servico que realiza la accion que desea el
      * usuario.
      * @param servicio Nombre del servicio.
+     * @param usuarioLogueadoDTO Objeto con el nombre del area del usuario logeado.
      */
-    public void setDetalleInfo(ObjectToStringDTO objectToStringDTO, GenericServicio genericServicio, 
+    public void setDetalleInfo(Object objectDTO, GenericServicio genericServicio,
             String servicio, UsuarioLogueadoDTO usuarioLogueadoDTO) {
-        
-        this.objectToStringDTO = objectToStringDTO;
+
+        this.objectDTO = objectDTO;
         this.genericServicio = genericServicio;
         this.servicio = servicio;
-        this.UsuarioLogueadoDTO = usuarioLogueadoDTO;
-        this.labelInfo.setText(objectToStringDTO.getDatos());
-        setImageItem();
-        
+        setDatosItem();
+        // Si el usuario no es de Mesa de Servico. No puede editar los tickets.
         if (servicio.equals(ICON_LABEL_TICKETS) && !usuarioLogueadoDTO.getNombreArea().equals(AREA_MESA_DE_SERVICIO)) {
             return;
         }
-            
+
         addBotones();
     }
 
@@ -97,29 +100,43 @@ public class ItemTablaInfoControlador implements Initializable {
         }
     }
 
-    
     /**
      * Muestra una imagen en la pantalla segun el servicio.
      */
-    private void setImageItem() {
+    private void setDatosItem() {
         String urlImageItem = "";
+        String datos = "";
         switch (servicio) {
             case ICON_LABEL_USUARIOS:
                 urlImageItem = IMAGE_URL_USUARIOS;
+                UsuarioDTO usuarioDTO  = (UsuarioDTO) objectDTO;
+                id = usuarioDTO.getId();
+                datos = UtilsVista.usuarioDTOToString(usuarioDTO);
                 break;
 
             case ICON_LABEL_CLIENTES:
                 urlImageItem = IMAGE_URL_CLIENTES;
+                ClienteDTO clienteDTO  = (ClienteDTO) objectDTO;
+                id = clienteDTO.getId();
+                datos = UtilsVista.clienteDTOToString(clienteDTO);
                 break;
 
             case ICON_LABEL_CONTRATOS:
                 urlImageItem = getUrlImageContratos();
+                ContratoDTO contratoDTO  = (ContratoDTO) objectDTO;
+                id = contratoDTO.getId();
+                datos = UtilsVista.contratoDTOToString(contratoDTO);
                 break;
-                
+
             case ICON_LABEL_TICKETS:
                 urlImageItem = IMAGE_URL_TICKETS;
+                TicketDTO ticketDTO  = (TicketDTO) objectDTO;
+                id = ticketDTO.getId();
+                datos = UtilsVista.ticketDTOToString(ticketDTO);
+                break;
         }
 
+        this.labelInfo.setText(datos);
         Image image = new Image(String.valueOf(getClass().getResource(urlImageItem)));
         imageItem.setImage(image);
     }
@@ -132,7 +149,8 @@ public class ItemTablaInfoControlador implements Initializable {
      */
     private String getUrlImageContratos() {
         String urlImageItem = null;
-        switch (objectToStringDTO.getEstado()) {
+        ContratoDTO contratoDTO = ((ContratoDTO) objectDTO);
+        switch (contratoDTO.getEstado()) {
             case ESTADO_CONTRATO_VALIDADO:
                 urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_VALIDADO;
                 break;
@@ -152,7 +170,7 @@ public class ItemTablaInfoControlador implements Initializable {
         }
         return urlImageItem;
     }
-    
+
     /**
      * Agrega el boton de validar a la vistas.
      */
@@ -165,7 +183,6 @@ public class ItemTablaInfoControlador implements Initializable {
             System.err.println(ex);
         }
     }
-
 
     /**
      * Crea un boton (BotonImagenControlador) con una icono y un texto dado.
@@ -199,31 +216,31 @@ public class ItemTablaInfoControlador implements Initializable {
     private void llamarServicio(String accion) {
         switch (accion) {
             case ICON_LABEL_EDITAR:
-                System.out.println("EDITAR REGISTRO CON ID: " + objectToStringDTO.getId());
+                System.out.println("EDITAR REGISTRO CON ID: " + id);
                 break;
-                
-             case ICON_LABEL_VALIDAR:
-                System.out.println("VALIDAR REGISTRO CON ID: " + objectToStringDTO.getId());
+
+            case ICON_LABEL_VALIDAR:
+                System.out.println("VALIDAR REGISTRO CON ID: " + id);
                 break;
 
             case ICON_LABEL_ELIMINAR:
                 // Se lanza Alerta para asegurarse que se quiere eliminar.
-                String mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION, objectToStringDTO.getId());
+                String mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION, id);
                 boolean isEliminar = UtilsVista.lanzaAlertaCancelYAceptar(ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                 // Si no se dio en Aceptar, no se hace nada.
                 if (!isEliminar) {
                     return;
                 }
                 // Si se dio en Aceptar, se elimina.
-                boolean isEliminado = genericServicio.eliminarPorId(objectToStringDTO.getId());
+                boolean isEliminado = genericServicio.eliminarPorId(id);
                 // Si ocurrio un error, se notifica al usuario.
                 if (!isEliminado) {
-                    mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_ERROR, objectToStringDTO.getId());
+                    mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_ERROR, id);
                     UtilsVista.lanzaAlertaError(ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                     return;
                 }
                 // Si se elimino correctamente, se notifica al usuario.
-                mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_ELIMINADO, objectToStringDTO.getId());
+                mensajeEliminar = String.format(ELIMINAR_REGISTRO_MENSAJE_ELIMINADO, id);
                 UtilsVista.lanzaAlertaInformacion(ELIMINAR_REGISTRO_TITULO, mensajeEliminar);
                 actualizarTablaInfo.set(!actualizarTablaInfo.get());
                 break;

@@ -1,14 +1,14 @@
 package servicios.interfaces;
 
-import modelo.entidades.Ticket;
+import servicios.dtos.TicketDTO;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
-public interface TicketServicio extends GenericServicio<Ticket> {
+public interface TicketServicio extends GenericServicio<TicketDTO> {
 
-//    public Ticket crearTicket(int idTipoPrioridad, int idTipoTicket, int idUsuario, int idPedido, String descripcion);
-    public Ticket crearTicketFalla(int idTipoPrioridad, int idUsuario, int idPedido);
+//    public TicketDTO crearTicket(int idTipoPrioridad, int idTipoTicket, int idUsuario, int idPedido, String descripcion);
+    public TicketDTO crearTicketFalla(int idTipoPrioridad, int idUsuario, int idPedido);
 
-    public Ticket crearTicketToner(int idTipoPrioridad, int idUsuario, int idPedido);
+    public TicketDTO crearTicketToner(int idTipoPrioridad, int idUsuario, int idPedido);
 }

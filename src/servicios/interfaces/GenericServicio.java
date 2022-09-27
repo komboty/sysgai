@@ -1,8 +1,6 @@
 package servicios.interfaces;
 
 import java.util.List;
-import servicios.dtos.FiltroDTO;
-import servicios.dtos.ObjectToStringDTO;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -10,12 +8,14 @@ import servicios.dtos.ObjectToStringDTO;
 public interface GenericServicio<T> {
 
     /**
-     * Obtiene una lista de informacion segun el servicio y filtro.
+     * Obtiene una lista de informacion segun el servicio y filtro. Obtiene una
+     * lista de informacion segun el servicio y filtro.
      *
-     * @param filtroDTO Filtro a realizar.
-     * @return Lista con todos los T en ObjectToStringDTO.
+     * @param filtro Nombre del filtro.
+     * @param valor Valor a filtrar.
+     * @return Lista con todos los T.
      */
-    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO);
+    public List<T> getTodos(String filtro, String valor);
 
     /**
      * Elimina un T del sistema por su id.

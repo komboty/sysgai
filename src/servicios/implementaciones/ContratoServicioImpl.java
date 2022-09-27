@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Contrato;
 import modelo.utils.UtilsModelo;
-import servicios.dtos.FiltroDTO;
-import servicios.dtos.ObjectToStringDTO;
+import servicios.dtos.ContratoDTO;
 import servicios.interfaces.ContratoServicio;
 
 /**
@@ -22,11 +21,11 @@ public class ContratoServicioImpl implements ContratoServicio {
     }
 
     @Override
-    public List<ObjectToStringDTO> getTodos(FiltroDTO filtroDTO) {
+    public List<ContratoDTO> getTodos(String filtro, String valor) {
         List<Contrato> contratos = contratoDAO.getTodos();
-        List<ObjectToStringDTO> objectToStringDTO = new ArrayList<>();
+        List<ContratoDTO> objectToStringDTO = new ArrayList<>();
         for (Contrato contrato : contratos) {
-            objectToStringDTO.add(UtilsModelo.contratoToObjectToStringDTO(contrato));
+            objectToStringDTO.add(UtilsModelo.contratoToContratoDTO(contrato));
         }
         return objectToStringDTO;
     }
@@ -37,22 +36,22 @@ public class ContratoServicioImpl implements ContratoServicio {
     }
 
     @Override
-    public Contrato crearContratoRentaMensual(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, int rentaMensual) {
+    public ContratoDTO crearContratoRentaMensual(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, int rentaMensual) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Contrato crearContratoRentaPorBolsa(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, int rentaMensual, int bolsaBN, int bolsaColor, double clickBN, double clickColor) {
+    public ContratoDTO crearContratoRentaPorBolsa(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, int rentaMensual, int bolsaBN, int bolsaColor, double clickBN, double clickColor) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Contrato crearContratoCostoPorPaginas(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, double clickBN, double clickColor) {
+    public ContratoDTO crearContratoCostoPorPaginas(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, double clickBN, double clickColor) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Contrato crearContratoSoporteYMantenimiento(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, int rentaMensual) {
+    public ContratoDTO crearContratoSoporteYMantenimiento(int idCliente, int idTipoPago, int idTipoToner, int idTipoEstadoProducto, LocalDateTime inicioContrato, int mesesContrato, int diaCorte, int rentaMensual) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
