@@ -34,13 +34,13 @@ public final class ConstantesVista {
     public static final String URL_BOTON_IMAGEN = "/vistas/utils/botonImagen.fxml";
     public static final String URL_ITEM_TABLA_INFO = "/vistas/vertodos/itemTablaInfo.fxml";
     public static final String URL_TABLA_INFO = "/vistas/vertodos/tablaInfo.fxml";
-    public static final String URL_ALMACENES_CREAR = "/vistas/.fxml";
-    public static final String URL_CLIENTES_CREAR = "/vistas/.fxml";
-    public static final String URL_CONTRATOS_CREAR = "/vistas/.fxml";
-    public static final String URL_FACTURAS_CREAR = "/vistas/.fxml";
-    public static final String URL_PEDIDOS_CREAR = "/vistas/.fxml";
-    public static final String URL_TICKETS_CREAR = "/vistas/.fxml";
-    public static final String URL_USUARIOS_CREAR = "/vistas/.fxml";
+    public static final String URL_ALMACENES_CREAR = "/vistas/crear/crearAlmacen/crearAlmacen.fxml";
+    public static final String URL_CLIENTES_CREAR = "/vistas/crear/crearCliente/crearCliente.fxml";
+    public static final String URL_CONTRATOS_CREAR = "/vistas/crear/crearContrato/crearContrato.fxml";
+    public static final String URL_FACTURAS_CREAR = "/vistas/crear/crearFactura/crearFactura.fxml";
+    public static final String URL_PEDIDOS_CREAR = "/vistas/crear/crearPedido/crearPedido.fxml";
+    public static final String URL_TICKETS_CREAR = "/vistas/crear/crearTicket/crearTicket.fxml";
+    public static final String URL_USUARIOS_CREAR = "/vistas/crear/crearUsuario/crearUsuario.fxml";
 
     // Mensajes de la vista.
     public static final String NO_HAY_REGISTROS = "No se encontro ningun registro";
