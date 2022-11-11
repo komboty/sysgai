@@ -1,33 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.crear.crearTicket.CrearTicketControlador">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="23.0" prefHeight="21.0" prefWidth="428.0" text="Registrar nuevo ticket. Por favor, llene los siguientes campos.">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="textMail21" layoutX="352.0" layoutY="69.0" prefHeight="25.0" prefWidth="140.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="332.0" layoutY="51.0" prefWidth="80.0" text="Descripción" />
-      <Button defaultButton="true" layoutX="422.0" layoutY="177.0" mnemonicParsing="false" text="Registrar" wrapText="true" />
-      <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="51.0" prefHeight="17.0" prefWidth="117.0" text="ID tipo de prioridad" />
-      <ChoiceBox layoutX="14.0" layoutY="69.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="6.0" layoutY="109.0" prefHeight="17.0" prefWidth="150.0" text="ID tipo de estado de ticket" />
-      <ChoiceBox layoutX="14.0" layoutY="127.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="162.0" prefHeight="17.0" prefWidth="98.0" text="ID tipo de ticket" />
-      <ChoiceBox layoutX="18.0" layoutY="180.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="175.0" layoutY="51.0" prefHeight="17.0" prefWidth="64.0" text="ID de área" />
-      <ChoiceBox layoutX="183.0" layoutY="69.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="175.0" layoutY="109.0" prefHeight="17.0" prefWidth="80.0" text="ID de usuario" />
-      <ChoiceBox layoutX="183.0" layoutY="127.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="176.0" layoutY="159.0" prefHeight="17.0" prefWidth="80.0" text="ID de pedido" />
-      <ChoiceBox layoutX="184.0" layoutY="177.0" prefWidth="150.0" />
+      <BorderPane>
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Registrar nuevo Ticket. Por favor, llene los siguientes campos." BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </Label>
+         </top>
+         <center>
+            <HBox spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox spacing="6.0">
+                     <children>
+                         <Label alignment="CENTER_RIGHT" text="Prioridad" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Estado de ticket" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Tipo de ticket" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Descripción" />
+                        <TextField/>
+                     </children>
+                  </VBox>
+                  <VBox spacing="6.0">
+                     <children>                        
+                        <Label alignment="CENTER_RIGHT" text="Área asignada" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Usuario asignado" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Pedido" />
+                        <ChoiceBox/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+         <right>
+            <Button defaultButton="true" mnemonicParsing="false" text="Registrar" wrapText="true" BorderPane.alignment="BOTTOM_LEFT" />
+         </right>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+      </BorderPane>
+      
    </children>
 </AnchorPane>
+

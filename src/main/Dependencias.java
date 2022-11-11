@@ -1,15 +1,15 @@
 package main;
 
-import basedatos.ConexionBD;
-import basedatos.ConexionBDImpl;
-import basedatos.daos.implementaciones.ClienteDAOImpl;
-import basedatos.daos.implementaciones.ContratoDAOImpl;
-import basedatos.daos.implementaciones.TicketDAOImpl;
-import basedatos.daos.implementaciones.UsuarioDAOImpl;
-import basedatos.daos.interfaces.ClienteDAO;
-import basedatos.daos.interfaces.ContratoDAO;
-import basedatos.daos.interfaces.TicketDAO;
-import basedatos.daos.interfaces.UsuarioDAO;
+import persistencia.ConexionBD;
+import persistencia.ConexionBDImpl;
+import persistencia.daos.implementaciones.ClienteDAOImpl;
+import persistencia.daos.implementaciones.ContratoDAOImpl;
+import persistencia.daos.implementaciones.TicketDAOImpl;
+import persistencia.daos.implementaciones.UsuarioDAOImpl;
+import persistencia.daos.interfaces.ClienteDAO;
+import persistencia.daos.interfaces.ContratoDAO;
+import persistencia.daos.interfaces.TicketDAO;
+import persistencia.daos.interfaces.UsuarioDAO;
 import servicios.implementaciones.ClienteServicioImpl;
 import servicios.implementaciones.ContratoServicioImpl;
 import servicios.implementaciones.TicketServicioImpl;

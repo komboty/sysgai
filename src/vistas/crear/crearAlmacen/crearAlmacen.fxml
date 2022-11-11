@@ -17,7 +17,7 @@
       <TextField fx:id="direccion" layoutX="23.0" layoutY="142.0" />
       <Label alignment="CENTER_RIGHT" layoutY="118.0" prefWidth="80.0" text="Dirección" />
       <Button defaultButton="true" layoutX="212.0" layoutY="142.0" mnemonicParsing="false" text="Registrar" wrapText="true" />
-      <Label alignment="CENTER_RIGHT" layoutX="13.0" layoutY="56.0" prefHeight="17.0" prefWidth="80.0" text="ID del cliente" />
+      <Label alignment="CENTER_RIGHT" layoutX="13.0" layoutY="56.0" prefHeight="17.0" prefWidth="80.0" text="Cliente" />
       <ChoiceBox fx:id="idCliente" layoutX="22.0" layoutY="80.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

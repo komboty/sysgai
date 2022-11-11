@@ -1,6 +1,6 @@
 package servicios.implementaciones;
 
-import basedatos.daos.interfaces.ContratoDAO;
+import persistencia.daos.interfaces.ContratoDAO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

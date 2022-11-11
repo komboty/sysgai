@@ -1,6 +1,6 @@
 package servicios.implementaciones;
 
-import basedatos.daos.interfaces.ClienteDAO;
+import persistencia.daos.interfaces.ClienteDAO;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Cliente;

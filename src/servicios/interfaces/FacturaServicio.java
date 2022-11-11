@@ -1,6 +1,6 @@
 package servicios.interfaces;
 
-import basedatos.daos.interfaces.GenericDAO;
+import persistencia.daos.interfaces.GenericDAO;
 import servicios.dtos.FacturaDTO;
 
 /**

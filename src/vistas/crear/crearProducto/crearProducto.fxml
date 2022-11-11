@@ -17,13 +17,13 @@
       <TextField fx:id="idModelo" layoutX="207.0" layoutY="70.0" />
       <Label alignment="CENTER_RIGHT" layoutX="182.0" layoutY="54.0" prefHeight="17.0" prefWidth="71.0" text="Modelo" />
       <Button fx:id="registrar" defaultButton="true" layoutX="426.0" layoutY="226.0" mnemonicParsing="false" text="Registrar" wrapText="true" />
-      <Label alignment="CENTER_RIGHT" layoutY="57.0" prefHeight="17.0" prefWidth="116.0" text="ID tipo de producto" />
+      <Label alignment="CENTER_RIGHT" layoutY="57.0" prefHeight="17.0" prefWidth="116.0" text="Tipo de producto" />
       <ComboBox fx:id="idTipodeProducto" layoutX="9.0" layoutY="74.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutY="105.0" prefHeight="17.0" prefWidth="116.0" text="ID tipo de impresión" />
+      <Label alignment="CENTER_RIGHT" layoutY="105.0" prefHeight="17.0" prefWidth="116.0" text="Tipo de impresión" />
       <ComboBox fx:id="idTipodeImpresion" layoutX="9.0" layoutY="120.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutX="2.0" layoutY="150.0" prefHeight="17.0" prefWidth="93.0" text="ID tipo de tóner" />
+      <Label alignment="CENTER_RIGHT" layoutX="2.0" layoutY="150.0" prefHeight="17.0" prefWidth="93.0" text="Tipo de tóner" />
       <ComboBox fx:id="idTipodeToner" layoutX="9.0" layoutY="165.0" prefWidth="150.0" />
-      <Label alignment="CENTER_RIGHT" layoutY="198.0" prefHeight="17.0" prefWidth="141.0" text="ID tipo de color de tóner" />
+      <Label alignment="CENTER_RIGHT" layoutY="198.0" prefHeight="17.0" prefWidth="141.0" text="Color de tóner" />
       <ComboBox fx:id="idTipocolorToner" layoutX="7.0" layoutY="213.0" prefWidth="150.0" />
       <TextField fx:id="costo" layoutX="207.0" layoutY="118.0" />
       <Label alignment="CENTER_RIGHT" layoutX="182.0" layoutY="102.0" prefHeight="17.0" prefWidth="57.0" text="Costo" />

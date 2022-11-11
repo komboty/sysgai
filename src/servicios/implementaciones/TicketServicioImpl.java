@@ -1,6 +1,6 @@
 package servicios.implementaciones;
 
-import basedatos.daos.interfaces.TicketDAO;
+import persistencia.daos.interfaces.TicketDAO;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Ticket;
