@@ -16,15 +16,19 @@ INSERT INTO Cliente (idCliente, idTipoNivelCliente, fechaCreacionCliente, fechaM
     (DEFAULT, 2, CURRENT_TIMESTAMP, NULL, 'Cliente 4', '5534346678', 'cliente3@gmail.com', 'CALLE: calle 45,NUM.EXT.: 45,NUM.INT.: Null,LOCALIDAD: colonia 45,MUNICIPIO: alcaldia 45,C.P.: 99999,ESTADO: estado 9');
 
 INSERT INTO Contrato (idContrato, idCliente, idTipoContrato, idTipoPago, idTipoToner, idTipoEstadoProducto, idTipoEstadoContrato, fechaCreacionContrato, fechaModificacionContrato, inicioContrato, mesesContrato, diaCorteContrato, rentaMensualContrato, bolsaBNContrato, bolsaColorContrato, clickBNContrato, clickColorContrato) VALUES
-    (DEFAULT, 1, 1, 1, 1, 1, 4, CURRENT_TIMESTAMP, NULL, CURRENT_TIMESTAMP, 6, 28, 8000.0, 0, 0, 0.0, 0.0),
-    (DEFAULT, 2, 2, 2, 2, 2, 1, CURRENT_TIMESTAMP, NULL, '2023-01-01 00:00:00', 8, 22, 2000.0, 3000, 1000, 0.16, 1.2),
-    (DEFAULT, 3, 3, 3, 1, 1, 2, CURRENT_TIMESTAMP, NULL, '2022-12-01 00:00:00', 12, 15, 0.0, 0, 0, 0.2, 1.6);
+    (DEFAULT, 1, 1, 1, 1, 1, 4, CURRENT_TIMESTAMP, NULL, '2022-12-01 00:00:00', 6, 28, 8000.0, 0, 0, 0.0, 0.0),
+    (DEFAULT, 2, 2, 2, 2, 2, 2, CURRENT_TIMESTAMP, NULL, '2023-01-01 00:00:00', 8, 22, 2000.0, 3000, 1000, 0.16, 1.2),
+    (DEFAULT, 3, 3, 3, 1, 1, 1, CURRENT_TIMESTAMP, NULL, '2023-03-14 00:00:00', 12, 15, 0.0, 0, 0, 0.2, 1.6),
+    (DEFAULT, 4, 3, 4, 1, 2, 3, CURRENT_TIMESTAMP, NULL, '2023-06-24 00:00:00', 12, 1, 0.0, 0, 0, 0.18, 2.3);
 
 INSERT INTO Pedido (idPedido, idUsuario, idContrato, idTipoEstadoPedido, fechaCreacionPedido, fechaModificacionPedido) VALUES
     (DEFAULT, 2, 1, 10, CURRENT_TIMESTAMP, NULL);
 
 INSERT INTO Ticket (idTicket, idTipoPrioridad, idTipoEstadoTicket, idTipoTicket, idArea, idUsuario, idPedido, fechaCreacionTicket, fechaModificacionTicket, descripcionTicket) VALUES
-    (DEFAULT, 3, 4, 1, 5, 6, 1, CURRENT_TIMESTAMP, NULL, 'Resuleto sin demora');
+    (DEFAULT, 3, 4, 1, 5, 6, 1, CURRENT_TIMESTAMP, NULL, 'Resuleto sin demora'),
+    (DEFAULT, 1, 1, 3, 5, NULL, 1, CURRENT_TIMESTAMP, NULL, ''),
+    (DEFAULT, 3, 1, 2, 8, 1, NULL, CURRENT_TIMESTAMP, NULL, 'Crear 2 usuarios de Arrendamiento'),
+    (DEFAULT, 2, 1, 3, 5, NULL, NULL, CURRENT_TIMESTAMP, NULL, '');
 
 INSERT INTO Producto (idProducto, idTipoProducto, idTipoImpresion, idTipoToner, idTipoColorToner, fechaCreacionProducto, fechaModificacionProducto, modeloProducto, costoProducto, volumenProducto, pesoProducto, rendimientoProducto) VALUES
     (DEFAULT, 2, 2, NULL, NULL, CURRENT_TIMESTAMP, NULL, 'HP123', 8600.0, 0.0, 0.0, NULL),
