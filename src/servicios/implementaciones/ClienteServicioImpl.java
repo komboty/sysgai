@@ -35,8 +35,24 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public ClienteDTO crearCliente(int idTipoNivelCliente, String nombre, String telefono, String mail, String direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ClienteDTO crearCliente(int idTipoNivelCliente, String nombre,
+            String telefono, String mail, String direccion) {
+
+        Cliente cliente = new Cliente();
+        cliente.setNombre(nombre);
+        cliente.setTelefono(telefono);
+        cliente.setMail(mail);
+        cliente.setDireccion(direccion);
+        cliente.setNivel(String.valueOf(idTipoNivelCliente));
+
+        // Se registra en la base de datos.
+        cliente = clienteDAO.registrar(cliente);
+        // Si no se registro el usuario.
+        if (cliente == null) {
+            return null;
+        }
+        //Si se registro el usuario.        
+        return UtilsModelo.clienteToClienteDTO(cliente);
     }
 
 }

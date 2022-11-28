@@ -9,6 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.Dependencias;
+import servicios.dtos.UsuarioDTO;
+import servicios.interfaces.UsuarioServicio;
+import static vistas.utils.ConstantesVista.*;
+import vistas.utils.UtilsVista;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -27,30 +32,66 @@ public class CrearUsuarioControlador implements Initializable {
     private TextField textDireccion;
     @FXML
     private ChoiceBox choiceArea;
+    // Areas de trabajo.
+    private Map<String, Integer> idsAreas;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Map<Integer, String> idsArea = new HashMap<>();
-        idsArea.put(1, "Arrendamiento");
-        idsArea.put(2, "Abogados");
-        idsArea.put(3, "Contadores");
-        idsArea.put(4, "Técnicos");
-        idsArea.put(5, "Mesa de servicio");
-        idsArea.put(6, "Almacén");
-        idsArea.put(7, "Distribución");
-        idsArea.put(8, "Administración");
-
-        for (Map.Entry<Integer, String> idArea : idsArea.entrySet()) {
-            choiceArea.getItems().add(idArea.getValue());
+        // Se obtienen las areas de trabajo
+        idsAreas = getAreas();
+        // Se cargan las areas de trabajo a la vista
+        for (Map.Entry<String, Integer> idArea : idsAreas.entrySet()) {
+            choiceArea.getItems().add(idArea.getKey());
         }
     }
 
+    /**
+     * Registra un usuario en la base de datos.
+     */
     public void onRegistrar() {
-        System.out.println(textNombre.getText());
-        System.out.println(textMail.getText());
-        System.out.println(textContrasenia.getText());
-        System.out.println(textTelefono.getText());
-        System.out.println(textDireccion.getText());
-        System.out.println(choiceArea.getSelectionModel().getSelectedItem());
+        UsuarioServicio usuarioServicio = Dependencias.getUsuarioServicio();
+        String nombreArea;
+        // Se obtiene el valor del ChoiceBox.
+        try {
+            nombreArea = choiceArea.getSelectionModel().getSelectedItem().toString();
+        } catch (Exception ex) {
+            System.err.println("vistas.crear.crearUsuario.CrearUsuarioControlador.onRegistrar()");
+            System.err.println(ex);
+            String mensajeError = String.format(NO_HAY_SELECCION_MENSAJE, "- Área");
+            UtilsVista.lanzaAlertaError(NO_HAY_SELECCION_TITULO, mensajeError);
+            return;
+        }
+
+        // Se registra el usuario en la base de datos.
+        UsuarioDTO usuarioDTO = usuarioServicio.crearUsuario(idsAreas.get(nombreArea),
+                textNombre.getText(), textTelefono.getText(), textMail.getText(),
+                textDireccion.getText(), textContrasenia.getText());
+
+        String msjAlert;
+        // Si ocurrio un error al registra el usuario en la base de datos.
+        if (usuarioDTO == null) {
+            msjAlert = String.format(REGISTRAR_MENSAJE_ERROR, "el Usuario");
+        } else {
+            // Si se registro correctamente el usuario en la base de datos.
+            msjAlert = String.format(REGISTRAR_MENSAJE, "El Usuario", usuarioDTO.getId());
+        }
+
+        UtilsVista.lanzaAlertaInformacion(ELIMINAR_REGISTRO_TITULO, msjAlert);
+    }
+
+    /**
+     * Obtiene las areas de trabajo.
+     */
+    public Map<String, Integer> getAreas() {
+        Map<String, Integer> idsAreas = new HashMap<>();
+        idsAreas.put("Arrendamiento", 1);
+        idsAreas.put("Abogados", 2);
+        idsAreas.put("Contadores", 3);
+        idsAreas.put("Técnicos", 4);
+        idsAreas.put("Mesa de servicio", 5);
+        idsAreas.put("Almacén", 6);
+        idsAreas.put("Distribución", 7);
+        idsAreas.put("Administración", 8);
+        return idsAreas;
     }
 }

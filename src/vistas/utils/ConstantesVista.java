@@ -43,13 +43,18 @@ public final class ConstantesVista {
     public static final String URL_USUARIOS_CREAR = "/vistas/crear/crearUsuario/crearUsuario.fxml";
 
     // Mensajes de la vista.
+    public static final String NO_HAY_SELECCION_TITULO = "Datos incorrectos";
+    public static final String NO_HAY_SELECCION_MENSAJE = "Debe seleccionar una opcion de:\n\t%s";
     public static final String NO_HAY_REGISTROS = "No se encontro ningun registro";
     public static final String ELIMINAR_REGISTRO_TITULO = "Eliminar registro";
     public static final String ELIMINAR_REGISTRO_MENSAJE_CONFIRMACION = "Esta seguro de eliminar el registro con ID: %s?";
     public static final String ELIMINAR_REGISTRO_MENSAJE_ELIMINADO = "El regitro con ID: %s se elimino correctamente.";
+    public static final String REGISTRAR_TITULO = "Registrar";
+    public static final String REGISTRAR_MENSAJE = "%s se regitro correctamente con el ID: %s";
 
     public static final String ERROR_NO_USUARIO = "No existe el Usuario";
     public static final String ELIMINAR_REGISTRO_MENSAJE_ERROR = "Ocurrio un error al elimiar el registro con ID: %s.\nAsegurese de eliminar antes las referencias del registro.";
+    public static final String REGISTRAR_MENSAJE_ERROR = "Ocurrio un error al registrar %s";
 
     // Etiqueta y su URL de iconos, imagenes de ItemTablaInfo.
     public static final String ICON_LABEL_ALMACENES = "Productos";

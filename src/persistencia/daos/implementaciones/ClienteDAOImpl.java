@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Cliente;
 import static persistencia.utils.ConstantesBD.*;
+import static persistencia.utils.UtilsBD.resultSetToLocalDateTime;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -50,6 +51,47 @@ public class ClienteDAOImpl implements ClienteDAO {
             System.err.println(ex);
         }
 
+        return null;
+    }
+    
+    @Override
+    public Cliente registrar(Cliente cliente) {
+        String consulta = "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s) VALUES "
+                + " (DEFAULT, ?, CURRENT_TIMESTAMP, NULL, ?, ?, ?, ?)"
+                + " RETURNING %s, %s";
+        consulta = String.format(consulta, N_T_CLIENTE,
+                T_CLIENTE_C_ID, T_CLIENTE_C_ID_TIPO_NIVEL_CLIENTE, T_CLIENTE_C_FECHA_CREACION,
+                T_CLIENTE_C_FECHA_MODIFICACION, T_CLIENTE_C_NOMBRE, T_CLIENTE_C_TELEFONO,
+                T_CLIENTE_C_MAIL, T_CLIENTE_C_DIRECCION,
+                T_CLIENTE_C_ID, T_CLIENTE_C_FECHA_CREACION);
+        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+
+        // Si no hay conexion a la base de datos.
+        if (statement == null) {
+            return null;
+        }
+
+        // Si hay conexion a la base de datos, se registra el Usuario.
+        try {
+            statement.setInt(1, Integer.parseInt(cliente.getNivel()));
+            statement.setString(2, cliente.getNombre());
+            statement.setString(3, cliente.getTelefono());
+            statement.setString(4, cliente.getMail());
+            statement.setString(5, cliente.getDireccion());
+            ResultSet resultSet = statement.executeQuery();
+            
+            // Si se registro el Cliente en la base de datos.
+            if (resultSet.next()) {                
+                cliente.setId(resultSet.getInt(T_CLIENTE_C_ID));
+                cliente.setFechaCreacion(resultSetToLocalDateTime(resultSet, T_CLIENTE_C_FECHA_CREACION));
+                return cliente;
+            }           
+        } catch (SQLException ex) {
+            System.err.println("persistencia.daos.implementaciones.ClienteDAOImpl.registrar()");
+            System.err.println(ex);
+        }
+
+        // Si no se registro el Cliente en la base de datos.
         return null;
     }
 

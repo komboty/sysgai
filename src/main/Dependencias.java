@@ -23,14 +23,14 @@ import servicios.interfaces.UsuarioServicio;
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
  */
 public class Dependencias {
-
+    // Conexion a la base de datos
     private static ConexionBD conexionBD;
-
+    // DAO's
     private static UsuarioDAO usuarioDAO;
     private static ClienteDAO clienteDAO;
     private static ContratoDAO contratoDAO;
     private static TicketDAO ticketDAO;
-
+    // Servicios
     private static UsuarioServicio usuarioServicio;
     private static ClienteServicio clienteServicio;
     private static ContratoServicio contratoServicio;

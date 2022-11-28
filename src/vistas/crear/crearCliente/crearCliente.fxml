@@ -50,7 +50,7 @@
             </HBox>
          </center>
          <right>
-            <Button defaultButton="true" mnemonicParsing="false" text="Registrar" wrapText="true" BorderPane.alignment="BOTTOM_LEFT" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#onRegistrar" text="Registrar" wrapText="true" BorderPane.alignment="BOTTOM_LEFT" />
          </right>
          <padding>
             <Insets left="20.0" top="20.0" />

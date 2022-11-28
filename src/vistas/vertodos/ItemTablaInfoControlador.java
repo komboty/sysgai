@@ -79,10 +79,10 @@ public class ItemTablaInfoControlador implements Initializable {
         this.servicio = servicio;
         setDatosItem();
         // Si el usuario no es de Mesa de Servico. No puede editar los tickets.
-        if (servicio.equals(ICON_LABEL_TICKETS) && !usuarioLogueadoDTO.getNombreArea().equals(AREA_MESA_DE_SERVICIO)) {
+        if ((servicio.equals(ICON_LABEL_TICKETS) && !usuarioLogueadoDTO.getNombreArea().equals(AREA_MESA_DE_SERVICIO))
+                || servicio.equals(ICON_LABEL_CONTRATOS)) {
             return;
         }
-
         addBotones();
     }
 
@@ -157,15 +157,18 @@ public class ItemTablaInfoControlador implements Initializable {
 
             case ESTADO_CONTRATO_RECHAZADO:
                 urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_RECHAZADO;
+                addBotones();
                 break;
 
             case ESTADO_CONTRATO_EN_VALIDACION:
                 urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_OTRO;
                 addBotonValidar();
+                addBotones();
                 break;
 
             default:
                 urlImageItem = IMAGE_URL_CONTRATOS_ESTADO_OTRO;
+                addBotones();
                 break;
         }
         return urlImageItem;

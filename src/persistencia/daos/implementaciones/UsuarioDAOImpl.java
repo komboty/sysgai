@@ -4,12 +4,14 @@ import persistencia.daos.interfaces.UsuarioDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.entidades.Usuario;
 import static persistencia.utils.ConstantesBD.*;
 import persistencia.ConexionBD;
 import persistencia.utils.UtilsBD;
+import static persistencia.utils.UtilsBD.resultSetToLocalDateTime;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -55,6 +57,48 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
 
         // Si no se encontro el Usuario en la base de datos.
+        return null;
+    }
+    
+    @Override
+    public Usuario registrar(Usuario usuario) {
+        String consulta = "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s) "
+                + " VALUES (DEFAULT, ?, CURRENT_TIMESTAMP, NULL, ?, ?, ?, ?, ?)"
+                + " RETURNING %s, %s";
+        consulta = String.format(consulta, N_T_USUARIO,
+                T_USUARIO_C_ID, T_USUARIO_C_ID_AREA, T_USUARIO_C_FECHA_CREACION,
+                T_USUARIO_C_FECHA_MODIFICACION, T_USUARIO_C_NOMBRE, T_USUARIO_C_TELEFONO,
+                T_USUARIO_C_MAIL, T_USUARIO_C_DIRECCION, T_USUARIO_C_CONTRASENIA,
+                T_USUARIO_C_ID, T_USUARIO_C_FECHA_CREACION);
+        PreparedStatement statement = conexion.getPreparedStatement(consulta);
+
+        // Si no hay conexion a la base de datos.
+        if (statement == null) {
+            return null;
+        }
+
+        // Si hay conexion a la base de datos, se registra el Usuario.
+        try {
+            statement.setInt(1, usuario.getArea().getId());
+            statement.setString(2, usuario.getNombre());
+            statement.setString(3, usuario.getTelefono());
+            statement.setString(4, usuario.getMail());
+            statement.setString(5, usuario.getDireccion());
+            statement.setString(6, usuario.getContrasenia());
+            ResultSet resultSet = statement.executeQuery();
+            
+            // Si se registro el Usuario en la base de datos.
+            if (resultSet.next()) {                
+                usuario.setId(resultSet.getInt(T_USUARIO_C_ID));
+                usuario.setFechaCreacion(resultSetToLocalDateTime(resultSet, T_USUARIO_C_FECHA_CREACION));
+                return usuario;
+            }           
+        } catch (SQLException ex) {
+            System.err.println("basedatos.daos.implementaciones.UsuarioDAOImpl.registrar()");
+            System.err.println(ex);
+        }
+
+        // Si no se registro el Usuario en la base de datos.
         return null;
     }
 

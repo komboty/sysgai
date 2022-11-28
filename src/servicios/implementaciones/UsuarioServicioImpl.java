@@ -3,6 +3,7 @@ package servicios.implementaciones;
 import persistencia.daos.interfaces.UsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
+import modelo.entidades.Area;
 import modelo.entidades.Usuario;
 import modelo.utils.UtilsModelo;
 import servicios.dtos.UsuarioDTO;
@@ -50,7 +51,26 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public UsuarioDTO crearUsuario(int idArea, String nombre, String telefono, String mail, String direccion, String contrasenia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public UsuarioDTO crearUsuario(int idArea, String nombre, String telefono, 
+            String mail, String direccion, String contrasenia) {
+        
+        Area area = new Area();
+        area.setId(idArea);
+        Usuario usuario = new Usuario();        
+        usuario.setArea(area);
+        usuario.setNombre(nombre);
+        usuario.setTelefono(telefono);
+        usuario.setMail(mail);
+        usuario.setDireccion(direccion);
+        usuario.setContrasenia(contrasenia);        
+        
+        // Se registra en la base de datos.
+        usuario = usuarioDAO.registrar(usuario);        
+        // Si no se registro el usuario.
+        if (usuario == null) {
+            return null;
+        }        
+        //Si se registro el usuario.        
+        return UtilsModelo.usuarioToUsuarioDTO(usuario);
     }
 }
