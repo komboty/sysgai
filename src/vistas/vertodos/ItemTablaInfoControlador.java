@@ -9,9 +9,11 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import static vistas.utils.ConstantesVista.*;
@@ -22,6 +24,8 @@ import servicios.dtos.TicketDTO;
 import servicios.dtos.UsuarioDTO;
 import servicios.dtos.UsuarioLogueadoDTO;
 import servicios.interfaces.GenericServicio;
+import vistas.crear.crearCliente.CrearClienteControlador;
+import vistas.crear.crearUsuario.CrearUsuarioControlador;
 import vistas.utils.UtilsVista;
 
 /**
@@ -42,10 +46,11 @@ public class ItemTablaInfoControlador implements Initializable {
     private GenericServicio genericServicio;
     // Nombre del servicio.
     private String servicio;
+    // Pantalla donde se esta mostrando la informacion.
+    private BorderPane borderPaneSubMenu;
     // Variable que al cambiar su estado actualiza la tabla (TablaInfoControlador).
     private final BooleanProperty actualizarTablaInfo = new SimpleBooleanProperty();
     private int id;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -69,14 +74,18 @@ public class ItemTablaInfoControlador implements Initializable {
      * @param genericServicio Servico que realiza la accion que desea el
      * usuario.
      * @param servicio Nombre del servicio.
-     * @param usuarioLogueadoDTO Objeto con el nombre del area del usuario logeado.
+     * @param usuarioLogueadoDTO Objeto con el nombre del area del usuario
+     * logeado.
+     * @param borderPaneSubMenu Pantalla donde se esta mostrando la informacion.
      */
     public void setDetalleInfo(Object objectDTO, GenericServicio genericServicio,
-            String servicio, UsuarioLogueadoDTO usuarioLogueadoDTO) {
+            String servicio, UsuarioLogueadoDTO usuarioLogueadoDTO,
+            BorderPane borderPaneSubMenu) {
 
         this.objectDTO = objectDTO;
         this.genericServicio = genericServicio;
         this.servicio = servicio;
+        this.borderPaneSubMenu = borderPaneSubMenu;
         setDatosItem();
         // Si el usuario no es de Mesa de Servico. No puede editar los tickets.
         if ((servicio.equals(ICON_LABEL_TICKETS) && !usuarioLogueadoDTO.getNombreArea().equals(AREA_MESA_DE_SERVICIO))
@@ -109,28 +118,28 @@ public class ItemTablaInfoControlador implements Initializable {
         switch (servicio) {
             case ICON_LABEL_USUARIOS:
                 urlImageItem = IMAGE_URL_USUARIOS;
-                UsuarioDTO usuarioDTO  = (UsuarioDTO) objectDTO;
+                UsuarioDTO usuarioDTO = (UsuarioDTO) objectDTO;
                 id = usuarioDTO.getId();
                 datos = UtilsVista.usuarioDTOToString(usuarioDTO);
                 break;
 
             case ICON_LABEL_CLIENTES:
                 urlImageItem = IMAGE_URL_CLIENTES;
-                ClienteDTO clienteDTO  = (ClienteDTO) objectDTO;
+                ClienteDTO clienteDTO = (ClienteDTO) objectDTO;
                 id = clienteDTO.getId();
                 datos = UtilsVista.clienteDTOToString(clienteDTO);
                 break;
 
             case ICON_LABEL_CONTRATOS:
                 urlImageItem = getUrlImageContratos();
-                ContratoDTO contratoDTO  = (ContratoDTO) objectDTO;
+                ContratoDTO contratoDTO = (ContratoDTO) objectDTO;
                 id = contratoDTO.getId();
                 datos = UtilsVista.contratoDTOToString(contratoDTO);
                 break;
 
             case ICON_LABEL_TICKETS:
                 urlImageItem = IMAGE_URL_TICKETS;
-                TicketDTO ticketDTO  = (TicketDTO) objectDTO;
+                TicketDTO ticketDTO = (TicketDTO) objectDTO;
                 id = ticketDTO.getId();
                 datos = UtilsVista.ticketDTOToString(ticketDTO);
                 break;
@@ -219,7 +228,12 @@ public class ItemTablaInfoControlador implements Initializable {
     private void llamarServicio(String accion) {
         switch (accion) {
             case ICON_LABEL_EDITAR:
-                System.out.println("EDITAR REGISTRO CON ID: " + id);
+                try {
+                    muestraVistaEditar();
+                } catch (IOException ex) {
+                    System.err.println("vistas.vertodos.ItemTablaInfoControlador.llamarServicio()");
+                    System.err.println(ex);
+                }
                 break;
 
             case ICON_LABEL_VALIDAR:
@@ -248,5 +262,34 @@ public class ItemTablaInfoControlador implements Initializable {
                 actualizarTablaInfo.set(!actualizarTablaInfo.get());
                 break;
         }
+    }
+
+    private void muestraVistaEditar() throws IOException {
+        FXMLLoader fxmlLoader = null;
+        Parent vista = null;
+        switch (servicio) {
+            case ICON_LABEL_USUARIOS:
+                UsuarioDTO usuarioDTO = (UsuarioDTO) objectDTO;
+                fxmlLoader = new FXMLLoader(getClass().getResource(URL_USUARIOS_CREAR));
+                vista = fxmlLoader.load();
+                CrearUsuarioControlador crearUsuarioControlador = fxmlLoader.getController();
+                crearUsuarioControlador.setInfo(usuarioDTO.getNombreArea(), 
+                        usuarioDTO.getNombre(), usuarioDTO.getTelefono(), 
+                        usuarioDTO.getMail(), usuarioDTO.getDireccion());
+                break;
+
+            case ICON_LABEL_CLIENTES:
+                ClienteDTO clienteDTO = (ClienteDTO) objectDTO;
+                fxmlLoader = new FXMLLoader(getClass().getResource(URL_CLIENTES_CREAR));
+                vista = fxmlLoader.load();
+                CrearClienteControlador crearClienteControlador = fxmlLoader.getController();
+                crearClienteControlador.setInfo(clienteDTO.getNivel(), 
+                        clienteDTO.getNombre(), clienteDTO.getTelefono(), 
+                        clienteDTO.getMail(), clienteDTO.getDireccion());
+                break;
+        }
+
+        borderPaneSubMenu.setCenter(vista);
+
     }
 }

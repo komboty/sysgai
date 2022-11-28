@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import main.Dependencias;
@@ -21,6 +23,8 @@ import vistas.utils.UtilsVista;
 public class CrearUsuarioControlador implements Initializable {
 
     @FXML
+    private Label label;
+    @FXML
     private TextField textNombre;
     @FXML
     private TextField textMail;
@@ -32,6 +36,8 @@ public class CrearUsuarioControlador implements Initializable {
     private TextField textDireccion;
     @FXML
     private ChoiceBox choiceArea;
+    @FXML
+    private Button btnRegistrar;
     // Areas de trabajo.
     private Map<String, Integer> idsAreas;
 
@@ -76,7 +82,7 @@ public class CrearUsuarioControlador implements Initializable {
             msjAlert = String.format(REGISTRAR_MENSAJE, "El Usuario", usuarioDTO.getId());
         }
 
-        UtilsVista.lanzaAlertaInformacion(ELIMINAR_REGISTRO_TITULO, msjAlert);
+        UtilsVista.lanzaAlertaInformacion(REGISTRAR_TITULO, msjAlert);
     }
 
     /**
@@ -93,5 +99,19 @@ public class CrearUsuarioControlador implements Initializable {
         idsAreas.put("Distribución", 7);
         idsAreas.put("Administración", 8);
         return idsAreas;
+    }
+
+    public void setInfo(String area, String nombre, String telefono, String mail,
+            String direccion) {
+
+        choiceArea.setValue(area);
+        textNombre.setText(nombre);
+        textTelefono.setText(telefono);
+        textMail.setText(mail);
+        textDireccion.setText(direccion);
+        textContrasenia.setText("");
+        
+        label.setText("Editar usuario");
+        btnRegistrar.setText("Editar");
     }
 }

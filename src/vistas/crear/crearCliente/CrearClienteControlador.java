@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.Dependencias;
 import servicios.dtos.ClienteDTO;
@@ -20,6 +22,8 @@ import vistas.utils.UtilsVista;
 public class CrearClienteControlador implements Initializable {
 
     @FXML
+    private Label label;
+    @FXML
     private TextField textNombre;
     @FXML
     private TextField textMail;
@@ -29,6 +33,8 @@ public class CrearClienteControlador implements Initializable {
     private TextField textDireccion;
     @FXML
     private ChoiceBox choiceNivel;
+    @FXML
+    private Button btnRegistrar;
     // Niveles que puede tener un Cliente.
     private Map<String, Integer> idsNiveles;
 
@@ -73,7 +79,7 @@ public class CrearClienteControlador implements Initializable {
             msjAlert = String.format(REGISTRAR_MENSAJE, "El Cliente", clienteDTO.getId());
         }
 
-        UtilsVista.lanzaAlertaInformacion(ELIMINAR_REGISTRO_TITULO, msjAlert);
+        UtilsVista.lanzaAlertaInformacion(REGISTRAR_TITULO, msjAlert);
     }
 
     /**
@@ -85,6 +91,19 @@ public class CrearClienteControlador implements Initializable {
         idsNiveles.put("B", 2);
         idsNiveles.put("C", 3);
         return idsNiveles;
+    }
+    
+    public void setInfo(String nivel, String nombre, String telefono, String mail,
+            String direccion) {
+
+        choiceNivel.setValue(nivel);
+        textNombre.setText(nombre);
+        textTelefono.setText(telefono);
+        textMail.setText(mail);
+        textDireccion.setText(direccion);
+        
+        label.setText("Editar cliente");
+        btnRegistrar.setText("Editar");
     }
 
 }

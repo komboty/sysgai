@@ -16,7 +16,7 @@
    <children>
       <BorderPane>
          <top>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Registrar nuevo usuario. Por favor, llene los siguientes campos." BorderPane.alignment="CENTER">
+            <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" text="Registrar nuevo usuario. Por favor, llene los siguientes campos." BorderPane.alignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
@@ -52,7 +52,7 @@
             </HBox>
          </center>
          <right>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#onRegistrar" text="Registrar" wrapText="true" BorderPane.alignment="BOTTOM_LEFT" />
+            <Button fx:id="btnRegistrar" defaultButton="true" mnemonicParsing="false" onAction="#onRegistrar" text="Registrar" wrapText="true" BorderPane.alignment="BOTTOM_LEFT" />
          </right>
          <padding>
             <Insets left="20.0" top="20.0" />

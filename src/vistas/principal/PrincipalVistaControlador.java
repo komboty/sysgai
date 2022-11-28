@@ -233,7 +233,7 @@ public class PrincipalVistaControlador implements Initializable {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(URL_TABLA_INFO));
                 fxmlLoader.setControllerFactory(controllerClass -> new TablaInfoControlador(nombreBoton,
-                        nombreSubBoton, usuarioLogueadoDTO));
+                        nombreSubBoton, usuarioLogueadoDTO, borderPaneSubMenu));
                 Parent vista = fxmlLoader.load();
                 borderPaneSubMenu.setCenter(vista);
             } catch (IOException ex) {
