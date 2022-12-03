@@ -8,24 +8,19 @@ import java.util.List;
 public interface GenericServicio<T> {
 
     /**
-     * Obtiene todos los T del sistema.
+     * Obtiene una lista de informacion segun el servicio y filtro. Obtiene una
+     * lista de informacion segun el servicio y filtro.
      *
+     * @param filtro Nombre del filtro.
+     * @param valor Valor a filtrar.
      * @return Lista con todos los T.
      */
-    public List<T> getTodos();
+    public List<T> getTodos(String filtro, String valor);
 
     /**
-     * Edita un registro del sistema por su id.
+     * Elimina un T del sistema por su id.
      *
-     * @param objectInit Objeto a editar.
-     * @return Regresa el registro con los nuevos cambios.
-     */
-    public T editarPorId(T objectInit);
-
-    /**
-     * Elimina un registro del sistema por su id.
-     *
-     * @param id Id del registro a eliminar.
+     * @param id Id del T a eliminar.
      * @return Regresa verdadero si se eliminio correctamente.
      */
     public boolean eliminarPorId(int id);

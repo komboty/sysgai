@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vistas.crear.crearTicket.CrearTicketControlador">
+   <children>
+      <BorderPane>
+         <top>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Registrar nuevo Ticket. Por favor, llene los siguientes campos." BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
+            </Label>
+         </top>
+         <center>
+            <HBox spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox spacing="6.0">
+                     <children>
+                         <Label alignment="CENTER_RIGHT" text="Prioridad" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Estado de ticket" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Tipo de ticket" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Descripción" />
+                        <TextField/>
+                     </children>
+                  </VBox>
+                  <VBox spacing="6.0">
+                     <children>                        
+                        <Label alignment="CENTER_RIGHT" text="Área asignada" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Usuario asignado" />
+                        <ChoiceBox/>
+                        <Label alignment="CENTER_RIGHT" text="Pedido" />
+                        <ChoiceBox/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+         <right>
+            <Button defaultButton="true" mnemonicParsing="false" text="Registrar" wrapText="true" BorderPane.alignment="BOTTOM_LEFT" />
+         </right>
+         <padding>
+            <Insets left="20.0" top="20.0" />
+         </padding>
+      </BorderPane>
+      
+   </children>
+</AnchorPane>
+

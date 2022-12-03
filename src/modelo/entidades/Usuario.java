@@ -1,7 +1,6 @@
 package modelo.entidades;
 
 import java.util.List;
-import modelo.utils.Utils;
 
 /**
  * @author Jose Alberto Salvador Cruz y Giovanni Pavón Callejas
@@ -46,18 +45,5 @@ public class Usuario extends Persona {
 
     public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
-    }
-
-    @Override
-    public String toString() {
-        String toString;
-        if (isToStringTodo()) {
-            
-            toString = String.format("%s\n-----------------\nAREA:%s\n-----------------\nTickets Asignados: %s\n",
-                    super.toString(), area.toString(), Utils.getSize(tickets));
-        } else {
-            toString = String.format("%s", super.toString());
-        }
-        return toString;
     }
 }

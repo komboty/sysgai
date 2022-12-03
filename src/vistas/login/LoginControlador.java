@@ -13,9 +13,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import main.Dependencias;
 import main.Main;
-import modelo.entidades.Area;
-import modelo.entidades.Usuario;
-import static modelo.utils.Constantes.*;
+import static modelo.utils.ConstantesModelo.*;
+import static vistas.utils.ConstantesVista.*;
+import servicios.dtos.UsuarioLogueadoDTO;
 import servicios.interfaces.UsuarioServicio;
 import vistas.principal.PrincipalVistaControlador;
 
@@ -43,29 +43,28 @@ public class LoginControlador implements Initializable {
     public void onIniciarSesion() throws IOException {
 //        // Se verifica si el usuario se encuntra registrado.
 //        UsuarioServicio usuarioServicio = Dependencias.getUsuarioServicio();
-//        Usuario usuario = usuarioServicio.identificar(textMail.getText(), textContrasenia.getText());
+//        UsuarioLogueadoDTO usuarioLogueadoDTO = usuarioServicio.iniciarSesion(textMail.getText(), textContrasenia.getText());
 //        
 //        // Si no se encuentra el usuario se manda error.
-//        if (usuario == null) {
-//            labelError.setText(VISTA_ERROR_NO_USUARIO);
+//        if (usuarioLogueadoDTO == null) {
+//            labelError.setText(ERROR_NO_USUARIO);
 //            return;
 //        }
 
         // Si se encuentra el usuario se muestra el menu.
-        Usuario usuario = new Usuario();
-        Area area = new Area();
-//        area.setNombre(AREA_ADMINISTRACION);
-//        area.setNombre(AREA_ARRENDAMIENTO);
-        area.setNombre(AREA_ABOGADOS);
-//        area.setNombre(AREA_CONTADORES);
-//        area.setNombre(AREA_TECNICOS);
-//        area.setNombre(AREA_MESA_DE_SERVICIO);
-//        area.setNombre(AREA_DISTRIBUCION);
-//        area.setNombre(AREA_ALMACEN);
-        usuario.setArea(area);
+        UsuarioLogueadoDTO usuarioLogueadoDTO = new UsuarioLogueadoDTO();
+        usuarioLogueadoDTO.setNombreArea(AREA_ADMINISTRACION);
+//        usuarioLogueadoDTO.setNombreArea(AREA_ARRENDAMIENTO);
+//        usuarioLogueadoDTO.setNombreArea(AREA_ABOGADOS);
+//        usuarioLogueadoDTO.setNombreArea(AREA_CONTADORES);
+//        usuarioLogueadoDTO.setNombreArea(AREA_TECNICOS);
+//        usuarioLogueadoDTO.setNombreArea(AREA_MESA_DE_SERVICIO);
+//        usuarioLogueadoDTO.setNombreArea(AREA_DISTRIBUCION);
+//        usuarioLogueadoDTO.setNombreArea(AREA_ALMACEN);
+        usuarioLogueadoDTO.setIdUsuario(1);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(VISTA_URL_PRINCIPAL));
-        fxmlLoader.setControllerFactory(controllerClass -> new PrincipalVistaControlador(usuario));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(URL_PRINCIPAL));
+        fxmlLoader.setControllerFactory(controllerClass -> new PrincipalVistaControlador(usuarioLogueadoDTO));
         Parent root = fxmlLoader.load();
         Main.getStage().setScene(new Scene(root));
     }
